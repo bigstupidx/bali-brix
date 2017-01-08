@@ -4,12 +4,20 @@ using System.Collections;
 public class Brick : MonoBehaviour
 {
 	public Sprite[] hitSprites;
+
+	// we use statis to make sure there is only one variable across all Brick classes
+	// that way we can increase/decrease the same variable inside each Brick independently
+	public static int brickCounts = 0;
 	private int timesHit;
 	private LevelManager levelManager;
+	private bool isBreakable;
 
 	// Use this for initialization
 	void Start ()
 	{
+		isBreakable = (this.tag == "Breakable");
+		if (isBreakable)
+			brickCounts++;
 		timesHit = 0;
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
 	}
@@ -22,7 +30,7 @@ public class Brick : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
-		if (this.tag != "Unbreakable")
+		if (isBreakable)
 			HandleHits ();
 	}
 
@@ -30,7 +38,10 @@ public class Brick : MonoBehaviour
 	{
 		timesHit++;
 		if (timesHit >= hitSprites.Length + 1) {
+			brickCounts--;
 			Destroy (gameObject);	
+			if (brickCounts <= 0)
+				levelManager.LoadNextLevel ();
 		} else {
 			LoadCrackedBrick ();
 		}
