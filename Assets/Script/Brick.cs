@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Brick : MonoBehaviour
 {
-	public int maxHits;
+	public Sprite[] hitSprites;
 	private int timesHit;
 	private LevelManager levelManager;
 
@@ -22,16 +22,23 @@ public class Brick : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
-		timesHit++;
-		if (timesHit >= maxHits) {
-			Destroy (gameObject);	
-		}
-
-		//SimulateWin ();
+		if (this.tag != "Unbreakable")
+			HandleHits ();
 	}
 
-	void SimulateWin ()
+	void HandleHits ()
 	{
-		levelManager.LoadNextLevel ();
+		timesHit++;
+		if (timesHit >= hitSprites.Length + 1) {
+			Destroy (gameObject);	
+		} else {
+			LoadCrackedBrick ();
+		}
+	}
+
+	void LoadCrackedBrick ()
+	{
+		int index = timesHit - 1;
+		this.GetComponent<SpriteRenderer> ().sprite = hitSprites [index];
 	}
 }
