@@ -7,12 +7,17 @@ public class LevelManager : MonoBehaviour
 	public void LoadLevel (string name)
 	{
 		Debug.Log ("load level requested:" + name);
+		// Need to reset the brick counts otherwise the leftover from last game 
+		// will be added to the new game
+		Brick.brickCounts = 0;
 		SceneManager.LoadScene (name);
 	}
 
 	public void LoadNextLevel ()
 	{
-		//int currentScene = SceneManager.sceneLoaded;
+		// Need to reset the brick counts otherwise the leftover from last game 
+		// will be added to the new game
+		Brick.brickCounts = 0;
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
 	}
 

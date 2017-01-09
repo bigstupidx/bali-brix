@@ -21,7 +21,7 @@ public class Ball : MonoBehaviour
 		if (!hasStarted) {
 			this.transform.position = paddle.transform.position + paddleToBallVector;
 			if (Input.GetMouseButtonDown (0)) {
-				this.GetComponent <Rigidbody2D> ().velocity = new Vector2 (2f, 13f);
+				this.GetComponent <Rigidbody2D> ().velocity = new Vector2 (2.2f, 9f);
 				hasStarted = true;
 			}		
 		}
@@ -29,7 +29,10 @@ public class Ball : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
-		if (hasStarted)
+		Vector2 speedUp = new Vector2 (Random.Range (-0.1f, 0.2f), Random.Range (-0.1f, 0.2f));
+		if (hasStarted) {
 			AudioSource.PlayClipAtPoint (hit, this.transform.position);	
+			this.GetComponent <Rigidbody2D> ().velocity += speedUp;
+		}		
 	}
 }
