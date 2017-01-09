@@ -8,6 +8,7 @@ public class Brick : MonoBehaviour
 	// we use statis to make sure there is only one variable across all Brick classes
 	// that way we can increase/decrease the same variable inside each Brick independently
 	public static int brickCounts = 0;
+	public AudioClip crack;
 	private int timesHit;
 	private LevelManager levelManager;
 	private bool isBreakable;
@@ -30,6 +31,7 @@ public class Brick : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
+		AudioSource.PlayClipAtPoint (crack, this.transform.position);
 		if (isBreakable)
 			HandleHits ();
 	}

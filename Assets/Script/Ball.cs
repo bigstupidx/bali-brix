@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Ball : MonoBehaviour
 {
+	public AudioClip hit;
+
 	private Paddle paddle;
 	private Vector3 paddleToBallVector;
 	private bool hasStarted = false;
@@ -23,5 +25,11 @@ public class Ball : MonoBehaviour
 				hasStarted = true;
 			}		
 		}
+	}
+
+	void OnCollisionEnter2D (Collision2D collision)
+	{
+		if (hasStarted)
+			AudioSource.PlayClipAtPoint (hit, this.transform.position);	
 	}
 }
