@@ -1,22 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 using ProgressBar;
-using System.Collections;
-using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class example : MonoBehaviour
+public class MyProgressBar : MonoBehaviour
 {
+	private LevelManager levelManager;
 	ProgressBarBehaviour BarBehaviour;
 	[SerializeField] float UpdateDelay = 2f;
 
 	IEnumerator Start ()
 	{
+		levelManager = GameObject.FindObjectOfType<LevelManager> ();
+		Debug.Log ("START Load Async");
 		BarBehaviour = GetComponent<ProgressBarBehaviour> ();
-		while (true) {
+		while (BarBehaviour.Value < 100) {
 			yield return new WaitForSeconds (UpdateDelay);
-			BarBehaviour.Value = Random.value * 100;
-			print ("new value: " + BarBehaviour.Value);
+			BarBehaviour.Value += Random.value * 100;
+			//result.allowSceneActivation = true;
 		}
+		Debug.Log ("YEAH Loaded Async");
+
+		yield return new WaitForSeconds (0.5f);
+
+		levelManager.LoadNextLevel ();
 	}
 }
