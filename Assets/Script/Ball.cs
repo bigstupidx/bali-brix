@@ -4,6 +4,7 @@ using System.Collections;
 public class Ball : MonoBehaviour
 {
 	public AudioClip hit;
+	public static int ballCounts = 3;
 
 	private Paddle paddle;
 	private Vector3 paddleToBallVector;

@@ -13,6 +13,11 @@ public class LevelManager : MonoBehaviour
 		SceneManager.LoadScene (name);
 	}
 
+	public void Reload ()
+	{
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+	}
+
 	public void LoadNextLevel ()
 	{
 		// Need to reset the brick counts otherwise the leftover from last game 

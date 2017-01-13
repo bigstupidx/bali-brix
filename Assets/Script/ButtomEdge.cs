@@ -21,6 +21,9 @@ public class ButtomEdge : MonoBehaviour
 	// This is where A Collision object collides
 	void OnCollisionEnter2D (Collision2D collision) // Type Collision2D
 	{
-		levelManager.LoadLevel ("Loose");
+		if (Ball.ballCounts-- <= 1)
+			levelManager.LoadLevel ("Loose");
+		else
+			levelManager.Reload ();
 	}
 }

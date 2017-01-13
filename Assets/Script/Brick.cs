@@ -9,6 +9,7 @@ public class Brick : MonoBehaviour
 	// we use statis to make sure there is only one variable across all Brick classes
 	// that way we can increase/decrease the same variable inside each Brick independently
 	public static int brickCounts = 0;
+	public static Hashtable brickMap;
 	public AudioClip crack;
 	private int timesHit;
 	private LevelManager levelManager;
@@ -17,15 +18,18 @@ public class Brick : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		brickMap [this.name] = true;
 		isBreakable = (this.tag == "Breakable");
-		if (isBreakable)
+		if (isBreakable && !IsDestroyed (this.name))
 			brickCounts++;
 		timesHit = 0;
+		print ("I am brick:" + this.GetInstanceID () + "and my count is:" + brickCounts);
+
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	bool IsDestroyed (string name)
 	{
 	
 	}
@@ -43,7 +47,7 @@ public class Brick : MonoBehaviour
 		if (timesHit >= hitSprites.Length + 1) {
 			brickCounts--;
 			showParticles ();
-			Destroy (gameObject);	
+			Destroy (this.gameObject);	
 			if (brickCounts <= 0)
 				levelManager.LoadNextLevel ();
 		} else {
