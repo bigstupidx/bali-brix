@@ -4,11 +4,10 @@ using System.Collections;
 public class Ball : MonoBehaviour
 {
 	public AudioClip hit;
-	public static int ballCounts = 3;
+	public static bool hasStarted = false;
 
 	private Paddle paddle;
 	private Vector3 paddleToBallVector;
-	private bool hasStarted = false;
 	// Use this for initialization
 	void Start ()
 	{
