@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Brick : MonoBehaviour
 {
@@ -12,24 +13,27 @@ public class Brick : MonoBehaviour
 	public AudioClip crack;
 	private int timesHit;
 	private LevelManager levelManager;
-	private bool isBreakable;
+	private GameObject score;
 
 	// Use this for initialization
 	void Start ()
 	{
-		isBreakable = (this.tag == "Breakable");
 		timesHit = 0;
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
-		if (isBreakable)
+		score = GameObject.Find ("Score");
+		score.GetComponent <Text> ().text = LevelManager.score.ToString ();
+		if (this.tag == "Breakable")
 			brickCounts++;
 	}
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
 		AudioSource.PlayClipAtPoint (crack, this.transform.position);
-		BrickMap.inProgress = true;
-		if (isBreakable)
-			HandleHits ();
+		if (this.tag == "Breakable") {
+			LevelManager.score += 10;
+			score.GetComponent <Text> ().text = LevelManager.score.ToString ();
+			HandleHits ();		
+		}
 	}
 
 	void HandleHits ()

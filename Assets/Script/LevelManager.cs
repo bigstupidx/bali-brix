@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
 	public static int ballCounts = 3;
+	public static int score = 0;
 	private GameObject background;
 
 	void Start ()

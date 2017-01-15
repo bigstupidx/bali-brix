@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class ButtomEdge : MonoBehaviour
 {
+	public AudioClip missed;
+
 	private LevelManager levelManager;
 	private GameObject balls;
 
@@ -25,6 +27,7 @@ public class ButtomEdge : MonoBehaviour
 	// This is where A Collision object collides
 	void OnCollisionEnter2D (Collision2D collision) // Type Collision2D
 	{
+		AudioSource.PlayClipAtPoint (missed, this.transform.position);	
 		Ball.hasStarted = false;
 		if (LevelManager.ballCounts-- <= 1) {
 			LevelManager.ballCounts = 3;
