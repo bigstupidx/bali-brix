@@ -1,16 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
 	public static int ballCounts = 3;
 	public static int score = 0;
 	private GameObject background;
+	private float timeLeft = 300f;
+	private GameObject timer;
 
 	void Start ()
 	{
 		background = GameObject.Find ("Background");
+		timer = GameObject.Find ("Timer");
+	}
+
+	void Update ()
+	{
+		if (Ball.hasStarted) {
+			timeLeft -= Time.deltaTime;
+			string minsAndSecs = Mathf.Round (timeLeft / 60) + " : " + Mathf.Round (timeLeft % 60);
+			timer.GetComponent <Text> ().text = minsAndSecs;
+		}
+		if (timeLeft <= 0) {
+			Ball.hasStarted = false;
+			LoadLevel ("Loose");
+		}
 	}
 
 	public void LoadLevel (string name)

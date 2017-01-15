@@ -30,7 +30,7 @@ public class Brick : MonoBehaviour
 	{
 		AudioSource.PlayClipAtPoint (crack, this.transform.position);
 		if (this.tag == "Breakable") {
-			LevelManager.score += 10;
+			LevelManager.score += 5;
 			score.GetComponent <Text> ().text = LevelManager.score.ToString ();
 			HandleHits ();		
 		}
