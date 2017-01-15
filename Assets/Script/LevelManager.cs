@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
 	{
 		if (Ball.hasStarted) {
 			timeLeft -= Time.deltaTime;
-			string minsAndSecs = Mathf.Round (timeLeft / 60) + " : " + Mathf.Round (timeLeft % 60);
+			string minsAndSecs = Mathf.Floor (timeLeft / 60) + " : " + Mathf.Floor (timeLeft % 60);
 			timer.GetComponent <Text> ().text = minsAndSecs;
 		}
 		if (timeLeft <= 0) {

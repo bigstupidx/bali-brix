@@ -5,9 +5,12 @@ public class Ball : MonoBehaviour
 {
 	public AudioClip hit;
 	public static bool hasStarted = false;
+	public static bool bonusPaid = false;
+	public static int bonusFactor = 1;
 
 	private Paddle paddle;
 	private Vector3 paddleToBallVector;
+
 	// Use this for initialization
 	void Start ()
 	{

@@ -4,16 +4,17 @@ using UnityEngine.UI;
 
 public class Brick : MonoBehaviour
 {
-	public Sprite[] hitSprites;
-	public GameObject particles;
-
 	// we use statis to make sure there is only one variable across all Brick classes
 	// that way we can increase/decrease the same variable inside each Brick independently
 	public static int brickCounts = 0;
 	public AudioClip crack;
+	public Sprite[] hitSprites;
+	public GameObject particles;
+
 	private int timesHit;
 	private LevelManager levelManager;
 	private GameObject score;
+	private GameObject balls;
 
 	// Use this for initialization
 	void Start ()
@@ -22,6 +23,9 @@ public class Brick : MonoBehaviour
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
 		score = GameObject.Find ("Score");
 		score.GetComponent <Text> ().text = LevelManager.score.ToString ();
+		balls = GameObject.Find ("Balls No");
+		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
+
 		if (this.tag == "Breakable")
 			brickCounts++;
 	}
@@ -30,9 +34,19 @@ public class Brick : MonoBehaviour
 	{
 		AudioSource.PlayClipAtPoint (crack, this.transform.position);
 		if (this.tag == "Breakable") {
-			LevelManager.score += 5;
-			score.GetComponent <Text> ().text = LevelManager.score.ToString ();
+			HandleScores ();
 			HandleHits ();		
+		}
+	}
+
+	void HandleScores ()
+	{
+		LevelManager.score += 155;
+		score.GetComponent <Text> ().text = LevelManager.score.ToString ();
+		if ((LevelManager.score / (1000 * Ball.bonusFactor)) >= 1) {
+			Ball.bonusFactor++;
+			LevelManager.ballCounts++;
+			balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
 		}
 	}
 
