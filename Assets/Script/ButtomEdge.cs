@@ -8,6 +8,8 @@ public class ButtomEdge : MonoBehaviour
 
 	private LevelManager levelManager;
 	private GameObject balls;
+	private int totalBricks;
+
 
 	void Start ()
 	{
@@ -16,6 +18,7 @@ public class ButtomEdge : MonoBehaviour
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
 		balls = GameObject.Find ("Balls No");
 		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
+		totalBricks = Brick.brickCounts;
 	}
 
 	// This is where a Collider object triggers
@@ -30,8 +33,9 @@ public class ButtomEdge : MonoBehaviour
 		AudioSource.PlayClipAtPoint (missed, this.transform.position);	
 		Ball.hasStarted = false;
 		if (LevelManager.ballCounts-- <= 1) {
-			LevelManager.ballCounts = 3;
+			//levelManager.TotalDamage (totalBricks - Brick.brickCounts);
 			levelManager.LoadLevel ("Loose");	
+			LevelManager.ballCounts = 3;
 		}
 		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
 	}
