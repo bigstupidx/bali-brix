@@ -31,10 +31,7 @@ public class LevelManager : MonoBehaviour
 
 	void Update ()
 	{
-		print ("--total bricks: " + totalBricks);
-		print ("--available bricks: " + Brick.brickCounts);
 		int delta = totalBricks - Brick.brickCounts;
-		print ("--delta: " + delta);
 		if (Ball.hasStarted && timer) {
 			timeLeft -= Time.deltaTime;
 			if (timeLeft < 0)
@@ -46,7 +43,6 @@ public class LevelManager : MonoBehaviour
 			EvalDamage (totalBricks - Brick.brickCounts);
 			Ball.hasStarted = false;
 
-			//LoadLevel ("Loose");
 		}
 	}
 
@@ -91,19 +87,27 @@ public class LevelManager : MonoBehaviour
 	public void LevelComplete (float damage)
 	{
 		int index;
+		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
+		Ball.hasStarted = false;
+
 		if (damage < 0.7) {
 			index = 0;
 		} else if (damage >= 0.7 && damage < 1) {
 			index = 1;
 		} else {
+			addTimeBonusScore ((int)timeLeft);
 			index = 2;
 		}
-		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
 
 		if (levelCompleteStars [index] != null)
 			stars.GetComponent <Image> ().sprite = levelCompleteStars [index];
 		else
 			Debug.LogError ("Sprite is missing!");
+	}
+
+	public void addTimeBonusScore (int time)
+	{
+		score += time * 10;
 	}
 
 	public void IncreaseBackgroundAlpha ()
