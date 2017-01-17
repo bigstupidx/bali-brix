@@ -9,16 +9,23 @@ public class LevelManager : MonoBehaviour
 	public static int score = 0;
 	private GameObject background;
 	private GameObject levelComplete;
-	private float timeLeft = 50f;
+	private GameObject stars;
+	private float timeLeft = 95f;
 	private GameObject timer;
 	private int totalBricks;
+	private string minsAndSecs = "0:0";
+	public Sprite[] levelCompleteStars;
+
 
 	void Start ()
 	{
 		background = GameObject.Find ("Background");
 		timer = GameObject.Find ("Timer");
 		levelComplete = GameObject.Find ("Level Complete");
-		levelComplete.GetComponent <CanvasGroup> ().alpha = 0;
+		if (levelComplete) {
+			levelComplete.GetComponent <CanvasGroup> ().alpha = 0;
+			stars = GameObject.Find ("Stars");
+		}
 		totalBricks = Brick.brickCounts;
 	}
 
@@ -28,13 +35,15 @@ public class LevelManager : MonoBehaviour
 		print ("--available bricks: " + Brick.brickCounts);
 		int delta = totalBricks - Brick.brickCounts;
 		print ("--delta: " + delta);
-		if (Ball.hasStarted) {
+		if (Ball.hasStarted && timer) {
 			timeLeft -= Time.deltaTime;
-			string minsAndSecs = Mathf.Floor (timeLeft / 60) + " : " + Mathf.Floor (timeLeft % 60);
+			if (timeLeft < 0)
+				timeLeft = 0;
+			minsAndSecs = Mathf.Floor (timeLeft / 60) + " : " + Mathf.Floor (timeLeft % 60);
 			timer.GetComponent <Text> ().text = minsAndSecs;
 		}
 		if (timeLeft <= 0) {
-			TotalDamage (totalBricks - Brick.brickCounts);
+			EvalDamage (totalBricks - Brick.brickCounts);
 			Ball.hasStarted = false;
 
 			//LoadLevel ("Loose");
@@ -56,7 +65,7 @@ public class LevelManager : MonoBehaviour
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 
-	public void TotalDamage (int destroyedBricks)
+	public void EvalDamage (int destroyedBricks)
 	{
 		float damage = (float)destroyedBricks / (float)totalBricks;
 		if (damage < 0.6) {
@@ -81,16 +90,20 @@ public class LevelManager : MonoBehaviour
 
 	public void LevelComplete (float damage)
 	{
-		int stars = 0;
+		int index;
 		if (damage < 0.7) {
-			stars = 1;
+			index = 0;
 		} else if (damage >= 0.7 && damage < 1) {
-			stars = 2;
+			index = 1;
 		} else {
-			stars = 3;
+			index = 2;
 		}
 		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
-		print (stars);
+
+		if (levelCompleteStars [index] != null)
+			stars.GetComponent <Image> ().sprite = levelCompleteStars [index];
+		else
+			Debug.LogError ("Sprite is missing!");
 	}
 
 	public void IncreaseBackgroundAlpha ()

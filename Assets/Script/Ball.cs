@@ -36,6 +36,8 @@ public class Ball : MonoBehaviour
 		if (hasStarted) {
 			AudioSource.PlayClipAtPoint (hit, this.transform.position);	
 			this.GetComponent <Rigidbody2D> ().velocity += speedUp;
+			if (Brick.brickCounts <= 0) // Make sure everything stops after last brick was hit
+				Destroy (this.gameObject);
 		}		
 	}
 }

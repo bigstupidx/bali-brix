@@ -60,7 +60,7 @@ public class Brick : MonoBehaviour
 			brickCounts--;
 			UpdateView (this.gameObject);
 			if (brickCounts <= 0) {
-				levelManager.TotalDamage (totalBricks);
+				levelManager.EvalDamage (totalBricks);
 			}
 		} else {
 			LoadCrackedBrick ();
