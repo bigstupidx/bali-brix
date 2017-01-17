@@ -31,19 +31,21 @@ public class LevelManager : MonoBehaviour
 
 	void Update ()
 	{
-		int delta = totalBricks - Brick.brickCounts;
 		if (Ball.hasStarted && timer) {
-			timeLeft -= Time.deltaTime;
-			if (timeLeft < 0)
-				timeLeft = 0;
-			minsAndSecs = Mathf.Floor (timeLeft / 60) + " : " + Mathf.Floor (timeLeft % 60);
-			timer.GetComponent <Text> ().text = minsAndSecs;
+			UpdateTimer ();
 		}
 		if (timeLeft <= 0) {
 			EvalDamage (totalBricks - Brick.brickCounts);
-			Ball.hasStarted = false;
-
 		}
+	}
+
+	private void UpdateTimer ()
+	{
+		timeLeft -= Time.deltaTime;
+		if (timeLeft < 0)
+			timeLeft = 0;
+		minsAndSecs = Mathf.Floor (timeLeft / 60) + " : " + Mathf.Floor (timeLeft % 60);
+		timer.GetComponent <Text> ().text = minsAndSecs;
 	}
 
 	public void LoadLevel (string name)
@@ -63,13 +65,14 @@ public class LevelManager : MonoBehaviour
 
 	public void EvalDamage (int destroyedBricks)
 	{
+		Ball.hasStarted = false;
 		float damage = (float)destroyedBricks / (float)totalBricks;
 		if (damage < 0.6) {
 			print ("LOST!!!"); 
 			LoadLevel ("Loose");
 		} else {
 			LevelComplete (damage);
-			Invoke ("LoadNextLevel", 5f);
+			//Invoke ("LoadNextLevel", 5f);
 		}
 	}
 
@@ -87,9 +90,6 @@ public class LevelManager : MonoBehaviour
 	public void LevelComplete (float damage)
 	{
 		int index;
-		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
-		Ball.hasStarted = false;
-
 		if (damage < 0.7) {
 			index = 0;
 		} else if (damage >= 0.7 && damage < 1) {
@@ -98,7 +98,7 @@ public class LevelManager : MonoBehaviour
 			addTimeBonusScore ((int)timeLeft);
 			index = 2;
 		}
-
+		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
 		if (levelCompleteStars [index] != null)
 			stars.GetComponent <Image> ().sprite = levelCompleteStars [index];
 		else
@@ -107,7 +107,13 @@ public class LevelManager : MonoBehaviour
 
 	public void addTimeBonusScore (int time)
 	{
-		score += time * 10;
+		print ("remainder add: " + time);
+		for (int i = time; i > 0; i--) {
+			minsAndSecs = Mathf.Floor (i / 60) + " : " + Mathf.Floor (i % 60);
+			timer.GetComponent <Text> ().text = minsAndSecs;
+			score += 10;
+			//yield return new WaitForSeconds (1f);
+		}
 	}
 
 	public void IncreaseBackgroundAlpha ()
