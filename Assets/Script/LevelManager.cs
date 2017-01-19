@@ -7,15 +7,17 @@ public class LevelManager : MonoBehaviour
 {
 	public static int ballCounts = 3;
 	public static int score = 0;
+	public AudioClip timeoutAlert;
+
 	private GameObject background;
 	private GameObject levelComplete;
 	private GameObject stars;
-	private float timeLeft = 95f;
+	private float timeLeft = 65f;
 	private GameObject timer;
 	private int totalBricks;
 	private string minsAndSecs = "0:0";
 	public Sprite[] levelCompleteStars;
-
+	private bool alert = true;
 
 	void Start ()
 	{
@@ -27,6 +29,7 @@ public class LevelManager : MonoBehaviour
 			stars = GameObject.Find ("Stars");
 		}
 		totalBricks = Brick.brickCounts;
+		//InvokeRepeating ("Alert", timeLeft - 7f, 1f); // play alert sound 7 sec before times up
 	}
 
 	void Update ()
@@ -37,6 +40,20 @@ public class LevelManager : MonoBehaviour
 		if (timeLeft <= 0) {
 			EvalDamage (totalBricks - Brick.brickCounts);
 		}
+		if (timeLeft < 7) {
+			if (alert) {
+				StartCoroutine (Alert ());
+				alert = false;
+			}
+		}
+	}
+
+	IEnumerator Alert ()
+	{
+		print ("ALERT!!!");
+		AudioSource.PlayClipAtPoint (timeoutAlert, this.transform.position);	
+		yield return new WaitForSeconds (1f);
+		alert = true;
 	}
 
 	private void UpdateTimer ()
@@ -66,13 +83,14 @@ public class LevelManager : MonoBehaviour
 	public void EvalDamage (int destroyedBricks)
 	{
 		Ball.hasStarted = false;
+		alert = false;
 		float damage = (float)destroyedBricks / (float)totalBricks;
 		if (damage < 0.6) {
 			print ("LOST!!!"); 
 			LoadLevel ("Loose");
 		} else {
 			LevelComplete (damage);
-			//Invoke ("LoadNextLevel", 5f);
+			Invoke ("LoadNextLevel", 5f);
 		}
 	}
 
