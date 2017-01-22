@@ -12,12 +12,13 @@ public class LevelManager : MonoBehaviour
 	private GameObject background;
 	private GameObject levelComplete;
 	private GameObject stars;
-	private float timeLeft = 65f;
+	private float timeLeft = 45f;
 	private GameObject timer;
 	private int totalBricks;
 	private string minsAndSecs = "0:0";
 	public Sprite[] levelCompleteStars;
 	private bool alert = true;
+	private int colorFactor = 20;
 
 	void Start ()
 	{
@@ -41,16 +42,26 @@ public class LevelManager : MonoBehaviour
 			EvalDamage (totalBricks - Brick.brickCounts);
 		}
 		if (timeLeft < 7) {
+			Blink ();
 			if (alert) {
+				timer.GetComponent <Text> ().fontStyle = FontStyle.Bold;
 				StartCoroutine (Alert ());
 				alert = false;
 			}
 		}
 	}
 
+	private void Blink ()
+	{
+		timer.GetComponent <Text> ().color = (Mathf.Floor (timeLeft % 2) == 0) ?
+			Color.Lerp (Color.yellow, Color.red, 1f) :
+			Color.Lerp (Color.red, Color.yellow, 1f);
+	}
+
 	IEnumerator Alert ()
 	{
 		print ("ALERT!!!");
+		colorFactor += 20;
 		AudioSource.PlayClipAtPoint (timeoutAlert, this.transform.position);	
 		yield return new WaitForSeconds (1f);
 		alert = true;

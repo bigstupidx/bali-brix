@@ -32,7 +32,7 @@ public class Ball : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
-		Vector2 speedUp = new Vector2 (Random.Range (-0.08f, 0.25f), Random.Range (-0.08f, 0.25f));
+		Vector2 speedUp = new Vector2 (Random.Range (-0.3f, 0.3f), Random.Range (-0.1f, 0.3f));
 		if (hasStarted) {
 			AudioSource.PlayClipAtPoint (hit, this.transform.position);	
 			this.GetComponent <Rigidbody2D> ().velocity += speedUp;
