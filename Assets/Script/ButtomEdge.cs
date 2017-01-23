@@ -5,11 +5,8 @@ using UnityEngine.UI;
 public class ButtomEdge : MonoBehaviour
 {
 	public AudioClip missed;
-
 	private LevelManager levelManager;
 	private GameObject balls;
-	private int totalBricks;
-
 
 	void Start ()
 	{
@@ -18,7 +15,6 @@ public class ButtomEdge : MonoBehaviour
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
 		balls = GameObject.Find ("Balls No");
 		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
-		totalBricks = Brick.brickCounts;
 	}
 
 	// This is where a Collider object triggers

@@ -2,17 +2,21 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Net;
 
 public class LevelManager : MonoBehaviour
 {
 	public static int ballCounts = 3;
-	public static int score = 0;
+	public static int currentScore = 0;
 	public AudioClip timeoutAlert;
+	public AudioClip popStar;
 
 	private GameObject background;
 	private GameObject levelComplete;
-	private GameObject stars;
-	private float timeLeft = 45f;
+	private GameObject starLeft, starMiddle, starRight;
+	private GameObject score;
+
+	private float timeLeft = 85f;
 	private GameObject timer;
 	private int totalBricks;
 	private string minsAndSecs = "0:0";
@@ -24,10 +28,16 @@ public class LevelManager : MonoBehaviour
 	{
 		background = GameObject.Find ("Background");
 		timer = GameObject.Find ("Timer");
+		score = GameObject.Find ("Score");
 		levelComplete = GameObject.Find ("Level Complete");
 		if (levelComplete) {
 			levelComplete.GetComponent <CanvasGroup> ().alpha = 0;
-			stars = GameObject.Find ("Stars");
+			starLeft = GameObject.Find ("Star Left");
+			starLeft.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
+			starMiddle = GameObject.Find ("Star Middle");
+			starMiddle.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
+			starRight = GameObject.Find ("Star Right");
+			starRight.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
 		}
 		totalBricks = Brick.brickCounts;
 		//InvokeRepeating ("Alert", timeLeft - 7f, 1f); // play alert sound 7 sec before times up
@@ -91,17 +101,24 @@ public class LevelManager : MonoBehaviour
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 
-	public void EvalDamage (int destroyedBricks)
+	public void EvalDamage (int destroyedBricks, bool cleared = false)
 	{
 		Ball.hasStarted = false;
 		alert = false;
-		float damage = (float)destroyedBricks / (float)totalBricks;
-		if (damage < 0.6) {
-			print ("LOST!!!"); 
-			LoadLevel ("Loose");
-		} else {
-			LevelComplete (damage);
+		if (cleared) {
+			LevelComplete (1);
 			Invoke ("LoadNextLevel", 5f);
+		} else {
+			float damage = (float)destroyedBricks / (float)totalBricks;
+			print ("Assess Damage:" + damage); 
+			print ("Destroyed:" + (float)destroyedBricks); 
+			print ("Total:" + (float)totalBricks); 
+			if (damage < 0.6) {
+				LoadLevel ("Loose");
+			} else {
+				LevelComplete (damage);
+				Invoke ("LoadNextLevel", 7f);
+			}
 		}
 	}
 
@@ -118,30 +135,61 @@ public class LevelManager : MonoBehaviour
 
 	public void LevelComplete (float damage)
 	{
-		int index;
-		if (damage < 0.7) {
-			index = 0;
-		} else if (damage >= 0.7 && damage < 1) {
-			index = 1;
-		} else {
-			addTimeBonusScore ((int)timeLeft);
-			index = 2;
+		int stars;
+		if (damage < 0.7) {												// 1 star
+			stars = 1;
+		} else if (damage >= 0.7 && damage < 1) { // 2 stars
+			stars = 2;
+		} else { 																	// 3 stars
+			StartCoroutine (addTimeBonusScore ((int)timeLeft));
+			//Invoke ("LoadNextLevel", 5f);
+			fetchLevelPrize ();
+			stars = 3;
 		}
 		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
-		if (levelCompleteStars [index] != null)
-			stars.GetComponent <Image> ().sprite = levelCompleteStars [index];
-		else
-			Debug.LogError ("Sprite is missing!");
+		ShowStars (stars);
 	}
 
-	public void addTimeBonusScore (int time)
+	private void ShowStars (int stars)
+	{
+		switch (stars) {
+		case 3:
+			print ("total damage");
+			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			starRight.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			break;
+
+		case 2:
+			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			break;
+
+		default:
+			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			break;
+		}
+	}
+
+	private void HandleStar (GameObject star)
+	{
+		star.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+	}
+
+	public void fetchLevelPrize ()
+	{
+		
+	}
+
+	IEnumerator addTimeBonusScore (int time)
 	{
 		print ("remainder add: " + time);
 		for (int i = time; i > 0; i--) {
-			minsAndSecs = Mathf.Floor (i / 60) + " : " + Mathf.Floor (i % 60);
+			minsAndSecs = Mathf.Floor (i / 60) + " : " + Mathf.Floor (i % 60 - 1);
 			timer.GetComponent <Text> ().text = minsAndSecs;
-			score += 10;
-			//yield return new WaitForSeconds (1f);
+			currentScore += 10;
+			score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
+			yield return new WaitForSeconds (0.01f);
 		}
 	}
 

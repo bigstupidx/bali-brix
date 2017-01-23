@@ -15,8 +15,6 @@ public class Brick : MonoBehaviour
 	private LevelManager levelManager;
 	private GameObject score;
 	private GameObject balls;
-	private int totalBricks;
-
 
 	// Use this for initialization
 	void Start ()
@@ -24,13 +22,12 @@ public class Brick : MonoBehaviour
 		timesHit = 0;
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
 		score = GameObject.Find ("Score");
-		score.GetComponent <Text> ().text = LevelManager.score.ToString ();
+		score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
 		balls = GameObject.Find ("Balls No");
 		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
 
 		if (this.tag == "Breakable")
 			brickCounts++;
-		totalBricks = Brick.brickCounts;
 	}
 
 	void OnCollisionEnter2D (Collision2D collision)
@@ -44,9 +41,9 @@ public class Brick : MonoBehaviour
 
 	void HandleScores ()
 	{
-		LevelManager.score += 5;
-		score.GetComponent <Text> ().text = LevelManager.score.ToString ();
-		if ((LevelManager.score / (1000 * Ball.bonusFactor)) >= 1) {
+		LevelManager.currentScore += 15;
+		score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
+		if ((LevelManager.currentScore / (1000 * Ball.bonusFactor)) >= 1) {
 			Ball.bonusFactor++;
 			LevelManager.ballCounts++;
 			balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
@@ -60,7 +57,7 @@ public class Brick : MonoBehaviour
 			brickCounts--;
 			UpdateView (this.gameObject);
 			if (brickCounts <= 0) {
-				levelManager.EvalDamage (totalBricks);
+				levelManager.EvalDamage (0, true);
 			}
 		} else {
 			LoadCrackedBrick ();

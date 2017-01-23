@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 88675c10d4b666549aae9ef548aa983f
-timeCreated: 1484628009
+timeCreated: 1485165147
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -47,7 +47,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
@@ -59,12 +59,12 @@ TextureImporter:
       name: level-complete-stars_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 365
-        width: 392
-        height: 180
+        x: 13
+        y: 4
+        width: 121
+        height: 120
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -72,12 +72,12 @@ TextureImporter:
       name: level-complete-stars_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 183
-        width: 392
-        height: 180
+        x: 145
+        y: 17
+        width: 139
+        height: 136
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -85,12 +85,12 @@ TextureImporter:
       name: level-complete-stars_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 392
-        height: 180
+        x: 297
+        y: 4
+        width: 121
+        height: 120
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
