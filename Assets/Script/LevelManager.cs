@@ -8,15 +8,14 @@ public class LevelManager : MonoBehaviour
 {
 	public static int ballCounts = 3;
 	public static int currentScore = 0;
-	public AudioClip timeoutAlert;
-	public AudioClip popStar;
+	public AudioClip timeoutAlert, popStar, bonus;
 
 	private GameObject background;
 	private GameObject levelComplete;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, levelCompleteScore;
 
-	private float timeLeft = 75f;
+	private float timeLeft = 15f;
 	private GameObject timer;
 	private int totalBricks;
 	private string minsAndSecs = "0:0";
@@ -111,7 +110,7 @@ public class LevelManager : MonoBehaviour
 		alert = false;
 		if (cleared) {
 			LevelComplete (1);
-			Invoke ("LoadNextLevel", 5f);
+			Invoke ("LoadNextLevel", timeLeft * 0.1f + 5f);
 		} else {
 			float damage = (float)destroyedBricks / (float)totalBricks;
 			print ("Assess Damage:" + damage); 
@@ -160,7 +159,7 @@ public class LevelManager : MonoBehaviour
 
 	IEnumerator PlayStarPopSound (int stars)
 	{
-		yield return new WaitForSeconds (0.75f);
+		yield return new WaitForSeconds (timeLeft * 0.1f);
 		AudioSource.PlayClipAtPoint (popStar, this.transform.position);	
 		starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
 		yield return new WaitForSeconds (0.4f);
@@ -189,12 +188,13 @@ public class LevelManager : MonoBehaviour
 	{
 		print ("remainder add: " + time);
 		for (int i = time; i > 0; i--) {
+			AudioSource.PlayClipAtPoint (bonus, this.transform.position);
 			minsAndSecs = Mathf.Floor (i / 60) + " : " + Mathf.Floor (i % 60 - 1);
 			timer.GetComponent <Text> ().text = minsAndSecs;
 			currentScore += 10;
 			score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
 			levelCompleteScore.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
-			yield return new WaitForSeconds (0.01f);
+			yield return new WaitForSeconds (0.1f);
 		}
 	}
 

@@ -13,7 +13,7 @@ public class Brick : MonoBehaviour
 
 	private int timesHit;
 	private LevelManager levelManager;
-	private GameObject score;
+	private GameObject score, levelCompleteScore;
 	private GameObject balls;
 
 	// Use this for initialization
@@ -23,6 +23,8 @@ public class Brick : MonoBehaviour
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
 		score = GameObject.Find ("Score");
 		score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
+		levelCompleteScore = GameObject.Find ("Level Complete Score");
+
 		balls = GameObject.Find ("Balls No");
 		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
 
@@ -43,6 +45,8 @@ public class Brick : MonoBehaviour
 	{
 		LevelManager.currentScore += 15;
 		score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
+		levelCompleteScore.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
+
 		if ((LevelManager.currentScore / (1000 * Ball.bonusFactor)) >= 1) {
 			Ball.bonusFactor++;
 			LevelManager.ballCounts++;
