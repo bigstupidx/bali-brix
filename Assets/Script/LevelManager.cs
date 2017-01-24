@@ -14,15 +14,17 @@ public class LevelManager : MonoBehaviour
 	private GameObject background;
 	private GameObject levelComplete;
 	private GameObject starLeft, starMiddle, starRight;
-	private GameObject score;
+	private GameObject score, levelCompleteScore;
 
-	private float timeLeft = 85f;
+	private float timeLeft = 75f;
 	private GameObject timer;
 	private int totalBricks;
 	private string minsAndSecs = "0:0";
 	public Sprite[] levelCompleteStars;
 	private bool alert = true;
+	private bool starsPlayed = false;
 	private int colorFactor = 20;
+
 
 	void Start ()
 	{
@@ -30,6 +32,8 @@ public class LevelManager : MonoBehaviour
 		timer = GameObject.Find ("Timer");
 		score = GameObject.Find ("Score");
 		levelComplete = GameObject.Find ("Level Complete");
+		levelCompleteScore = GameObject.Find ("Level Complete Score");
+
 		if (levelComplete) {
 			levelComplete.GetComponent <CanvasGroup> ().alpha = 0;
 			starLeft = GameObject.Find ("Star Left");
@@ -135,7 +139,8 @@ public class LevelManager : MonoBehaviour
 
 	public void LevelComplete (float damage)
 	{
-		int stars;
+		int stars = 0;
+		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
@@ -146,35 +151,34 @@ public class LevelManager : MonoBehaviour
 			fetchLevelPrize ();
 			stars = 3;
 		}
-		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
-		ShowStars (stars);
-	}
-
-	private void ShowStars (int stars)
-	{
-		switch (stars) {
-		case 3:
-			print ("total damage");
-			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-			starRight.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-			break;
-
-		case 2:
-			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-			break;
-
-		default:
-			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-			break;
+		if (!starsPlayed) {
+			starsPlayed = true;
+			StartCoroutine (PlayStarPopSound (stars));
 		}
 	}
 
-	private void HandleStar (GameObject star)
+
+	IEnumerator PlayStarPopSound (int stars)
 	{
-		star.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+		yield return new WaitForSeconds (0.75f);
+		AudioSource.PlayClipAtPoint (popStar, this.transform.position);	
+		starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+		yield return new WaitForSeconds (0.4f);
+
+		if (stars == 2) {
+			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
+			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			yield return new WaitForSeconds (0.4f);
+		} else {
+			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
+			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			yield return new WaitForSeconds (0.4f);
+			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
+			starRight.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+		}
+		starsPlayed = true;
 	}
+
 
 	public void fetchLevelPrize ()
 	{
@@ -189,6 +193,7 @@ public class LevelManager : MonoBehaviour
 			timer.GetComponent <Text> ().text = minsAndSecs;
 			currentScore += 10;
 			score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
+			levelCompleteScore.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
 			yield return new WaitForSeconds (0.01f);
 		}
 	}
