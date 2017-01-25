@@ -23,7 +23,7 @@ public class Ball : MonoBehaviour
 	{
 		if (!hasStarted) {
 			this.transform.position = paddle.transform.position + paddleToBallVector;
-			if (Input.GetMouseButtonDown (0)) {
+			if (Input.GetMouseButton (0)) {
 				this.GetComponent <Rigidbody2D> ().velocity = new Vector2 (2.2f, 9f);
 				hasStarted = true;
 			}		

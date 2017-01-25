@@ -95,12 +95,17 @@ public class LevelManager : MonoBehaviour
 		// Need to reset the brick counts otherwise the leftover from last game 
 		// will be added to the new game
 		Brick.brickCounts = 0;
+		Ball.hasStarted = false;
+
 		//Ball.ballCounts = 3;
 		SceneManager.LoadScene (name);
 	}
 
 	public void Reload ()
 	{
+		Ball.hasStarted = false;
+		Brick.brickCounts = 0;
+
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 
