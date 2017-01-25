@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, levelCompleteScore;
 
-	private float timeLeft = 15f;
+	private float timeLeft = 95f;
 	private GameObject timer;
 	private int totalBricks;
 	private string minsAndSecs = "0:0";
