@@ -9,9 +9,11 @@ public class Brick : MonoBehaviour
 	public static int brickCounts = 0;
 	public AudioClip crack;
 	public Sprite[] hitSprites;
-	public Sprite[] surprizes;
 	public GameObject particles;
+	public GameObject fallingObject;
 
+	private bool hasBall = false;
+	private int fallingBallIndex;
 	private int timesHit;
 	private LevelManager levelManager;
 	private GameObject score, levelCompleteScore;
@@ -25,6 +27,12 @@ public class Brick : MonoBehaviour
 		score = GameObject.Find ("Score");
 		score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
+		if (levelManager.fallingObjects > 0 && Random.Range (0f, 1f) > 0.5f) {
+			hasBall = true;
+			levelManager.fallingObjects--;
+			fallingBallIndex = (int)Random.Range (0, 12) + 1;
+			//fallingObject.GetComponent <SpriteRenderer>().sprite 
+		}
 
 		balls = GameObject.Find ("Balls No");
 		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
@@ -80,7 +88,18 @@ public class Brick : MonoBehaviour
 	{
 		ShowParticles ();
 		Destroy (this.gameObject);
+		if (hasBall) {
+			dropTheBall (fallingBallIndex);
+		}
 		levelManager.IncreaseBackgroundAlpha ();
+	}
+
+	void dropTheBall (int index)
+	{
+		GameObject ball = 
+			Instantiate (fallingObject, this.gameObject.transform.position, Quaternion.identity) as GameObject;
+		ball.GetComponent <SpriteRenderer> ().sprite = ball.GetComponent <FallingObjects> ().SetTheBall (index);
+		//ball.GetComponent
 	}
 
 	void LoadCrackedBrick ()

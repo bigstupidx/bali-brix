@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 	public static int ballCounts = 3;
 	public static int currentScore = 0;
 	public AudioClip timeoutAlert, popStar, bonus;
+	public int fallingObjects = 0;
 
 	private GameObject background;
 	private GameObject levelComplete;
