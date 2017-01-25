@@ -9,6 +9,7 @@ public class Brick : MonoBehaviour
 	public static int brickCounts = 0;
 	public AudioClip crack;
 	public Sprite[] hitSprites;
+	public Sprite[] surprizes;
 	public GameObject particles;
 
 	private int timesHit;
