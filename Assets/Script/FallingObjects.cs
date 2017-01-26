@@ -5,6 +5,7 @@ public class FallingObjects : MonoBehaviour
 {
 	public Sprite[] fallingObjects;
 	public AudioClip powerUp, powerDown;
+	public float bulletSpeed = 10;
 	public GameObject bullet;
 
 	private float duration = 0.3f;
@@ -24,7 +25,10 @@ public class FallingObjects : MonoBehaviour
 			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, duration) / duration + 0.5f);	
 		if (active) {
 			UpdateTimer ();
+			if (Input.GetButtonDown ("Fire1"))
+				Fire ();
 		}
+
 	}
 
 	private void UpdateTimer ()
@@ -40,6 +44,7 @@ public class FallingObjects : MonoBehaviour
 	{
 		if (other.tag == "Paddle") {
 			active = true;
+			GetGuns ();
 			switch (this.GetComponent <SpriteRenderer> ().sprite.name) {
 			case "balls_1":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
@@ -95,20 +100,17 @@ public class FallingObjects : MonoBehaviour
 
 	private void GetGuns ()
 	{
-		while (active) {
-			Shoot ();
+		if (Input.GetMouseButton (0) || Input.GetMouseButtonDown (0) && active) {
+			Fire ();
 		}
+
+
 	}
 
-	private void Shoot ()
+	void Fire ()
 	{
-		if (Input.GetMouseButton (0) || Input.GetMouseButtonDown (0)) {
-			GameObject b = 
-				Instantiate (bullet, this.gameObject.transform.position, Quaternion.identity) as GameObject;
-			while (b) {
-				b.transform.position += new Vector3 (0f, 1f, 0f);
-			}
-		}
+		GameObject bulletClone = Instantiate (bullet, transform.position, transform.rotation) as GameObject;
+		bulletClone.GetComponent<Rigidbody2D> ().velocity = transform.forward * bulletSpeed;
 	}
 
 	private void SealFloor ()
