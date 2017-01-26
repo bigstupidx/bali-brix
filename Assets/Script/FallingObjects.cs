@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class FallingObjects : MonoBehaviour
 {
@@ -8,43 +9,57 @@ public class FallingObjects : MonoBehaviour
 	public float bulletSpeed = 10;
 	public GameObject bullet;
 
-	private float duration = 0.3f;
+	private float blinkDuration = 0.3f;
 	private bool active = false;
 	private bool gun = false;
-	private float timeLeft = 50f;
+	private float timeLeft = 7f;
+	private GameObject paddle;
+	private GameObject ball;
 
 	// Use this for initialization
 	void Start ()
 	{
-	
+		paddle = GameObject.Find ("Paddle");
+		ball = GameObject.Find ("Ball");
+
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
 		this.GetComponent <SpriteRenderer> ().color = 
-			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, duration) / duration + 0.5f);	
+			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, blinkDuration) / blinkDuration + 0.5f);	
 		if (active) {
 			UpdateTimer ();
-			if (gun && Input.GetButtonDown ("Fire1"))
-				Fire ();
+			if (Input.GetButton ("Fire1")) {
+				print ("click inside the FallingObjects");
+				//InvokeRepeating ("Fire", 0f, 10f);
+				StartCoroutine (Fire ());
+			}
 		}
-
 	}
 
 	private void UpdateTimer ()
 	{
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
-			timeLeft = 10f;
+			timeLeft = 7f;
 			active = false;
 		}
+	}
+
+	IEnumerator Fire ()
+	{
+		Vector3 pos = new Vector3 (0f, 1.0f, 0f);
+		GameObject bulletClone = Instantiate (bullet, paddle.transform.position + pos, transform.rotation) as GameObject;
+		yield return new WaitForSeconds (0.5f);
+		bulletClone.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 13f);
+		yield return new WaitForSeconds (0.5f);
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.tag == "Paddle") {
-			active = true;
 			GetGuns ();
 			switch (this.GetComponent <SpriteRenderer> ().sprite.name) {
 			case "balls_1":
@@ -101,14 +116,10 @@ public class FallingObjects : MonoBehaviour
 
 	private void GetGuns ()
 	{
-		gun = true;
+		active = true;
 	}
 
-	void Fire ()
-	{
-		GameObject bulletClone = Instantiate (bullet, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
-		bulletClone.GetComponent<Rigidbody2D> ().velocity = -transform.forward * bulletSpeed;
-	}
+
 
 	private void SealFloor ()
 	{

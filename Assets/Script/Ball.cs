@@ -26,6 +26,7 @@ public class Ball : MonoBehaviour
 			if (Input.GetButtonDown ("Fire1")) {
 				this.GetComponent <Rigidbody2D> ().velocity = new Vector2 (2.25f, 9.1f);
 				hasStarted = true;
+				print ("click inside the Ball");
 			}		
 		}
 	}
@@ -33,6 +34,7 @@ public class Ball : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D collision)
 	{
 		Vector2 speedUp = new Vector2 (Random.Range (-0.35f, 0.35f), Random.Range (-0.1f, 0.35f));
+
 		if (hasStarted) {
 			AudioSource.PlayClipAtPoint (hit, this.transform.position);	
 			this.GetComponent <Rigidbody2D> ().velocity += speedUp;
