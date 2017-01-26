@@ -10,7 +10,8 @@ public class FallingObjects : MonoBehaviour
 
 	private float duration = 0.3f;
 	private bool active = false;
-	private float timeLeft = 10f;
+	private bool gun = false;
+	private float timeLeft = 50f;
 
 	// Use this for initialization
 	void Start ()
@@ -25,7 +26,7 @@ public class FallingObjects : MonoBehaviour
 			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, duration) / duration + 0.5f);	
 		if (active) {
 			UpdateTimer ();
-			if (Input.GetButtonDown ("Fire1"))
+			if (gun && Input.GetButtonDown ("Fire1"))
 				Fire ();
 		}
 
@@ -100,17 +101,13 @@ public class FallingObjects : MonoBehaviour
 
 	private void GetGuns ()
 	{
-		if (Input.GetMouseButton (0) || Input.GetMouseButtonDown (0) && active) {
-			Fire ();
-		}
-
-
+		gun = true;
 	}
 
 	void Fire ()
 	{
-		GameObject bulletClone = Instantiate (bullet, transform.position, transform.rotation) as GameObject;
-		bulletClone.GetComponent<Rigidbody2D> ().velocity = transform.forward * bulletSpeed;
+		GameObject bulletClone = Instantiate (bullet, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
+		bulletClone.GetComponent<Rigidbody2D> ().velocity = -transform.forward * bulletSpeed;
 	}
 
 	private void SealFloor ()

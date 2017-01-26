@@ -28,23 +28,33 @@ public class LevelManager : MonoBehaviour
 
 	void Start ()
 	{
+		FindThemAll ();
+
+		if (levelComplete) {
+			ToggleUI ();
+			TurnOffStars ();
+		}
+		totalBricks = Brick.brickCounts;
+		//InvokeRepeating ("Alert", timeLeft - 7f, 1f); // play alert sound 7 sec before times up
+	}
+
+	private void FindThemAll ()
+	{
 		background = GameObject.Find ("Background");
 		timer = GameObject.Find ("Timer");
 		score = GameObject.Find ("Score");
 		levelComplete = GameObject.Find ("Level Complete");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
+		starLeft = GameObject.Find ("Star Left");
+		starMiddle = GameObject.Find ("Star Middle");
+		starRight = GameObject.Find ("Star Right");
+	}
 
-		if (levelComplete) {
-			levelComplete.GetComponent <CanvasGroup> ().alpha = 0;
-			starLeft = GameObject.Find ("Star Left");
-			starLeft.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
-			starMiddle = GameObject.Find ("Star Middle");
-			starMiddle.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
-			starRight = GameObject.Find ("Star Right");
-			starRight.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
-		}
-		totalBricks = Brick.brickCounts;
-		//InvokeRepeating ("Alert", timeLeft - 7f, 1f); // play alert sound 7 sec before times up
+	private void TurnOffStars ()
+	{
+		starLeft.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
+		starMiddle.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
+		starRight.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
 	}
 
 	void Update ()
@@ -145,7 +155,9 @@ public class LevelManager : MonoBehaviour
 	public void LevelComplete (float damage)
 	{
 		int stars = 0;
-		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
+		//levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
+		//levelComplete.GetComponent <CanvasGroup> ().interactable = true;
+		ToggleUI ();
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
@@ -160,6 +172,14 @@ public class LevelManager : MonoBehaviour
 			starsPlayed = true;
 			StartCoroutine (PlayStarPopSound (stars));
 		}
+	}
+
+	private void ToggleUI ()
+	{
+		levelComplete.GetComponent <CanvasGroup> ().alpha = 
+			(levelComplete.GetComponent <CanvasGroup> ().alpha == 1) ? 0 : 1;
+		levelComplete.GetComponent <CanvasGroup> ().interactable = 
+			(levelComplete.GetComponent <CanvasGroup> ().interactable) ? false : true;
 	}
 
 
