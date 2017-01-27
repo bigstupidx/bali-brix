@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
 {
 	public static int ballCounts = 3;
 	public static int currentScore = 0;
-	public AudioClip timeoutAlert, popStar, bonus;
+	public AudioClip timeoutAlert, popStar, bonusTime, bonusBall;
 	public int fallingObjects = 0;
 
 	private GameObject background;
@@ -114,7 +114,6 @@ public class LevelManager : MonoBehaviour
 	{
 		Ball.hasStarted = false;
 		Brick.brickCounts = 0;
-
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 
@@ -180,7 +179,6 @@ public class LevelManager : MonoBehaviour
 			(levelComplete.GetComponent <CanvasGroup> ().interactable) ? false : true;
 	}
 
-
 	IEnumerator PlayStarPopSound (int stars)
 	{
 		yield return new WaitForSeconds (timeLeft * 0.1f);
@@ -212,7 +210,7 @@ public class LevelManager : MonoBehaviour
 	{
 		print ("remainder add: " + time);
 		for (int i = time; i > 0; i--) {
-			AudioSource.PlayClipAtPoint (bonus, this.transform.position);
+			AudioSource.PlayClipAtPoint (bonusTime, this.transform.position);
 			minsAndSecs = Mathf.Floor (i / 60) + " : " + Mathf.Floor (i % 60 - 1);
 			timer.GetComponent <Text> ().text = minsAndSecs;
 			currentScore += 10;
@@ -229,6 +227,7 @@ public class LevelManager : MonoBehaviour
 	{
 		Ball.bonusFactor++;
 		ballCounts++;
+		AudioSource.PlayClipAtPoint (bonusBall, this.transform.position);
 		balls.GetComponent <Text> ().text = ballCounts.ToString ();
 	}
 
