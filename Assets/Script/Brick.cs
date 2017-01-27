@@ -55,11 +55,8 @@ public class Brick : MonoBehaviour
 		LevelManager.currentScore += 15;
 		score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
 		levelCompleteScore.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
-
 		if ((LevelManager.currentScore / (1000 * Ball.bonusFactor)) >= 1) {
-			Ball.bonusFactor++;
-			LevelManager.ballCounts++;
-			balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
+			levelManager.AddBonusBall (balls);
 		}
 	}
 

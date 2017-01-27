@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject background;
 	private GameObject levelComplete;
 	private GameObject starLeft, starMiddle, starRight;
-	private GameObject score, levelCompleteScore;
+	private GameObject score, ballsNo, levelCompleteScore;
 
 	private float timeLeft = 85f;
 	private GameObject timer;
@@ -29,13 +29,11 @@ public class LevelManager : MonoBehaviour
 	void Start ()
 	{
 		FindThemAll ();
-
 		if (levelComplete) {
 			ToggleUI ();
 			TurnOffStars ();
 		}
 		totalBricks = Brick.brickCounts;
-		//InvokeRepeating ("Alert", timeLeft - 7f, 1f); // play alert sound 7 sec before times up
 	}
 
 	private void FindThemAll ()
@@ -43,6 +41,7 @@ public class LevelManager : MonoBehaviour
 		background = GameObject.Find ("Background");
 		timer = GameObject.Find ("Timer");
 		score = GameObject.Find ("Score");
+		ballsNo = GameObject.Find ("Balls No");
 		levelComplete = GameObject.Find ("Level Complete");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
 		starLeft = GameObject.Find ("Star Left");
@@ -84,7 +83,6 @@ public class LevelManager : MonoBehaviour
 
 	IEnumerator Alert ()
 	{
-		print ("ALERT!!!");
 		colorFactor += 20;
 		AudioSource.PlayClipAtPoint (timeoutAlert, this.transform.position);	
 		yield return new WaitForSeconds (1f);
@@ -157,7 +155,7 @@ public class LevelManager : MonoBehaviour
 		int stars = 0;
 		//levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
 		//levelComplete.GetComponent <CanvasGroup> ().interactable = true;
-		ToggleUI ();
+		ToggleUI ();  // show level complete window + its elements
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
@@ -220,8 +218,18 @@ public class LevelManager : MonoBehaviour
 			currentScore += 10;
 			score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
 			levelCompleteScore.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
+			if ((currentScore / (1000 * Ball.bonusFactor)) >= 1) {
+				AddBonusBall (ballsNo);
+			}
 			yield return new WaitForSeconds (0.1f);
 		}
+	}
+
+	public void AddBonusBall (GameObject balls)
+	{
+		Ball.bonusFactor++;
+		ballCounts++;
+		balls.GetComponent <Text> ().text = ballCounts.ToString ();
 	}
 
 	public void IncreaseBackgroundAlpha ()
