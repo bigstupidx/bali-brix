@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 public class FallingObjects : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class FallingObjects : MonoBehaviour
 	public float bulletSpeed = 10;
 	public GameObject bullet;
 
-	private float blinkDuration = 0.3f;
 	private bool active = false;
 	private bool gun = false;
+	private bool loaded = false;
 	private float timeLeft = 7f;
+	// one bullet every 0.8 sec
+	private float shootingRate = 0.8f;
+	private float blinkDuration = 0.3f;
 	private GameObject paddle;
 	private GameObject ball;
 
@@ -21,7 +25,6 @@ public class FallingObjects : MonoBehaviour
 	{
 		paddle = GameObject.Find ("Paddle");
 		ball = GameObject.Find ("Ball");
-
 	}
 
 	// Update is called once per frame
@@ -31,12 +34,29 @@ public class FallingObjects : MonoBehaviour
 			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, blinkDuration) / blinkDuration + 0.5f);	
 		if (active) {
 			UpdateTimer ();
-			if (Input.GetButton ("Fire1")) {
-				print ("click inside the FallingObjects");
-				//InvokeRepeating ("Fire", 0f, 10f);
-				StartCoroutine (Fire ());
+			shootingRate -= Time.deltaTime;
+			if (shootingRate < 0f) {
+				shootingRate = 0.8f;
+				loaded = true;
+				print ("reloaded"); 
+			}
+			if (Input.GetButton ("Fire1") && loaded) {
+				Fire ();
+				//InvokeRepeating ("Fire", 0f, 2f);
+
+				//StartCoroutine (Fire ());
 			}
 		}
+	}
+
+	private void Fire ()
+	{
+		loaded = false;
+		Vector3 pos = new Vector3 (0f, 1.0f, 0f);
+		GameObject bulletClone = 
+			Instantiate (bullet, paddle.transform.position + pos, transform.rotation) as GameObject;
+		bulletClone.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 13f);
+		Destroy (bulletClone, 1.0f);
 	}
 
 	private void UpdateTimer ()
@@ -46,15 +66,6 @@ public class FallingObjects : MonoBehaviour
 			timeLeft = 7f;
 			active = false;
 		}
-	}
-
-	IEnumerator Fire ()
-	{
-		Vector3 pos = new Vector3 (0f, 1.0f, 0f);
-		GameObject bulletClone = Instantiate (bullet, paddle.transform.position + pos, transform.rotation) as GameObject;
-		yield return new WaitForSeconds (0.5f);
-		bulletClone.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 13f);
-		yield return new WaitForSeconds (0.5f);
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
@@ -117,6 +128,7 @@ public class FallingObjects : MonoBehaviour
 	private void GetGuns ()
 	{
 		active = true;
+		loaded = true;
 	}
 
 
