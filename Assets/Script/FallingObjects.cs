@@ -7,24 +7,13 @@ public class FallingObjects : MonoBehaviour
 {
 	public Sprite[] fallingObjects;
 	public AudioClip powerUp, powerDown;
-	public float bulletSpeed = 10;
-	public GameObject bullet;
 
-	private bool active = false;
-	private bool gun = false;
-	private bool loaded = false;
-	private float timeLeft = 7f;
-	// one bullet every 0.8 sec
-	private float shootingRate = 0.8f;
 	private float blinkDuration = 0.3f;
-	private GameObject paddle;
-	private GameObject ball;
+	public GameObject gun;
 
 	// Use this for initialization
 	void Start ()
 	{
-		paddle = GameObject.Find ("Paddle");
-		ball = GameObject.Find ("Ball");
 	}
 
 	// Update is called once per frame
@@ -32,50 +21,17 @@ public class FallingObjects : MonoBehaviour
 	{
 		this.GetComponent <SpriteRenderer> ().color = 
 			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, blinkDuration) / blinkDuration + 0.5f);	
-		if (active) {
-			UpdateTimer ();
-			shootingRate -= Time.deltaTime;
-			if (shootingRate < 0f) {
-				shootingRate = 0.8f;
-				loaded = true;
-				print ("reloaded"); 
-			}
-			if (Input.GetButton ("Fire1") && loaded) {
-				Fire ();
-				//InvokeRepeating ("Fire", 0f, 2f);
-
-				//StartCoroutine (Fire ());
-			}
-		}
-	}
-
-	private void Fire ()
-	{
-		loaded = false;
-		Vector3 pos = new Vector3 (0f, 1.0f, 0f);
-		GameObject bulletClone = 
-			Instantiate (bullet, paddle.transform.position + pos, transform.rotation) as GameObject;
-		bulletClone.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, 13f);
-		Destroy (bulletClone, 1.0f);
-	}
-
-	private void UpdateTimer ()
-	{
-		timeLeft -= Time.deltaTime;
-		if (timeLeft < 0) {
-			timeLeft = 7f;
-			active = false;
-		}
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.tag == "Paddle") {
-			GetGuns ();
+			GetGun ();
+
 			switch (this.GetComponent <SpriteRenderer> ().sprite.name) {
 			case "balls_1":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
-				GetGuns ();
+				GetGun ();
 				break;
 			case "balls_2":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
@@ -114,7 +70,7 @@ public class FallingObjects : MonoBehaviour
 				PauseBall ();
 				break;
 			default:
-				print ("something is not right!");
+				print ("you hit the R ball!");
 				break;
 			}
 		}
@@ -125,10 +81,11 @@ public class FallingObjects : MonoBehaviour
 		return fallingObjects [index];
 	}
 
-	private void GetGuns ()
+	private void GetGun ()
 	{
-		active = true;
-		loaded = true;
+		if (!gun)
+			print ("no gun!");
+		GameObject gunClone = Instantiate (gun, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
 	}
 
 
