@@ -9,7 +9,7 @@ public class FallingObjects : MonoBehaviour
 	public AudioClip powerUp, powerDown;
 
 	private float blinkDuration = 0.3f;
-	public GameObject gun;
+	public GameObject gun, sealer;
 
 	// Use this for initialization
 	void Start ()
@@ -26,16 +26,15 @@ public class FallingObjects : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.tag == "Paddle") {
-			GetGun ();
 
 			switch (this.GetComponent <SpriteRenderer> ().sprite.name) {
 			case "balls_1":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
-				GetGun ();
+				GameObject gunClone = Instantiate (gun, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
 				break;
 			case "balls_2":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
-				SealFloor ();
+				GameObject sealerClone = Instantiate (sealer, new Vector3 (0f, -4f, 0f), transform.rotation) as GameObject;
 				break;
 			case "balls_3":
 				AudioSource.PlayClipAtPoint (powerDown, this.transform.position);	
@@ -80,14 +79,6 @@ public class FallingObjects : MonoBehaviour
 	{
 		return fallingObjects [index];
 	}
-
-	private void GetGun ()
-	{
-		if (!gun)
-			print ("no gun!");
-		GameObject gunClone = Instantiate (gun, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
-	}
-
 
 
 	private void SealFloor ()
