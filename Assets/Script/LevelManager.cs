@@ -9,21 +9,21 @@ public class LevelManager : MonoBehaviour
 	public static int ballCounts = 3;
 	public static int currentScore = 0;
 	public AudioClip timeoutAlert, popStar, bonusTime, bonusBall;
+	public Sprite[] levelCompleteStars;
 	public int fallingObjects = 0;
 
+	private GameObject timer;
 	private GameObject background;
 	private GameObject levelComplete;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore;
 
-	private float timeLeft = 85f;
-	private GameObject timer;
-	private int totalBricks;
 	private string minsAndSecs = "0:0";
-	public Sprite[] levelCompleteStars;
+	private float timeLeft = 85f;
 	private bool alert = true;
 	private bool starsPlayed = false;
 	private int colorFactor = 20;
+	private int totalBricks;
 
 
 	void Start ()
@@ -152,8 +152,6 @@ public class LevelManager : MonoBehaviour
 	public void LevelComplete (float damage)
 	{
 		int stars = 0;
-		//levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
-		//levelComplete.GetComponent <CanvasGroup> ().interactable = true;
 		ToggleUI ();  // show level complete window + its elements
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
@@ -203,7 +201,7 @@ public class LevelManager : MonoBehaviour
 
 	public void fetchLevelPrize ()
 	{
-		
+
 	}
 
 	IEnumerator addTimeBonusScore (int time)
