@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Sealer : MonoBehaviour
 {
-	private float blinkDuration = 0.2f;
+	private float blinkDuration = 1f;
 	private float timeLeft = 7f;
 	private bool active = true;
 
@@ -28,12 +28,13 @@ public class Sealer : MonoBehaviour
 		if (timeLeft < 0) {
 			timeLeft = 7f;
 			active = false;
+			Destroy (this.gameObject);
 		}
 	}
 
 	private void Seal ()
 	{
 		this.GetComponent <SpriteRenderer> ().color = 
-			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, blinkDuration) / blinkDuration + 0.7f);	
+			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, blinkDuration) / blinkDuration + 0.5f);	
 	}
 }
