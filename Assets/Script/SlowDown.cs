@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedUp : MonoBehaviour
+public class SlowDown : MonoBehaviour
 {
-	public float speedUpFactor = 2f;
+	public float slowDownFactor = -1f;
 
 	private float timeLeft = 7f;
 	private bool active = true;
@@ -19,12 +19,12 @@ public class SpeedUp : MonoBehaviour
 		defaultSpeed = ball.GetComponent <Ball> ().defaultSpeed;
 		xSpeed = ball.GetComponent <Rigidbody2D> ().velocity.x;
 		ySpeed = (ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ?
-			ball.GetComponent <Rigidbody2D> ().velocity.y + speedUpFactor :
-			ball.GetComponent <Rigidbody2D> ().velocity.y - speedUpFactor;
-			
+				ball.GetComponent <Rigidbody2D> ().velocity.y + slowDownFactor :
+				ball.GetComponent <Rigidbody2D> ().velocity.y - slowDownFactor;
+
 		ball.GetComponent <Rigidbody2D> ().velocity = new Vector2 (xSpeed, ySpeed);
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -47,12 +47,13 @@ public class SpeedUp : MonoBehaviour
 	private void ResetSpeed ()
 	{
 		ySpeed = (ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ?
-			ball.GetComponent <Rigidbody2D> ().velocity.y - speedUpFactor :
-			ball.GetComponent <Rigidbody2D> ().velocity.y + speedUpFactor;
+				ball.GetComponent <Rigidbody2D> ().velocity.y - slowDownFactor / 2 :
+				ball.GetComponent <Rigidbody2D> ().velocity.y + slowDownFactor / 2;
 		if (Mathf.Abs (ySpeed) < defaultSpeed.y) {
 			ySpeed = (ySpeed > 0) ? defaultSpeed.y : -defaultSpeed.y;
 		}
 		ball.GetComponent <Rigidbody2D> ().velocity = 
-			new Vector2 (ball.GetComponent <Rigidbody2D> ().velocity.x, ySpeed);
+				new Vector2 (ball.GetComponent <Rigidbody2D> ().velocity.x, ySpeed);
 	}
 }
+

@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
 	public static bool hasStarted = false;
 	public static bool bonusPaid = false;
 	public static int bonusFactor = 1;
+	public Vector2 defaultSpeed = new Vector2 (2.25f, 9.2f);
 
 	private Paddle paddle;
 	private Vector3 paddleToBallVector;
@@ -24,7 +25,7 @@ public class Ball : MonoBehaviour
 		if (!hasStarted) {
 			this.transform.position = paddle.transform.position + paddleToBallVector;
 			if (Input.GetButtonDown ("Fire1")) {
-				this.GetComponent <Rigidbody2D> ().velocity = new Vector2 (2.25f, 9.2f);
+				this.GetComponent <Rigidbody2D> ().velocity = defaultSpeed;
 				hasStarted = true;
 				print ("click inside the Ball");
 			}		
