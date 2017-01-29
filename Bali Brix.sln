@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{3B5ADB7E-487F-AF89-9C44-8312D2F09BE6}") = "Bali Brix", "Assembly-CSharp.csproj", "{05355941-7A87-AAE0-8AB7-D538F3A6C08F}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bali Brix", "Assembly-CSharp.csproj", "{05355941-7A87-AAE0-8AB7-D538F3A6C08F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

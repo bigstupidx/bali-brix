@@ -9,7 +9,7 @@ public class FallingObjects : MonoBehaviour
 	public AudioClip powerUp, powerDown;
 
 	private float blinkDuration = 0.3f;
-	public GameObject gun, sealer;
+	public GameObject gun, sealer, speedUp;
 
 	// Use this for initialization
 	void Start ()
@@ -30,15 +30,18 @@ public class FallingObjects : MonoBehaviour
 			switch (this.GetComponent <SpriteRenderer> ().sprite.name) {
 			case "balls_1":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
-				GameObject gunClone = Instantiate (gun, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
+				GameObject gunClone = 
+					Instantiate (gun, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
 				break;
 			case "balls_2":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
-				GameObject sealerClone = Instantiate (sealer, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
+				GameObject sealerClone = 
+					Instantiate (sealer, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
 			case "balls_3":
 				AudioSource.PlayClipAtPoint (powerDown, this.transform.position);	
-				SpeedUp ();
+				GameObject speedUpClone = 
+					Instantiate (speedUp, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
 			case "balls_4":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
@@ -78,17 +81,6 @@ public class FallingObjects : MonoBehaviour
 	public Sprite SetTheBall (int index)
 	{
 		return fallingObjects [index];
-	}
-
-
-	private void SealFloor ()
-	{
-
-	}
-
-	private void SpeedUp ()
-	{
-
 	}
 
 	private void SlowDown ()
