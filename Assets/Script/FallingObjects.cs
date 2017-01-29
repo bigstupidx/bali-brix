@@ -34,7 +34,7 @@ public class FallingObjects : MonoBehaviour
 				break;
 			case "balls_2":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
-				GameObject sealerClone = Instantiate (sealer, new Vector3 (0f, -4f, 0f), transform.rotation) as GameObject;
+				GameObject sealerClone = Instantiate (sealer, new Vector3 (0f, -5.7f, 0f), transform.rotation) as GameObject;
 				break;
 			case "balls_3":
 				AudioSource.PlayClipAtPoint (powerDown, this.transform.position);	
