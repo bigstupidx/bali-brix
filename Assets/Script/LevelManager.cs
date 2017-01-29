@@ -188,7 +188,7 @@ public class LevelManager : MonoBehaviour
 			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
 			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
 			yield return new WaitForSeconds (0.4f);
-		} else {
+		} else if (stars == 3) {
 			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
 			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
 			yield return new WaitForSeconds (0.4f);

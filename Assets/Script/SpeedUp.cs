@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpeedUp : MonoBehaviour
 {
-	public float speedUpFactor = 1f;
+	public float speedUpFactor = 2f;
 
 	private float timeLeft = 7f;
 	private bool active = true;
