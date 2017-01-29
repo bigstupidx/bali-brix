@@ -7,9 +7,9 @@ public class FallingObjects : MonoBehaviour
 {
 	public Sprite[] fallingObjects;
 	public AudioClip powerUp, powerDown;
+	public GameObject gun, sealer, speedUp;
 
 	private float blinkDuration = 0.3f;
-	public GameObject gun, sealer, speedUp;
 
 	// Use this for initialization
 	void Start ()

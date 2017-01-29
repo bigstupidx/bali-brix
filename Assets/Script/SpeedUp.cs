@@ -48,9 +48,6 @@ public class SpeedUp : MonoBehaviour
 			ball.GetComponent <Rigidbody2D> ().velocity.y - speedUpFactor :
 			ball.GetComponent <Rigidbody2D> ().velocity.y + speedUpFactor;
 		ball.GetComponent <Rigidbody2D> ().velocity = 
-			new Vector2 (
-			ball.GetComponent <Rigidbody2D> ().velocity.x, 
-			ySpeed
-		);
+			new Vector2 (ball.GetComponent <Rigidbody2D> ().velocity.x, ySpeed);
 	}
 }
