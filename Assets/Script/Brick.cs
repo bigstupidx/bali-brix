@@ -30,7 +30,7 @@ public class Brick : MonoBehaviour
 		if (levelManager.fallingObjects > 0 && Random.Range (0f, 1f) > 0.5f) {
 			hasBall = true;
 			levelManager.fallingObjects--;
-			fallingBallIndex = 4; //(int)Random.Range (1, 13);  // the first ball is the original one
+			fallingBallIndex = 3; //(int)Random.Range (1, 13);  // the first ball is the original one
 			//fallingObject.GetComponent <SpriteRenderer>().sprite 
 		}
 

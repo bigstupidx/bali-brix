@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpeedUp : MonoBehaviour
 {
-	public float speedUpFactor = 2f;
+	public float speedUpFactor = 100f;
 
 	private float timeLeft = 7f;
 	private bool active = true;
@@ -16,13 +16,13 @@ public class SpeedUp : MonoBehaviour
 	void Start ()
 	{
 		ball = GameObject.Find ("Ball");
-		defaultSpeed = ball.GetComponent <Ball> ().defaultSpeed;
-		xSpeed = ball.GetComponent <Rigidbody2D> ().velocity.x;
-		ySpeed = (ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ?
-			ball.GetComponent <Rigidbody2D> ().velocity.y + speedUpFactor :
-			ball.GetComponent <Rigidbody2D> ().velocity.y - speedUpFactor;
-			
-		ball.GetComponent <Rigidbody2D> ().velocity = new Vector2 (xSpeed, ySpeed);
+		if (ball.GetComponent <Rigidbody2D> ().velocity.y > 0) {
+			ball.GetComponent <Rigidbody2D> ()
+				.AddForce (new Vector2 (speedUpFactor / 3, speedUpFactor), ForceMode2D.Impulse);
+		} else {
+			ball.GetComponent <Rigidbody2D> ()
+				.AddForce (new Vector2 (-speedUpFactor / 3, -speedUpFactor), ForceMode2D.Impulse);
+		}
 	}
 	
 	// Update is called once per frame
@@ -46,13 +46,12 @@ public class SpeedUp : MonoBehaviour
 
 	private void ResetSpeed ()
 	{
-		ySpeed = (ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ?
-			ball.GetComponent <Rigidbody2D> ().velocity.y - speedUpFactor :
-			ball.GetComponent <Rigidbody2D> ().velocity.y + speedUpFactor;
-		if (Mathf.Abs (ySpeed) < defaultSpeed.y) {
-			ySpeed = (ySpeed > 0) ? defaultSpeed.y : -defaultSpeed.y;
-		}
-		ball.GetComponent <Rigidbody2D> ().velocity = 
-			new Vector2 (ball.GetComponent <Rigidbody2D> ().velocity.x, ySpeed);
+		if (ball.GetComponent <Rigidbody2D> ().velocity.y > 0) {
+			ball.GetComponent <Rigidbody2D> ()
+				.AddForce (new Vector2 (-speedUpFactor / 3, -speedUpFactor), ForceMode2D.Impulse);
+		} else {
+			ball.GetComponent <Rigidbody2D> ()
+				.AddForce (new Vector2 (speedUpFactor / 3, speedUpFactor), ForceMode2D.Impulse);
+		}		
 	}
 }
