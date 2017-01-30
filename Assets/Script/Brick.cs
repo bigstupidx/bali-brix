@@ -17,7 +17,7 @@ public class Brick : MonoBehaviour
 	private int timesHit;
 	private LevelManager levelManager;
 	private GameObject score, levelCompleteScore;
-	private GameObject balls;
+	private GameObject balls, dust;
 
 	// Use this for initialization
 	void Start ()
@@ -76,7 +76,7 @@ public class Brick : MonoBehaviour
 
 	void ShowParticles ()
 	{
-		GameObject dust = 
+		dust = 
 			Instantiate (particles, this.gameObject.transform.position, Quaternion.identity) as GameObject;
 		dust.GetComponent<ParticleSystem> ().startColor = this.GetComponent<SpriteRenderer> ().color;
 	}
@@ -96,7 +96,6 @@ public class Brick : MonoBehaviour
 		GameObject ball = 
 			Instantiate (fallingObject, this.gameObject.transform.position, Quaternion.identity) as GameObject;
 		ball.GetComponent <SpriteRenderer> ().sprite = ball.GetComponent <FallingObjects> ().SetTheBall (index);
-		//ball.GetComponent
 	}
 
 	void LoadCrackedBrick ()

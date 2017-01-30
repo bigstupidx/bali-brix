@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject score, ballsNo, levelCompleteScore;
 
 	private string minsAndSecs = "0:0";
-	private float timeLeft = 85f;
+	private float timeLeft = 185f;
 	private bool alert = true;
 	private bool starsPlayed = false;
 	private int colorFactor = 20;
