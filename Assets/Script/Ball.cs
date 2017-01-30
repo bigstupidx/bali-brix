@@ -34,11 +34,20 @@ public class Ball : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
-		Vector2 speedUp = new Vector2 (Random.Range (-0.4f, 0.4f), Random.Range (-0.1f, 0.4f));
+		float ySpeed = Random.Range (-0.002f, 0.011f);
+		float xSpeed = Random.Range (-0.002f, 0.01f);
+
+		//Vector2 speedUp = new Vector2 (Random.Range (-0.4f, 0.4f), Random.Range (-0.1f, 0.4f));
 
 		if (hasStarted) {
 			AudioSource.PlayClipAtPoint (hit, this.transform.position);	
-			this.GetComponent <Rigidbody2D> ().velocity += speedUp;
+			this.GetComponent <Rigidbody2D> ()
+					.AddForce (new Vector2 (
+				(this.GetComponent <Rigidbody2D> ().velocity.x > 0) ? xSpeed : -xSpeed, 
+				(this.GetComponent <Rigidbody2D> ().velocity.y > 0) ? ySpeed : -ySpeed 
+			), ForceMode2D.Impulse);
+	
+			//this.GetComponent <Rigidbody2D> ().velocity += speedUp;
 			if (Brick.brickCounts <= 0) // Make sure everything stops after last brick was hit
 				Destroy (this.gameObject);
 		}		

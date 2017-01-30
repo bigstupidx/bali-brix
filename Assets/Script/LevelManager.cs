@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject score, ballsNo, levelCompleteScore;
 
 	private string minsAndSecs = "0:0";
-	private float timeLeft = 185f;
+	private float timeLeft;
 	private bool alert = true;
 	private bool starsPlayed = false;
 	private int colorFactor = 20;
@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
 			TurnOffStars ();
 		}
 		totalBricks = Brick.brickCounts;
+		timeLeft = totalBricks * 2.5f;
 	}
 
 	private void FindThemAll ()
@@ -76,9 +77,11 @@ public class LevelManager : MonoBehaviour
 
 	private void Blink ()
 	{
-		timer.GetComponent <Text> ().color = (Mathf.Floor (timeLeft % 2) == 0) ?
-			Color.Lerp (Color.yellow, Color.red, 1f) :
-			Color.Lerp (Color.red, Color.yellow, 1f);
+		if (timer) {
+			timer.GetComponent <Text> ().color = (Mathf.Floor (timeLeft % 2) == 0) ?
+				Color.Lerp (Color.yellow, Color.red, 1f) :
+				Color.Lerp (Color.red, Color.yellow, 1f);
+		}
 	}
 
 	IEnumerator Alert ()
@@ -171,10 +174,12 @@ public class LevelManager : MonoBehaviour
 
 	private void ToggleUI ()
 	{
-		levelComplete.GetComponent <CanvasGroup> ().alpha = 
-			(levelComplete.GetComponent <CanvasGroup> ().alpha == 1) ? 0 : 1;
-		levelComplete.GetComponent <CanvasGroup> ().interactable = 
-			(levelComplete.GetComponent <CanvasGroup> ().interactable) ? false : true;
+		if (levelComplete) {
+			levelComplete.GetComponent <CanvasGroup> ().alpha = 
+				(levelComplete.GetComponent <CanvasGroup> ().alpha == 1) ? 0 : 1;
+			levelComplete.GetComponent <CanvasGroup> ().interactable = 
+				(levelComplete.GetComponent <CanvasGroup> ().interactable) ? false : true;
+		}
 	}
 
 	IEnumerator PlayStarPopSound (int stars)
