@@ -129,12 +129,11 @@ public class LevelManager : MonoBehaviour
 			Invoke ("LoadNextLevel", timeLeft * 0.1f + 5f);
 		} else {
 			float damage = (float)destroyedBricks / (float)totalBricks;
-			print ("Assess Damage:" + damage); 
-			print ("Destroyed:" + (float)destroyedBricks); 
-			print ("Total:" + (float)totalBricks); 
 			if (damage < 0.6) {
 				LoadLevel ("Loose");
 			} else {
+				SetHighestLevel ();
+				ToggleUI ();  // show level complete window + its elements
 				LevelComplete (damage);
 				Invoke ("LoadNextLevel", 7f);
 			}
@@ -152,10 +151,15 @@ public class LevelManager : MonoBehaviour
 		SceneManager.LoadScene (sceneIndex);
 	}
 
+	private void SetHighestLevel ()
+	{
+		LevelSelection.highestLevel++;
+		PlayerPrefs.SetInt ("Highest Level", LevelSelection.highestLevel);
+	}
+
 	public void LevelComplete (float damage)
 	{
 		int stars = 0;
-		ToggleUI ();  // show level complete window + its elements
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
@@ -237,6 +241,11 @@ public class LevelManager : MonoBehaviour
 	public void IncreaseBackgroundAlpha ()
 	{
 		background.GetComponent <SpriteRenderer> ().color += new Color (0f, 0f, 0f, 0.007f);
+	}
+
+	public void UnLock (string level)
+	{
+		
 	}
 
 	public void Quit ()
