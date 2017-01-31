@@ -25,7 +25,6 @@ public class LevelManager : MonoBehaviour
 	private int colorFactor = 20;
 	private int totalBricks;
 
-
 	void Start ()
 	{
 		FindThemAll ();
@@ -62,10 +61,12 @@ public class LevelManager : MonoBehaviour
 		if (Ball.hasStarted && timer) {
 			UpdateTimer ();
 		}
-		if (timeLeft <= 0) {
+		if (timeLeft <= 0f) {
 			EvalDamage (totalBricks - Brick.brickCounts);
+			timeLeft = 0.1f; // just to prevent running EvalDamage (the root cause of Flickering)
+			alert = false;
 		}
-		if (timeLeft < 7) {
+		if (timeLeft < 7f) {
 			Blink ();
 			if (alert) {
 				timer.GetComponent <Text> ().fontStyle = FontStyle.Bold;
@@ -87,9 +88,9 @@ public class LevelManager : MonoBehaviour
 	IEnumerator Alert ()
 	{
 		colorFactor += 20;
-		AudioSource.PlayClipAtPoint (timeoutAlert, this.transform.position);	
+		AudioSource.PlayClipAtPoint (timeoutAlert, this.transform.position);
 		yield return new WaitForSeconds (1f);
-		alert = true;
+		alert = (timeLeft > 0.1f) ? true : false;
 	}
 
 	private void UpdateTimer ()
@@ -126,15 +127,17 @@ public class LevelManager : MonoBehaviour
 		alert = false;
 		if (cleared) {
 			LevelComplete (1);
+			UnlockNextLevel ();
 			Invoke ("LoadNextLevel", timeLeft * 0.1f + 5f);
 		} else {
 			float damage = (float)destroyedBricks / (float)totalBricks;
 			if (damage < 0.6) {
 				LoadLevel ("Loose");
 			} else {
-				SetHighestLevel ();
+				print ("highest level:" + LevelSelection.highestLevel);
 				ToggleUI ();  // show level complete window + its elements
 				LevelComplete (damage);
+				UnlockNextLevel ();
 				Invoke ("LoadNextLevel", 7f);
 			}
 		}
@@ -151,7 +154,7 @@ public class LevelManager : MonoBehaviour
 		SceneManager.LoadScene (sceneIndex);
 	}
 
-	private void SetHighestLevel ()
+	private void UnlockNextLevel ()
 	{
 		LevelSelection.highestLevel++;
 		PlayerPrefs.SetInt ("Highest Level", LevelSelection.highestLevel);
@@ -190,19 +193,23 @@ public class LevelManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds (timeLeft * 0.1f);
 		AudioSource.PlayClipAtPoint (popStar, this.transform.position);	
-		starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+		if (starLeft)
+			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
 		yield return new WaitForSeconds (0.4f);
 
 		if (stars == 2) {
 			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
-			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			if (starMiddle)
+				starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
 			yield return new WaitForSeconds (0.4f);
 		} else if (stars == 3) {
 			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
-			starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			if (starMiddle)
+				starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
 			yield return new WaitForSeconds (0.4f);
 			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
-			starRight.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+			if (starRight)
+				starRight.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
 		}
 		starsPlayed = true;
 	}
@@ -215,7 +222,6 @@ public class LevelManager : MonoBehaviour
 
 	IEnumerator addTimeBonusScore (int time)
 	{
-		print ("remainder add: " + time);
 		for (int i = time; i > 0; i--) {
 			AudioSource.PlayClipAtPoint (bonusTime, this.transform.position);
 			minsAndSecs = Mathf.Floor (i / 60) + " : " + Mathf.Floor (i % 60 - 1);
@@ -240,17 +246,7 @@ public class LevelManager : MonoBehaviour
 
 	public void IncreaseBackgroundAlpha ()
 	{
-		background.GetComponent <SpriteRenderer> ().color += new Color (0f, 0f, 0f, 0.007f);
-	}
-
-	public void UnLock (string level)
-	{
-		
-	}
-
-	public void Quit ()
-	{
-		Debug.Log ("quit!");
-		Application.Quit ();
+		float alpha = (float)1 / (totalBricks + Brick.brickCounts);
+		background.GetComponent <SpriteRenderer> ().color += new Color (0f, 0f, 0f, alpha);
 	}
 }
