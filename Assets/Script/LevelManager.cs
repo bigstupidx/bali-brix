@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
 			TurnOffStars ();
 		}
 		totalBricks = Brick.brickCounts;
-		timeLeft = totalBricks * 2.5f;
+		timeLeft = totalBricks * 2.65f;
 	}
 
 	private void FindThemAll ()
@@ -104,13 +104,10 @@ public class LevelManager : MonoBehaviour
 
 	public void LoadLevel (string name)
 	{
-		Debug.Log ("load level requested:" + name);
 		// Need to reset the brick counts otherwise the leftover from last game 
 		// will be added to the new game
 		Brick.brickCounts = 0;
 		Ball.hasStarted = false;
-
-		//Ball.ballCounts = 3;
 		SceneManager.LoadScene (name);
 	}
 
