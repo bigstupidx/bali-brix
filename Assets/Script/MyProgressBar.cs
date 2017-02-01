@@ -24,6 +24,6 @@ public class MyProgressBar : MonoBehaviour
 
 		yield return new WaitForSeconds (0.5f);
 
-		levelManager.LoadNextLevel ();
+		SceneManager.LoadScene ("Level Selection");
 	}
 }
