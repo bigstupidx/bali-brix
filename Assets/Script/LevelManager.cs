@@ -29,7 +29,11 @@ public class LevelManager : MonoBehaviour
 	{
 		FindThemAll ();
 		if (levelComplete) {
-			ToggleUI ();
+			print ("levelComplete does exist!");
+			//ToggleUI ();
+			levelComplete.GetComponent <CanvasGroup> ().alpha = 0;
+			levelComplete.GetComponent <CanvasGroup> ().interactable = false;
+			
 			TurnOffStars ();
 		}
 		totalBricks = Brick.brickCounts;
@@ -104,6 +108,7 @@ public class LevelManager : MonoBehaviour
 
 	public void LoadLevel (string name)
 	{
+		print ("Load scene " + name + " requested");
 		// Need to reset the brick counts otherwise the leftover from last game 
 		// will be added to the new game
 		Brick.brickCounts = 0;
@@ -113,6 +118,7 @@ public class LevelManager : MonoBehaviour
 
 	public void Reload ()
 	{
+		print ("realoding the current scene: " + SceneManager.GetActiveScene ().name);
 		Ball.hasStarted = false;
 		Brick.brickCounts = 0;
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
@@ -122,6 +128,8 @@ public class LevelManager : MonoBehaviour
 	{
 		Ball.hasStarted = false;
 		alert = false;
+		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
+		levelComplete.GetComponent <CanvasGroup> ().interactable = true;
 		if (cleared) {
 			LevelComplete (1);
 			UnlockNextLevel ();
@@ -132,7 +140,7 @@ public class LevelManager : MonoBehaviour
 				LoadLevel ("Loose");
 			} else {
 				print ("highest level:" + LevelSelection.highestLevel);
-				ToggleUI ();  // show level complete window + its elements
+				//ToggleUI ();  // show level complete window + its elements
 				LevelComplete (damage);
 				UnlockNextLevel ();
 				Invoke ("LoadNextLevel", 7f);
@@ -178,12 +186,16 @@ public class LevelManager : MonoBehaviour
 
 	private void ToggleUI ()
 	{
-		if (levelComplete) {
-			levelComplete.GetComponent <CanvasGroup> ().alpha = 
+		print ("alpha: " + levelComplete.GetComponent <CanvasGroup> ().alpha
+		+ " interactable: " + levelComplete.GetComponent <CanvasGroup> ().interactable);
+		//if (levelComplete) {
+		levelComplete.GetComponent <CanvasGroup> ().alpha = 
 				(levelComplete.GetComponent <CanvasGroup> ().alpha == 1) ? 0 : 1;
-			levelComplete.GetComponent <CanvasGroup> ().interactable = 
+		levelComplete.GetComponent <CanvasGroup> ().interactable = 
 				(levelComplete.GetComponent <CanvasGroup> ().interactable) ? false : true;
-		}
+		print ("alpha: " + levelComplete.GetComponent <CanvasGroup> ().alpha
+		+ " interactable: " + levelComplete.GetComponent <CanvasGroup> ().interactable);
+		//}
 	}
 
 	IEnumerator PlayStarPopSound (int stars)
@@ -245,5 +257,12 @@ public class LevelManager : MonoBehaviour
 	{
 		float alpha = (float)1 / (totalBricks + Brick.brickCounts);
 		background.GetComponent <SpriteRenderer> ().color += new Color (0f, 0f, 0f, alpha);
+	}
+
+	public void Quit ()
+	{
+		Debug.Log ("quit!");
+		print ("QUIT");
+		Application.Quit ();
 	}
 }
