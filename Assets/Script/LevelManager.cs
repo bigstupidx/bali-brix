@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
 
 	private GameObject timer;
 	private GameObject background;
-	private GameObject levelComplete;
+	private GameObject levelCompleteCanvas;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore;
 
@@ -25,14 +25,24 @@ public class LevelManager : MonoBehaviour
 	private int colorFactor = 20;
 	private int totalBricks;
 
+	private AudioClip[] allSounds;
+
+	void StopAllAudio ()
+	{
+		allSounds = FindObjectsOfType (typeof(AudioClip)) as AudioClip[];
+		foreach (AudioClip audioS in allSounds) {
+
+		}
+	}
+
 	void Start ()
 	{
 		FindThemAll ();
-		if (levelComplete) {
+		if (levelCompleteCanvas) {
 			print ("levelComplete does exist!");
 			//ToggleUI ();
-			levelComplete.GetComponent <CanvasGroup> ().alpha = 0;
-			levelComplete.GetComponent <CanvasGroup> ().interactable = false;
+			levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 0;
+			levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = false;
 			
 			TurnOffStars ();
 		}
@@ -46,7 +56,7 @@ public class LevelManager : MonoBehaviour
 		timer = GameObject.Find ("Timer");
 		score = GameObject.Find ("Score");
 		ballsNo = GameObject.Find ("Balls No");
-		levelComplete = GameObject.Find ("Level Complete");
+		levelCompleteCanvas = GameObject.Find ("Canvas - Level Complete");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
 		starLeft = GameObject.Find ("Star Left");
 		starMiddle = GameObject.Find ("Star Middle");
@@ -128,8 +138,8 @@ public class LevelManager : MonoBehaviour
 	{
 		Ball.hasStarted = false;
 		alert = false;
-		levelComplete.GetComponent <CanvasGroup> ().alpha = 1;
-		levelComplete.GetComponent <CanvasGroup> ().interactable = true;
+		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
+		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		if (cleared) {
 			LevelComplete (1);
 			UnlockNextLevel ();
@@ -186,15 +196,15 @@ public class LevelManager : MonoBehaviour
 
 	private void ToggleUI ()
 	{
-		print ("alpha: " + levelComplete.GetComponent <CanvasGroup> ().alpha
-		+ " interactable: " + levelComplete.GetComponent <CanvasGroup> ().interactable);
+		print ("alpha: " + levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha
+		+ " interactable: " + levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable);
 		//if (levelComplete) {
-		levelComplete.GetComponent <CanvasGroup> ().alpha = 
-				(levelComplete.GetComponent <CanvasGroup> ().alpha == 1) ? 0 : 1;
-		levelComplete.GetComponent <CanvasGroup> ().interactable = 
-				(levelComplete.GetComponent <CanvasGroup> ().interactable) ? false : true;
-		print ("alpha: " + levelComplete.GetComponent <CanvasGroup> ().alpha
-		+ " interactable: " + levelComplete.GetComponent <CanvasGroup> ().interactable);
+		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 
+				(levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha == 1) ? 0 : 1;
+		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = 
+				(levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable) ? false : true;
+		print ("alpha: " + levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha
+		+ " interactable: " + levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable);
 		//}
 	}
 
@@ -257,6 +267,12 @@ public class LevelManager : MonoBehaviour
 	{
 		float alpha = (float)1 / (totalBricks + Brick.brickCounts);
 		background.GetComponent <SpriteRenderer> ().color += new Color (0f, 0f, 0f, alpha);
+	}
+
+	public void toggleSounds ()
+	{
+		AudioListener.pause = (AudioListener.pause) ? false : true;
+		AudioListener.volume = (AudioListener.pause) ? 0 : 3;
 	}
 
 	public void Quit ()
