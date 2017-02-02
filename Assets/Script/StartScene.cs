@@ -25,6 +25,11 @@ public class StartScene : MonoBehaviour
 		SceneManager.LoadScene ("Level Selection");
 	}
 
+	public void LoadLevel (string name)
+	{
+		SceneManager.LoadScene (name);
+	}
+
 	public void Quit ()
 	{
 		Debug.Log ("quit!");

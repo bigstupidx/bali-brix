@@ -35,7 +35,7 @@ public class Ball : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D collision)
 	{
 		float ySpeed = Random.Range (-0.002f, 0.011f);
-		float xSpeed = Random.Range (-0.002f, 0.01f);
+		float xSpeed = Random.Range (-0.002f, 0.011f);
 
 		//Vector2 speedUp = new Vector2 (Random.Range (-0.4f, 0.4f), Random.Range (-0.1f, 0.4f));
 
