@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
 	public static int ballCounts = 3;
 	public static int currentScore = 0;
 	public AudioClip timeoutAlert, popStar, bonusTime, bonusBall;
-	public Sprite[] levelCompleteStars;
+	public Sprite[] levelCompleteStars, soundIcons;
 	public int fallingObjects = 0;
 
 	private GameObject timer;
@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject levelCompleteCanvas;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore, level;
+//, sound;
 
 	private string minsAndSecs = "0:0";
 	private float timeLeft;
@@ -50,6 +51,7 @@ public class LevelManager : MonoBehaviour
 		background = GameObject.Find ("Background");
 		timer = GameObject.Find ("Timer");
 		score = GameObject.Find ("Score");
+		//sound = GameObject.Find ("Sound");
 		ballsNo = GameObject.Find ("Balls No");
 		level = GameObject.Find ("Level");
 		levelCompleteCanvas = GameObject.Find ("Canvas - Level Complete");
@@ -269,6 +271,7 @@ public class LevelManager : MonoBehaviour
 	{
 		AudioListener.pause = (AudioListener.pause) ? false : true;
 		AudioListener.volume = (AudioListener.pause) ? 0 : 2;
+		//sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
 	}
 
 	public void Quit ()
