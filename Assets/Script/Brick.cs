@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Brick : MonoBehaviour
 {
@@ -30,8 +31,8 @@ public class Brick : MonoBehaviour
 		if (levelManager.fallingObjects > 0 && Random.Range (0f, 1f) > 0.5f) {
 			hasBall = true;
 			levelManager.fallingObjects--;
-			fallingBallIndex = 3; //(int)Random.Range (1, 13);  // the first ball is the original one
-			//fallingObject.GetComponent <SpriteRenderer>().sprite 
+
+			fallingBallIndex = (int)Random.Range (1, 4);// SceneManager.GetActiveScene ().buildIndex);  
 		}
 
 		balls = GameObject.Find ("Balls No");
@@ -40,6 +41,8 @@ public class Brick : MonoBehaviour
 		if (this.tag == "Breakable")
 			brickCounts++;
 	}
+
+
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{

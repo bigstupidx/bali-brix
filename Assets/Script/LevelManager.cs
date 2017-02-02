@@ -28,8 +28,7 @@ public class LevelManager : MonoBehaviour
 	void Start ()
 	{
 		FindThemAll ();
-		string levelName = SceneManager.GetActiveScene ().name;
-		level.GetComponent <Text> ().text = levelName.Substring (0, 5) + " " + levelName.Substring (5, 2);
+		SetUILevelName (SceneManager.GetActiveScene ().name);
 		if (levelCompleteCanvas) {
 			//ToggleUI ();
 			levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 0;
@@ -39,6 +38,11 @@ public class LevelManager : MonoBehaviour
 		}
 		totalBricks = Brick.brickCounts;
 		timeLeft = totalBricks * 2.65f;
+	}
+
+	private void SetUILevelName (string name)
+	{
+		level.GetComponent<Text> ().text = name.Substring (0, 5) + " " + name.Substring (5, 2);
 	}
 
 	private void FindThemAll ()
