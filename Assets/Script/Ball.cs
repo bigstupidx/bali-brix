@@ -47,9 +47,28 @@ public class Ball : MonoBehaviour
 				(this.GetComponent <Rigidbody2D> ().velocity.y > 0) ? ySpeed : -ySpeed 
 			), ForceMode2D.Impulse);
 	
+			SetSpeedLimits (this.GetComponent <Rigidbody2D> ().velocity);
+
 			//this.GetComponent <Rigidbody2D> ().velocity += speedUp;
 			if (Brick.brickCounts <= 0) // Make sure everything stops after last brick was hit
 				Destroy (this.gameObject);
 		}		
+	}
+
+	private void SetSpeedLimits (Vector2 speed)
+	{
+		print ("current speed: " + speed);
+		// fix the straight horizontal/vertical movements
+		if (speed.x > -0.07f && speed.x < 0.07f)
+			speed.x = (speed.x < 0) ? -1f : 1f;
+		if (speed.y > -0.07f && speed.y < 0.07f)
+			speed.y = (speed.y < 0) ? -9.8f : 9.8f;
+		Vector2 newSpeed = new Vector2 (
+			                   Mathf.Clamp (speed.x, -7f, 7f),
+			                   Mathf.Clamp (speed.y, -15f, 15f)
+		                   );
+		this.GetComponent <Rigidbody2D> ().velocity = newSpeed;
+
+		print ("fixed speed: " + newSpeed);
 	}
 }
