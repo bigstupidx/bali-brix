@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject levelCompleteCanvas;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore, level;
-//, sound;
+	//, sound;
 
 	private string minsAndSecs = "0:0";
 	private float timeLeft;
@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
 			TurnOffStars ();
 		}
 		totalBricks = Brick.brickCounts;
-		timeLeft = totalBricks * 2.65f;
+		timeLeft = totalBricks * 2.1f;
 	}
 
 	private void SetUILevelName (string name)

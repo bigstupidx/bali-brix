@@ -4,11 +4,11 @@ using System.Collections;
 public class Gun : MonoBehaviour
 {
 	public GameObject bullet;
-	public float bulletSpeed = 14f;
+	public float bulletSpeed = 18f;
 
-	// one bullet every 0.8 sec
-	private float shootingRate = 1f;
-	private float timeLeft = 7f;
+	// one bullet every 0.5 sec
+	private float shootingRate = 0.5f;
+	private float timeLeft = 9f;
 	private bool active = true;
 	private bool gun = false;
 	private bool loaded = true;
@@ -27,7 +27,7 @@ public class Gun : MonoBehaviour
 		if (active) {
 			Countdown ();
 			if (shootingRate < 0f) {
-				shootingRate = 1f;
+				shootingRate = 0.5f;
 				loaded = true; 
 			}
 			if (Input.GetButton ("Fire1") && loaded) {
@@ -52,6 +52,6 @@ public class Gun : MonoBehaviour
 		GameObject bulletClone = 
 			Instantiate (bullet, paddle.transform.position + pos, transform.rotation) as GameObject;
 		bulletClone.GetComponent<Rigidbody2D> ().velocity = new Vector2 (0, bulletSpeed);
-		Destroy (bulletClone, 0.8f);
+		Destroy (bulletClone, 1.1f);
 	}
 }
