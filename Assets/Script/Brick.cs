@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//using System;
+
 public class Brick : MonoBehaviour
 {
 	// we use statis to make sure there is only one variable across all Brick classes
@@ -31,8 +33,7 @@ public class Brick : MonoBehaviour
 		if (levelManager.fallingObjects > 0 && Random.Range (0f, 1f) > 0.5f) {
 			hasBall = true;
 			levelManager.fallingObjects--;
-
-			fallingBallIndex = (int)Random.Range (1, 4);// SceneManager.GetActiveScene ().buildIndex);  
+			SetBall ();
 		}
 
 		balls = GameObject.Find ("Balls No");
@@ -42,6 +43,11 @@ public class Brick : MonoBehaviour
 			brickCounts++;
 	}
 
+	private void SetBall ()
+	{
+		int max = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 5);
+		fallingBallIndex = (int)Random.Range (1, max);  
+	}
 
 
 	void OnCollisionEnter2D (Collision2D collision)
@@ -89,12 +95,12 @@ public class Brick : MonoBehaviour
 		ShowParticles ();
 		Destroy (this.gameObject);
 		if (hasBall) {
-			dropTheBall (fallingBallIndex);
+			DropBall (fallingBallIndex);
 		}
 		levelManager.IncreaseBackgroundAlpha ();
 	}
 
-	void dropTheBall (int index)
+	void DropBall (int index)
 	{
 		GameObject ball = 
 			Instantiate (fallingObject, this.gameObject.transform.position, Quaternion.identity) as GameObject;
