@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrowPaddle : MonoBehaviour
+public class ShrinkPaddle : MonoBehaviour
 {
-	public float growFactor = 0.6f;
 
-	private float timeLeft = 10f;
+	public float shrinkFactor = -0.2f;
+
+	private float timeLeft = 7f;
 	private bool active = true;
 	private GameObject paddle;
 	// Use this for initialization
 	void Start ()
 	{
 		paddle = GameObject.Find ("Paddle");
-		paddle.transform.localScale += new Vector3 (growFactor, -0.22f, 0f);
+		paddle.transform.localScale += new Vector3 (shrinkFactor, 0.22f, 0f);
 	}
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -28,7 +29,7 @@ public class GrowPaddle : MonoBehaviour
 	{
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
-			timeLeft = 10f;
+			timeLeft = 7f;
 			active = false;
 			ResetPaddle ();
 		}
@@ -36,6 +37,6 @@ public class GrowPaddle : MonoBehaviour
 
 	private void ResetPaddle ()
 	{
-		paddle.transform.localScale += new Vector3 (-growFactor, 0.22f, 0f);
+		paddle.transform.localScale += new Vector3 (-shrinkFactor, -0.22f, 0f);
 	}
 }

@@ -7,8 +7,7 @@ public class FallingObjects : MonoBehaviour
 {
 	public Sprite[] fallingObjects;
 	public AudioClip powerUp, powerDown;
-	public GameObject gun, sealer, speedUp, slowDown, growPaddle;
-	//, shrinkPaddle;
+	public GameObject gun, sealer, speedUp, slowDown, growPaddle, shrinkPaddle;
 
 	private float blinkDuration = 0.3f;
 
@@ -56,7 +55,8 @@ public class FallingObjects : MonoBehaviour
 				break;
 			case "balls_6":
 				AudioSource.PlayClipAtPoint (powerDown, this.transform.position);	
-				ShrinkPaddle ();
+				GameObject shrinkPaddleClone = 
+					Instantiate (shrinkPaddle, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
 			case "balls_7":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
@@ -84,11 +84,6 @@ public class FallingObjects : MonoBehaviour
 	public Sprite SetTheBall (int index)
 	{
 		return fallingObjects [index];
-	}
-
-	private void ShrinkPaddle ()
-	{
-
 	}
 
 	private void AddLife ()
