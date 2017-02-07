@@ -7,7 +7,7 @@ public class FallingObjects : MonoBehaviour
 {
 	public Sprite[] fallingObjects;
 	public AudioClip powerUp, powerDown;
-	public GameObject gun, sealer, speedUp, slowDown, growPaddle, shrinkPaddle;
+	public GameObject gun, sealer, speedUp, slowDown, growPaddle, shrinkPaddle, breakThrough;
 
 	private float blinkDuration = 0.3f;
 	private LevelManager levelManager;
@@ -70,7 +70,8 @@ public class FallingObjects : MonoBehaviour
 				break;
 			case "balls_8":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
-				BreakThrough ();
+				GameObject breakthroughClone = 
+					Instantiate (breakThrough, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
 			case "balls_9":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
@@ -98,11 +99,6 @@ public class FallingObjects : MonoBehaviour
 		// we need to decrease the bonus factor because in the AddBonusBall it 
 		// has been increased for handling score bonus
 		Ball.bonusFactor--;
-	}
-
-	private void BreakThrough ()
-	{
-
 	}
 
 	private void DoubleBalls ()

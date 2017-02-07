@@ -46,16 +46,31 @@ public class Brick : MonoBehaviour
 	private void SetBall ()
 	{
 		int max = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 6);
-		fallingBallIndex = 7;//(int)Random.Range (1, max);  
+		fallingBallIndex = 8;//(int)Random.Range (1, max);  
 	}
 
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
+		if (collision.transform.tag == "Ball") {
+			//print ("COLLIDED and isTrigger is:" + this.GetComponent <BoxCollider2D> ().isTrigger.ToString ()); 
+			AudioSource.PlayClipAtPoint (crack, this.transform.position);
+			if (this.tag == "Breakable") {
+				HandleScores ();
+				HandleHits ();		
+			}
+		}
+	}
+
+	// use this for break through balls
+	void OnTriggerEnter2D (Collider2D other)
+	{
 		AudioSource.PlayClipAtPoint (crack, this.transform.position);
-		if (this.tag == "Breakable") {
+		//if (other.tag == "Ball") {
+		if (this.tag == "Breakable" && other.tag == "Ball") {
+			//print ("TRIGGERED and isTrigger is:" + this.GetComponent <BoxCollider2D> ().isTrigger.ToString ());
 			HandleScores ();
-			HandleHits ();		
+			HandleHits ();	
 		}
 	}
 
@@ -93,7 +108,10 @@ public class Brick : MonoBehaviour
 	void UpdateView (GameObject brick)
 	{
 		ShowParticles ();
+		//print ("Brick " + this.GetInstanceID () + " destroyed!");
 		Destroy (this.gameObject);
+		//print ("SEE? " + this.GetInstanceID ());
+
 		if (hasBall) {
 			DropBall (fallingBallIndex);
 		}

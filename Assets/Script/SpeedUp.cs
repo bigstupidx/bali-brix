@@ -39,7 +39,6 @@ public class SpeedUp : MonoBehaviour
 		if (timeLeft < 0) {
 			timeLeft = 7f;
 			active = false;
-			print (ball.GetComponent <Rigidbody2D> ().velocity);
 			ResetSpeed ();
 		}
 	}

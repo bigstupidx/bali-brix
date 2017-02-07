@@ -60,7 +60,6 @@ public class Ball : MonoBehaviour
 
 	private void SetSpeedLimits (Vector2 speed)
 	{
-		print ("current speed: " + speed);
 		// fix the straight horizontal/vertical movements
 		if (speed.x > -0.07f && speed.x < 0.07f)
 			speed.x = (speed.x < 0) ? -1f : 1f;
@@ -71,7 +70,5 @@ public class Ball : MonoBehaviour
 			                   Mathf.Clamp (speed.y, -15f, 15f)
 		                   );
 		this.GetComponent <Rigidbody2D> ().velocity = newSpeed;
-
-		print ("fixed speed: " + newSpeed);
 	}
 }
