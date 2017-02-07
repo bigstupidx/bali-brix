@@ -45,8 +45,8 @@ public class Brick : MonoBehaviour
 
 	private void SetBall ()
 	{
-		int max = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 5);
-		fallingBallIndex = 6;//(int)Random.Range (1, max);  
+		int max = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 6);
+		fallingBallIndex = (int)Random.Range (1, max);  
 	}
 
 
