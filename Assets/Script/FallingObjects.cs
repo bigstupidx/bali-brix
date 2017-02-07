@@ -10,10 +10,16 @@ public class FallingObjects : MonoBehaviour
 	public GameObject gun, sealer, speedUp, slowDown, growPaddle, shrinkPaddle;
 
 	private float blinkDuration = 0.3f;
+	private LevelManager levelManager;
+	private GameObject balls;
+
 
 	// Use this for initialization
 	void Start ()
 	{
+		levelManager = GameObject.FindObjectOfType<LevelManager> ();
+		balls = GameObject.Find ("Balls No");
+		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
 	}
 
 	// Update is called once per frame
@@ -88,7 +94,10 @@ public class FallingObjects : MonoBehaviour
 
 	private void AddLife ()
 	{
-
+		levelManager.AddBonusBall (balls);
+		// we need to decrease the bonus factor because in the AddBonusBall it 
+		// has been increased for handling score bonus
+		Ball.bonusFactor--;
 	}
 
 	private void BreakThrough ()
