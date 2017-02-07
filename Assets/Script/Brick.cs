@@ -45,14 +45,14 @@ public class Brick : MonoBehaviour
 
 	private void SetBall ()
 	{
-		int max = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 6);
-		fallingBallIndex = 8;//(int)Random.Range (1, max);  
+		int max = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 8);
+		fallingBallIndex = (int)Random.Range (1, max);  
 	}
 
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
-		if (collision.transform.tag == "Ball") {
+		if (collision.transform.tag == "Ball" || collision.transform.tag == "Bullet") {
 			//print ("COLLIDED and isTrigger is:" + this.GetComponent <BoxCollider2D> ().isTrigger.ToString ()); 
 			AudioSource.PlayClipAtPoint (crack, this.transform.position);
 			if (this.tag == "Breakable") {
