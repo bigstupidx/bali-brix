@@ -139,7 +139,7 @@ public class LevelManager : MonoBehaviour
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		if (cleared) {
-			LevelComplete (1);
+			ShowLevelComplete (1);
 			UnlockNextLevel ();
 			Invoke ("LoadNextLevel", timeLeft * 0.1f + 5f);
 		} else {
@@ -149,7 +149,7 @@ public class LevelManager : MonoBehaviour
 			} else {
 				print ("highest level:" + LevelSelection.highestLevel);
 				//ToggleUI ();  // show level complete window + its elements
-				LevelComplete (damage);
+				ShowLevelComplete (damage);
 				UnlockNextLevel ();
 				Invoke ("LoadNextLevel", 7f);
 			}
@@ -163,17 +163,21 @@ public class LevelManager : MonoBehaviour
 		Brick.brickCounts = 0;
 		Ball.hasStarted = false; 
 		int sceneIndex = SceneManager.GetActiveScene ().buildIndex + 1;
-		PlayerPrefs.SetInt ("HighestLevel", sceneIndex);
+		//PlayerPrefs.SetInt ("HighestLevel", sceneIndex);
 		SceneManager.LoadScene (sceneIndex);
 	}
 
 	private void UnlockNextLevel ()
 	{
-		LevelSelection.highestLevel++;
-		PlayerPrefs.SetInt ("Highest Level", LevelSelection.highestLevel);
+		// Remember! Level 01 build index is 3.
+		int currentLevel = SceneManager.GetActiveScene ().buildIndex - 2;
+		if (currentLevel >= LevelSelection.highestLevel) {
+			LevelSelection.highestLevel++;
+			PlayerPrefs.SetInt ("Highest Level", LevelSelection.highestLevel);	
+		}
 	}
 
-	public void LevelComplete (float damage)
+	public void ShowLevelComplete (float damage)
 	{
 		int stars = 0;
 		if (damage < 0.7) {												// 1 star
