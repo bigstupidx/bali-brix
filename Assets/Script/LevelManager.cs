@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Net;
+using UnityEngine.Advertisements;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class LevelManager : MonoBehaviour
 	public AudioClip timeoutAlert, popStar, bonusTime, bonusBall;
 	public Sprite[] levelCompleteStars, soundIcons;
 	public int fallingObjects = 0;
+	public float timeLeft = 0f;
+	public int totalBricks = 0;
 
 	private GameObject timer;
 	private GameObject background;
@@ -20,11 +23,10 @@ public class LevelManager : MonoBehaviour
 	//, sound;
 
 	private string minsAndSecs = "0:0";
-	private float timeLeft;
+
 	private bool alert = true;
 	private bool starsPlayed = false;
 	private int colorFactor = 20;
-	private int totalBricks;
 
 	void Start ()
 	{
@@ -34,7 +36,6 @@ public class LevelManager : MonoBehaviour
 			//ToggleUI ();
 			levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 0;
 			levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = false;
-
 			TurnOffStars ();
 		}
 		totalBricks = Brick.brickCounts;
@@ -88,6 +89,45 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+	private void SecondChance ()
+	{
+		// 3 sec to make a descision + 30 sec to play
+		/*
+		if () {
+			
+		}
+		*/
+	}
+
+	public void ShowRewardedAd ()
+	{
+		if (Advertisement.IsReady ("rewardedVideo")) {
+			var options = new ShowOptions { resultCallback = HandleShowResult };
+			Advertisement.Show ("rewardedVideo", options);
+		}
+	}
+
+	private void HandleShowResult (ShowResult result)
+	{
+		switch (result) {
+		case ShowResult.Finished:
+			Debug.Log ("The ad was successfully shown.");
+			//
+			// YOUR CODE TO REWARD THE GAMER
+			// Give coins etc.
+			timeLeft = 30f;
+			ballCounts = 1;
+
+			break;
+		case ShowResult.Skipped:
+			Debug.Log ("The ad was skipped before reaching the end.");
+			break;
+		case ShowResult.Failed:
+			Debug.LogError ("The ad failed to be shown.");
+			break;
+		}
+	}
+
 	private void Blink ()
 	{
 		if (timer) {
@@ -136,8 +176,6 @@ public class LevelManager : MonoBehaviour
 	{
 		Ball.hasStarted = false;
 		alert = false;
-		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
-		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		if (cleared) {
 			ShowLevelComplete (1);
 			UnlockNextLevel ();
@@ -145,10 +183,9 @@ public class LevelManager : MonoBehaviour
 		} else {
 			float damage = (float)destroyedBricks / (float)totalBricks;
 			if (damage < 0.6) {
-				LoadLevel ("Loose");
+				ShowRewardedAd ();
+				//LoadLevel ("Loose");
 			} else {
-				print ("highest level:" + LevelSelection.highestLevel);
-				//ToggleUI ();  // show level complete window + its elements
 				ShowLevelComplete (damage);
 				UnlockNextLevel ();
 				Invoke ("LoadNextLevel", 7f);
@@ -180,6 +217,8 @@ public class LevelManager : MonoBehaviour
 	public void ShowLevelComplete (float damage)
 	{
 		int stars = 0;
+		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
+		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
