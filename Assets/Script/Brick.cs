@@ -16,7 +16,7 @@ public class Brick : MonoBehaviour
 	public GameObject fallingObject;
 
 	private bool hasBall = false;
-	private int fallingBallIndex;
+	private int fallingBallIndex = 1;
 	private int timesHit;
 	private LevelManager levelManager;
 	private GameObject score, levelCompleteScore;
@@ -46,7 +46,8 @@ public class Brick : MonoBehaviour
 	private void SetBall ()
 	{
 		int max = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 8);
-		fallingBallIndex = (int)Random.Range (1, max);  
+		fallingBallIndex = (fallingBallIndex % max == 0) ? 
+			1 : fallingBallIndex++; //Random.Range (1, max);  
 	}
 
 

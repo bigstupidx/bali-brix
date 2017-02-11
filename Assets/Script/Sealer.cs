@@ -6,12 +6,6 @@ public class Sealer : MonoBehaviour
 	private float blinkDuration = 1f;
 	private float timeLeft = 7f;
 	private bool active = true;
-
-	// Use this for initialization
-	void Start ()
-	{
-	
-	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -26,9 +20,10 @@ public class Sealer : MonoBehaviour
 	{
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
-			timeLeft = 7f;
 			active = false;
 			Destroy (this.gameObject);
+			timeLeft = 7f;
+
 		}
 	}
 
