@@ -12,15 +12,15 @@ public class LevelManager : MonoBehaviour
 	public AudioClip timeoutAlert, popStar, bonusTime, bonusBall;
 	public Sprite[] levelCompleteStars, soundIcons;
 	public int fallingObjects = 0;
-	public float timeLeft = 0f;
 	public int totalBricks = 0;
+	public float timeLeft = 0f;
+	public bool secondChance = true;
 
 	private GameObject timer;
 	private GameObject background;
 	private GameObject levelCompleteCanvas;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore, level;
-	//, sound;
 
 	private string minsAndSecs = "0:0";
 
@@ -38,6 +38,7 @@ public class LevelManager : MonoBehaviour
 			levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = false;
 			TurnOffStars ();
 		}
+		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 		totalBricks = Brick.brickCounts;
 		timeLeft = totalBricks * 2.1f;
 	}
@@ -166,7 +167,6 @@ public class LevelManager : MonoBehaviour
 
 	public void Reload ()
 	{
-		print ("realoding the current scene: " + SceneManager.GetActiveScene ().name);
 		Ball.hasStarted = false;
 		Brick.brickCounts = 0;
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
@@ -183,8 +183,12 @@ public class LevelManager : MonoBehaviour
 		} else {
 			float damage = (float)destroyedBricks / (float)totalBricks;
 			if (damage < 0.6) {
-				ShowRewardedAd ();
-				//LoadLevel ("Loose");
+				if (secondChance) {
+					ShowRewardedAd ();
+					secondChance = false;
+				} else {
+					LoadLevel ("Loose");	
+				}
 			} else {
 				ShowLevelComplete (damage);
 				UnlockNextLevel ();

@@ -30,6 +30,6 @@ public class Sealer : MonoBehaviour
 	private void Seal ()
 	{
 		this.GetComponent <SpriteRenderer> ().color = 
-			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, blinkDuration) / blinkDuration + 0.5f);	
+			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, blinkDuration) / blinkDuration + 0.1f);	
 	}
 }

@@ -23,6 +23,7 @@ public class Loose : MonoBehaviour
 		// will be added to the new game
 		Brick.brickCounts = 0;
 		Ball.hasStarted = false;
+		LevelManager.ballCounts = 3;
 		SceneManager.LoadScene (name);
 	}
 

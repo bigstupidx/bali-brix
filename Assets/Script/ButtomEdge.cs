@@ -29,6 +29,8 @@ public class ButtomEdge : MonoBehaviour
 		AudioSource.PlayClipAtPoint (missed, this.transform.position);	
 		Ball.hasStarted = false;
 		if (LevelManager.ballCounts-- <= 1) {
+			print ("total: " + levelManager.totalBricks + " available: " + Brick.brickCounts);
+			print (" Damage: " + (float)(levelManager.totalBricks - Brick.brickCounts) / (float)levelManager.totalBricks);
 			levelManager.EvalDamage (levelManager.totalBricks - Brick.brickCounts);
 			//levelManager.LoadLevel ("Loose");	
 			//levelManager.EvalDamage ();
