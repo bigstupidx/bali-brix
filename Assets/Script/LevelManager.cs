@@ -110,6 +110,7 @@ public class LevelManager : MonoBehaviour
 
 	private void HandleShowResult (ShowResult result)
 	{
+		Ball.hasStarted = false;
 		switch (result) {
 		case ShowResult.Finished:
 			Debug.Log ("The ad was successfully shown.");
