@@ -118,8 +118,8 @@ public class LevelManager : MonoBehaviour
 			// YOUR CODE TO REWARD THE GAMER
 			// Give coins etc.
 			timeLeft = 30f;
-			ballCounts = 1;
-
+			ballCounts++;
+			ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 			break;
 		case ShowResult.Skipped:
 			Debug.Log ("The ad was skipped before reaching the end.");
@@ -224,6 +224,7 @@ public class LevelManager : MonoBehaviour
 		int stars = 0;
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
+		print ("damage: " + damage); 
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
@@ -256,10 +257,13 @@ public class LevelManager : MonoBehaviour
 
 	IEnumerator PlayStarPopSound (int stars)
 	{
+		print ("number of stars: " + stars); 
 		yield return new WaitForSeconds (timeLeft * 0.1f);
 		AudioSource.PlayClipAtPoint (popStar, this.transform.position);	
 		if (starLeft)
 			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
+		else
+			print ("cant find the fucking star dude!");
 		yield return new WaitForSeconds (0.4f);
 
 		if (stars == 2) {
