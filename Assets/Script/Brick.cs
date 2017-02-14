@@ -16,8 +16,8 @@ public class Brick : MonoBehaviour
 	public GameObject fallingObject;
 
 	private bool hasBall = false;
-	private int fallingBallIndex = 1;
-	private int timesHit;
+	//private int fallingBallIndex = 1;
+	private int timesHit, ballIndex;
 	private LevelManager levelManager;
 	private GameObject score, levelCompleteScore;
 	private GameObject balls, dust;
@@ -45,11 +45,16 @@ public class Brick : MonoBehaviour
 
 	private void SetBall ()
 	{
-		int max = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 8);
-		fallingBallIndex = (fallingBallIndex % max == 0) ? 
-			1 : fallingBallIndex++; //Random.Range (1, max);  
+		int maxBallIndex = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 8);
+		//print ("ball: " + fallingBallIndex + " max: " + maxBallIndex); 
+		//print ("calculations: " + fallingBallIndex % maxBallIndex);
+		if (levelManager.fallingBallIndex == maxBallIndex)
+			levelManager.fallingBallIndex = 1; //Random.Range (1, max);  
+		else
+			levelManager.fallingBallIndex++;
+		print ("ball: " + levelManager.fallingBallIndex);
+		ballIndex = levelManager.fallingBallIndex;
 	}
-
 
 	void OnCollisionEnter2D (Collision2D collision)
 	{
@@ -114,13 +119,14 @@ public class Brick : MonoBehaviour
 		//print ("SEE? " + this.GetInstanceID ());
 
 		if (hasBall) {
-			DropBall (fallingBallIndex);
+			DropBall (ballIndex);
 		}
 		levelManager.IncreaseBackgroundAlpha ();
 	}
 
 	void DropBall (int index)
 	{
+		print ("Current Ball Index is: " + index);
 		GameObject ball = 
 			Instantiate (fallingObject, this.gameObject.transform.position, Quaternion.identity) as GameObject;
 		ball.GetComponent <SpriteRenderer> ().sprite = ball.GetComponent <FallingObjects> ().SetTheBall (index);

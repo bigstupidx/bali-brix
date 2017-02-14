@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 	public AudioClip timeoutAlert, popStar, bonusTime, bonusBall;
 	public Sprite[] levelCompleteStars, soundIcons;
 	public int fallingObjects = 0;
+	public int fallingBallIndex = 1;
 	public int totalBricks = 0;
 	public float timeLeft = 0f;
 	public bool secondChance = true;
@@ -158,7 +159,6 @@ public class LevelManager : MonoBehaviour
 
 	public void LoadLevel (string name)
 	{
-		print ("Load scene " + name + " requested");
 		// Need to reset the brick counts otherwise the leftover from last game 
 		// will be added to the new game
 		Brick.brickCounts = 0;
@@ -224,7 +224,6 @@ public class LevelManager : MonoBehaviour
 		int stars = 0;
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
-		print ("damage: " + damage); 
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
@@ -243,32 +242,21 @@ public class LevelManager : MonoBehaviour
 
 	private void ToggleUI ()
 	{
-		print ("alpha: " + levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha
-		+ " interactable: " + levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable);
-		//if (levelComplete) {
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 
 			(levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha == 1) ? 0 : 1;
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = 
 			(levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable) ? false : true;
-		print ("alpha: " + levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha
-		+ " interactable: " + levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable);
-		//}
 	}
 
 	IEnumerator PlayStarPopSound (int stars)
 	{
-		print ("number of stars: " + stars); 
-		//yield return new WaitForSeconds (timeLeft * 0.1f);
 		AudioSource.PlayClipAtPoint (popStar, this.transform.position);	
 		if (starLeft) {
-			print ("yup, I'm showing it!");
 			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
 		} else
-			print ("cant find the fucking star dude!");
-		yield return new WaitForSeconds (0.4f);
+			yield return new WaitForSeconds (0.4f);
 
 		if (stars == 2) {
-			print ("Found 2 stars!");
 			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
 			if (starMiddle)
 				starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
@@ -331,7 +319,6 @@ public class LevelManager : MonoBehaviour
 	public void Quit ()
 	{
 		Debug.Log ("quit!");
-		print ("QUIT");
 		Application.Quit ();
 	}
 }
