@@ -193,7 +193,7 @@ public class LevelManager : MonoBehaviour
 			} else {
 				ShowLevelComplete (damage);
 				UnlockNextLevel ();
-				Invoke ("LoadNextLevel", 7f);
+				Invoke ("LoadNextLevel", 3.5f);
 			}
 		}
 	}
@@ -258,15 +258,17 @@ public class LevelManager : MonoBehaviour
 	IEnumerator PlayStarPopSound (int stars)
 	{
 		print ("number of stars: " + stars); 
-		yield return new WaitForSeconds (timeLeft * 0.1f);
+		//yield return new WaitForSeconds (timeLeft * 0.1f);
 		AudioSource.PlayClipAtPoint (popStar, this.transform.position);	
-		if (starLeft)
+		if (starLeft) {
+			print ("yup, I'm showing it!");
 			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-		else
+		} else
 			print ("cant find the fucking star dude!");
 		yield return new WaitForSeconds (0.4f);
 
 		if (stars == 2) {
+			print ("Found 2 stars!");
 			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
 			if (starMiddle)
 				starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
