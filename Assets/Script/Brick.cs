@@ -114,10 +114,7 @@ public class Brick : MonoBehaviour
 	void UpdateView (GameObject brick)
 	{
 		ShowParticles ();
-		//print ("Brick " + this.GetInstanceID () + " destroyed!");
 		Destroy (this.gameObject);
-		//print ("SEE? " + this.GetInstanceID ());
-
 		if (hasBall) {
 			DropBall (ballIndex);
 		}
@@ -126,7 +123,6 @@ public class Brick : MonoBehaviour
 
 	void DropBall (int index)
 	{
-		print ("Current Ball Index is: " + index);
 		GameObject ball = 
 			Instantiate (fallingObject, this.gameObject.transform.position, Quaternion.identity) as GameObject;
 		ball.GetComponent <SpriteRenderer> ().sprite = ball.GetComponent <FallingObjects> ().SetTheBall (index);

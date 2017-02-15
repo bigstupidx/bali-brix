@@ -23,13 +23,12 @@ public class Sealer : MonoBehaviour
 			active = false;
 			Destroy (this.gameObject);
 			timeLeft = 7f;
-
 		}
 	}
 
 	private void Seal ()
 	{
 		this.GetComponent <SpriteRenderer> ().color = 
-			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, blinkDuration) / blinkDuration + 0.1f);	
+			new Color (255f, 255f, 255f, Mathf.PingPong (Time.time, blinkDuration) / blinkDuration + 0.6f);	
 	}
 }

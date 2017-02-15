@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlowDown : MonoBehaviour
 {
-	public float slowDownFactor = -100f;
+	public float slowDownFactor = -85f;
 
 	private float timeLeft = 7f;
 	private bool active = true;
@@ -14,13 +14,10 @@ public class SlowDown : MonoBehaviour
 	void Start ()
 	{
 		ball = GameObject.Find ("Ball");
-		if (ball.GetComponent <Rigidbody2D> ().velocity.y > 0) {
-			ball.GetComponent <Rigidbody2D> ()
-				.AddForce (new Vector2 (slowDownFactor / 3, slowDownFactor), ForceMode2D.Impulse);
-		} else {
-			ball.GetComponent <Rigidbody2D> ()
-				.AddForce (new Vector2 (-slowDownFactor / 3, -slowDownFactor), ForceMode2D.Impulse);
-		}
+		ball.GetComponent <Rigidbody2D> ().AddForce (new Vector2 (
+			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (slowDownFactor / 3) : (-slowDownFactor / 3),
+			(ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ? (slowDownFactor) : (-slowDownFactor)
+		));
 	}
 
 	// Update is called once per frame
@@ -43,13 +40,10 @@ public class SlowDown : MonoBehaviour
 
 	private void ResetSpeed ()
 	{
-		if (ball.GetComponent <Rigidbody2D> ().velocity.y > 0) {
-			ball.GetComponent <Rigidbody2D> ()
-				.AddForce (new Vector2 (-slowDownFactor / 3, -slowDownFactor), ForceMode2D.Impulse);
-		} else {
-			ball.GetComponent <Rigidbody2D> ()
-				.AddForce (new Vector2 (slowDownFactor / 3, slowDownFactor), ForceMode2D.Impulse);
-		}		
+		ball.GetComponent <Rigidbody2D> ().AddForce (new Vector2 (
+			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (-slowDownFactor / 3) : (slowDownFactor / 3),
+			(ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ? (-slowDownFactor) : (slowDownFactor)
+		));
 	}
 }
 
