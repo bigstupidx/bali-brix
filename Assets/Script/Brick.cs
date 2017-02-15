@@ -52,7 +52,6 @@ public class Brick : MonoBehaviour
 			levelManager.fallingBallIndex = 1; //Random.Range (1, max);  
 		else
 			levelManager.fallingBallIndex++;
-		print ("ball: " + levelManager.fallingBallIndex);
 		ballIndex = levelManager.fallingBallIndex;
 	}
 
@@ -109,6 +108,7 @@ public class Brick : MonoBehaviour
 		dust = 
 			Instantiate (particles, this.gameObject.transform.position, Quaternion.identity) as GameObject;
 		dust.GetComponent<ParticleSystem> ().startColor = this.GetComponent<SpriteRenderer> ().color;
+		Destroy (dust, 1f);
 	}
 
 	void UpdateView (GameObject brick)

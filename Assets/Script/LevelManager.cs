@@ -250,11 +250,12 @@ public class LevelManager : MonoBehaviour
 
 	IEnumerator PlayStarPopSound (int stars)
 	{
+		yield return new WaitForSeconds (0.4f);
 		AudioSource.PlayClipAtPoint (popStar, this.transform.position);	
 		if (starLeft) {
 			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-		} else
 			yield return new WaitForSeconds (0.4f);
+		} 
 
 		if (stars == 2) {
 			AudioSource.PlayClipAtPoint (popStar, this.transform.position);

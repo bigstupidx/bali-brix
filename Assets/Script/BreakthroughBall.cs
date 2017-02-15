@@ -14,7 +14,6 @@ public class BreakthroughBall : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		print ("Got your ball!");
 		ToggleTrigger ();
 	}
 
@@ -31,7 +30,6 @@ public class BreakthroughBall : MonoBehaviour
 	{
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
-			print ("Times Up!");
 			timeLeft = 7;
 			active = false;
 			ToggleTrigger ();
@@ -45,6 +43,5 @@ public class BreakthroughBall : MonoBehaviour
 		for (int index = 0; index < allAvailableBricks.Length; index++) {
 			allAvailableBricks [index].GetComponent <BoxCollider2D> ().isTrigger = trigger;
 		}
-		print ("length: " + allAvailableBricks.Length + " trigger: " + trigger); 
 	}
 }
