@@ -71,9 +71,9 @@ public class Brick : MonoBehaviour
 	// use this for break through balls
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		AudioSource.PlayClipAtPoint (crack, this.transform.position);
 		//if (other.tag == "Ball") {
 		if (this.tag == "Breakable" && other.tag == "Ball") {
+			AudioSource.PlayClipAtPoint (crack, this.transform.position);
 			//print ("TRIGGERED and isTrigger is:" + this.GetComponent <BoxCollider2D> ().isTrigger.ToString ());
 			HandleScores ();
 			HandleHits ();	
