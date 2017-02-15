@@ -120,6 +120,7 @@ public class LevelManager : MonoBehaviour
 			// Give coins etc.
 			timeLeft = 30f;
 			ballCounts++;
+			alert = true;
 			ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 			break;
 		case ShowResult.Skipped:

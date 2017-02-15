@@ -71,7 +71,7 @@ public class Brick : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		//if (other.tag == "Ball") {
-		if (this.tag == "Breakable" && other.tag == "Ball") {
+		if (this.tag == "Breakable" && (other.tag == "Ball" || other.tag == "Bullet")) {
 			AudioSource.PlayClipAtPoint (crack, this.transform.position);
 			//print ("TRIGGERED and isTrigger is:" + this.GetComponent <BoxCollider2D> ().isTrigger.ToString ());
 			HandleScores ();
