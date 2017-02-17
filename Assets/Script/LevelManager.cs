@@ -118,10 +118,11 @@ public class LevelManager : MonoBehaviour
 			//
 			// YOUR CODE TO REWARD THE GAMER
 			// Give coins etc.
-			timeLeft = 30f;
+			timeLeft = 31f;
 			ballCounts++;
 			alert = true;
 			ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
+			UpdateTimer ();
 			break;
 		case ShowResult.Skipped:
 			Debug.Log ("The ad was skipped before reaching the end.");
