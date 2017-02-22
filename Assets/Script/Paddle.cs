@@ -28,8 +28,8 @@ public class Paddle : MonoBehaviour
 
 	void MovePaddle ()
 	{
-		float mousePoseInBlocks = Input.mousePosition.x / Screen.width * 16;
-		paddlePos.x = Mathf.Clamp (mousePoseInBlocks - 8f, -7.5f, 7.5f);
+		float mousePoseInBlocks = Input.mousePosition.x / Screen.width * 7;//16;
+		paddlePos.x = Mathf.Clamp (mousePoseInBlocks - 4f, -3.5f, 3.5f);//(mousePoseInBlocks - 8f, -7.5f, 7.5f);
 		this.transform.position = paddlePos;
 	}
 
