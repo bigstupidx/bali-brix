@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 {
 	public static int ballCounts = 3;
 	public static int currentScore = 0;
+	public static int playCounts = 0;
 	public AudioClip timeoutAlert, popStar, bonusTime, bonusBall;
 	public Sprite[] levelCompleteStars, soundIcons;
 	public int fallingObjects = 0;
@@ -42,6 +43,18 @@ public class LevelManager : MonoBehaviour
 		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 		totalBricks = Brick.brickCounts;
 		timeLeft = totalBricks * 2.1f;
+		playCounts++;
+		if (playCounts > 3) {
+			playCounts = 0;
+			ShowAd ();
+		}
+	}
+
+	public void ShowAd ()
+	{
+		if (Advertisement.IsReady ()) {
+			Advertisement.Show ();
+		}
 	}
 
 	private void SetUILevelName (string name)
