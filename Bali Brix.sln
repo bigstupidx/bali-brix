@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bali Brix", "Assembly-CSharp-firstpass.csproj", "{AF148E5D-5C5E-1E56-3F25-F0E1E2D2B85E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bali Brix", "Assembly-CSharp.csproj", "{05355941-7A87-AAE0-8AB7-D538F3A6C08F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bali Brix", "Assembly-CSharp-Editor-firstpass.csproj", "{9C14956A-0AE4-6861-8FFE-E8E571A0E064}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF148E5D-5C5E-1E56-3F25-F0E1E2D2B85E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF148E5D-5C5E-1E56-3F25-F0E1E2D2B85E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF148E5D-5C5E-1E56-3F25-F0E1E2D2B85E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF148E5D-5C5E-1E56-3F25-F0E1E2D2B85E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05355941-7A87-AAE0-8AB7-D538F3A6C08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05355941-7A87-AAE0-8AB7-D538F3A6C08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05355941-7A87-AAE0-8AB7-D538F3A6C08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05355941-7A87-AAE0-8AB7-D538F3A6C08F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C14956A-0AE4-6861-8FFE-E8E571A0E064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C14956A-0AE4-6861-8FFE-E8E571A0E064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C14956A-0AE4-6861-8FFE-E8E571A0E064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C14956A-0AE4-6861-8FFE-E8E571A0E064}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
