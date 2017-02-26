@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using System.Net;
 using UnityEngine.Advertisements;
 
-
-
 public class LevelManager : MonoBehaviour
 {
 	public static int ballCounts = 3;
