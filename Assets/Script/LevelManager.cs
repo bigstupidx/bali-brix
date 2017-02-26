@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject timer;
 	private GameObject background;
 	private GameObject levelCompleteCanvas;
+	private GameObject iAPCanvas;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore, level;
 
@@ -35,10 +36,13 @@ public class LevelManager : MonoBehaviour
 		FindThemAll ();
 		SetUILevelName (SceneManager.GetActiveScene ().name);
 		if (levelCompleteCanvas) {
-			//ToggleUI ();
 			levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 0;
 			levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = false;
 			TurnOffStars ();
+		}
+		if (iAPCanvas) {
+			iAPCanvas.GetComponent <CanvasGroup> ().alpha = 0;
+			iAPCanvas.GetComponent <CanvasGroup> ().interactable = false;
 		}
 		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 		totalBricks = Brick.brickCounts;
@@ -71,6 +75,7 @@ public class LevelManager : MonoBehaviour
 		ballsNo = GameObject.Find ("Balls No");
 		level = GameObject.Find ("Level");
 		levelCompleteCanvas = GameObject.Find ("Canvas - Level Complete");
+		iAPCanvas = GameObject.Find ("Canvas - IAP");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
 		starLeft = GameObject.Find ("Star Left");
 		starMiddle = GameObject.Find ("Star Middle");
@@ -330,6 +335,13 @@ public class LevelManager : MonoBehaviour
 		AudioListener.pause = (AudioListener.pause) ? false : true;
 		AudioListener.volume = (AudioListener.pause) ? 0 : 2;
 		//sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
+	}
+
+	public void ShowIAP ()
+	{
+		print ("show IAP");
+		iAPCanvas.GetComponent <CanvasGroup> ().alpha = 1;
+		iAPCanvas.GetComponent <CanvasGroup> ().interactable = true;
 	}
 
 	public void Quit ()
