@@ -56,17 +56,20 @@ public class LevelManager : MonoBehaviour
 	public void TurnOffCanvases ()
 	{
 		if (levelCompleteCanvas) {
-			levelCompleteCanvas.GetComponent<CanvasGroup> ().alpha = 0;
-			levelCompleteCanvas.GetComponent<CanvasGroup> ().interactable = false;
+			levelCompleteCanvas.SetActive (false);
+			//levelCompleteCanvas.GetComponent<CanvasGroup> ().alpha = 0;
+			//levelCompleteCanvas.GetComponent<CanvasGroup> ().interactable = false;
 			TurnOffStars ();
 		}
 		if (iAPCanvas) {
-			iAPCanvas.GetComponent<CanvasGroup> ().alpha = 0;
-			iAPCanvas.GetComponent<CanvasGroup> ().interactable = false;
+			iAPCanvas.SetActive (false);
+			//iAPCanvas.GetComponent<CanvasGroup> ().alpha = 0;
+			//iAPCanvas.GetComponent<CanvasGroup> ().interactable = false;
 		}
 		if (powerUpCanvas) {
-			powerUpCanvas.GetComponent<CanvasGroup> ().alpha = 0;
-			powerUpCanvas.GetComponent<CanvasGroup> ().interactable = false;
+			powerUpCanvas.SetActive (false);
+			//powerUpCanvas.GetComponent<CanvasGroup> ().alpha = 0;
+			//powerUpCanvas.GetComponent<CanvasGroup> ().interactable = false;
 		}
 		canvasActive = false;
 	}
@@ -358,16 +361,18 @@ public class LevelManager : MonoBehaviour
 
 	public void ShowIAP ()
 	{
-		iAPCanvas.GetComponent <CanvasGroup> ().alpha = 1;
-		iAPCanvas.GetComponent <CanvasGroup> ().interactable = true;
+		iAPCanvas.SetActive (true);
+		//iAPCanvas.GetComponent <CanvasGroup> ().alpha = 1;
+		//iAPCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		canvasActive = true;
 	}
 
 
 	public void ShowPowerUp ()
 	{
-		powerUpCanvas.GetComponent <CanvasGroup> ().alpha = 1;
-		powerUpCanvas.GetComponent <CanvasGroup> ().interactable = true;
+		powerUpCanvas.SetActive (true);
+		//powerUpCanvas.GetComponent <CanvasGroup> ().alpha = 1;
+		//powerUpCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		canvasActive = true;
 	}
 

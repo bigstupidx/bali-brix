@@ -203,6 +203,7 @@ namespace CompleteProject
 				Debug.Log (string.Format ("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
 				// TODO: The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
 				//ScoreManager.score += 100;
+				//====================== here handle coins and you are good to go
 			}
 			// Or ... a non-consumable product has been purchased by this user.
 			else if (String.Equals (args.purchasedProduct.definition.id, kProductIDNonConsumable, StringComparison.Ordinal)) {
