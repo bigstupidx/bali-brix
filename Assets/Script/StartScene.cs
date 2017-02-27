@@ -30,6 +30,11 @@ public class StartScene : MonoBehaviour
 		SceneManager.LoadScene (name);
 	}
 
+	public void RateUs ()
+	{
+		Application.OpenURL ("https://play.google.com/store/apps/details?id=com.soolan.BaliBrix");
+	}
+
 	public void Quit ()
 	{
 		Debug.Log ("quit!");
