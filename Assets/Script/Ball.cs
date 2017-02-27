@@ -25,7 +25,7 @@ public class Ball : MonoBehaviour
 		float direction = 0f;
 		if (!hasStarted) {
 			this.transform.position = paddle.transform.position + paddleToBallVector;
-			if (Input.GetButtonDown ("Fire1")) {
+			if (!LevelManager.canvasActive && Input.GetButtonDown ("Fire1")) {
 				// set the ball direction at the beginning
 				direction = (this.transform.position.x > 0) ? 1f : -1f;
 				this.GetComponent <Rigidbody2D> ().velocity = 

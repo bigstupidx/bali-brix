@@ -4,12 +4,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Net;
 using UnityEngine.Advertisements;
+using System.Net.NetworkInformation;
 
 public class LevelManager : MonoBehaviour
 {
 	public static int ballCounts = 3;
 	public static int currentScore = 0;
 	public static int playCounts = 0;
+	public static bool powerUpOffered = false;
+	public static bool canvasActive = false;
 	public AudioClip timeoutAlert, popStar, bonusTime, bonusBall;
 	public Sprite[] levelCompleteStars, soundIcons;
 	public int fallingObjects = 0;
@@ -22,11 +25,11 @@ public class LevelManager : MonoBehaviour
 	private GameObject background;
 	private GameObject levelCompleteCanvas;
 	private GameObject iAPCanvas;
+	private GameObject powerUpCanvas;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore, level;
 
 	private string minsAndSecs = "0:0";
-
 	private bool alert = true;
 	private bool starsPlayed = false;
 	private int colorFactor = 20;
@@ -35,14 +38,10 @@ public class LevelManager : MonoBehaviour
 	{
 		FindThemAll ();
 		SetUILevelName (SceneManager.GetActiveScene ().name);
-		if (levelCompleteCanvas) {
-			levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 0;
-			levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = false;
-			TurnOffStars ();
-		}
-		if (iAPCanvas) {
-			iAPCanvas.GetComponent <CanvasGroup> ().alpha = 0;
-			iAPCanvas.GetComponent <CanvasGroup> ().interactable = false;
+		TurnOffCanvases ();
+		if (!powerUpOffered) {
+			ShowPowerUp ();
+			powerUpOffered = true;
 		}
 		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 		totalBricks = Brick.brickCounts;
@@ -52,6 +51,24 @@ public class LevelManager : MonoBehaviour
 			playCounts = 0;
 			ShowAd ();
 		}
+	}
+
+	public void TurnOffCanvases ()
+	{
+		if (levelCompleteCanvas) {
+			levelCompleteCanvas.GetComponent<CanvasGroup> ().alpha = 0;
+			levelCompleteCanvas.GetComponent<CanvasGroup> ().interactable = false;
+			TurnOffStars ();
+		}
+		if (iAPCanvas) {
+			iAPCanvas.GetComponent<CanvasGroup> ().alpha = 0;
+			iAPCanvas.GetComponent<CanvasGroup> ().interactable = false;
+		}
+		if (powerUpCanvas) {
+			powerUpCanvas.GetComponent<CanvasGroup> ().alpha = 0;
+			powerUpCanvas.GetComponent<CanvasGroup> ().interactable = false;
+		}
+		canvasActive = false;
 	}
 
 	public void ShowAd ()
@@ -76,6 +93,7 @@ public class LevelManager : MonoBehaviour
 		level = GameObject.Find ("Level");
 		levelCompleteCanvas = GameObject.Find ("Canvas - Level Complete");
 		iAPCanvas = GameObject.Find ("Canvas - IAP");
+		powerUpCanvas = GameObject.Find ("Canvas - Power Ups");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
 		starLeft = GameObject.Find ("Star Left");
 		starMiddle = GameObject.Find ("Star Middle");
@@ -242,6 +260,7 @@ public class LevelManager : MonoBehaviour
 	public void ShowLevelComplete (float damage)
 	{
 		int stars = 0;
+		canvasActive = true;
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		if (damage < 0.7) {												// 1 star
@@ -339,9 +358,17 @@ public class LevelManager : MonoBehaviour
 
 	public void ShowIAP ()
 	{
-		print ("show IAP");
 		iAPCanvas.GetComponent <CanvasGroup> ().alpha = 1;
 		iAPCanvas.GetComponent <CanvasGroup> ().interactable = true;
+		canvasActive = true;
+	}
+
+
+	public void ShowPowerUp ()
+	{
+		powerUpCanvas.GetComponent <CanvasGroup> ().alpha = 1;
+		powerUpCanvas.GetComponent <CanvasGroup> ().interactable = true;
+		canvasActive = true;
 	}
 
 	public void Quit ()
