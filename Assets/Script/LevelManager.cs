@@ -55,6 +55,7 @@ public class LevelManager : MonoBehaviour
 
 	public void TurnOffCanvases ()
 	{
+		print ("they are all off");
 		if (levelCompleteCanvas) {
 			levelCompleteCanvas.SetActive (false);
 			//levelCompleteCanvas.GetComponent<CanvasGroup> ().alpha = 0;
@@ -264,8 +265,9 @@ public class LevelManager : MonoBehaviour
 	{
 		int stars = 0;
 		canvasActive = true;
-		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
-		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
+		levelCompleteCanvas.SetActive (true);
+		//levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
+		//levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
