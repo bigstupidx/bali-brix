@@ -58,19 +58,13 @@ public class LevelManager : MonoBehaviour
 		print ("they are all off");
 		if (levelCompleteCanvas) {
 			levelCompleteCanvas.SetActive (false);
-			//levelCompleteCanvas.GetComponent<CanvasGroup> ().alpha = 0;
-			//levelCompleteCanvas.GetComponent<CanvasGroup> ().interactable = false;
 			TurnOffStars ();
 		}
 		if (iAPCanvas) {
 			iAPCanvas.SetActive (false);
-			//iAPCanvas.GetComponent<CanvasGroup> ().alpha = 0;
-			//iAPCanvas.GetComponent<CanvasGroup> ().interactable = false;
 		}
 		if (powerUpCanvas) {
 			powerUpCanvas.SetActive (false);
-			//powerUpCanvas.GetComponent<CanvasGroup> ().alpha = 0;
-			//powerUpCanvas.GetComponent<CanvasGroup> ().interactable = false;
 		}
 		canvasActive = false;
 	}
@@ -266,8 +260,6 @@ public class LevelManager : MonoBehaviour
 		int stars = 0;
 		canvasActive = true;
 		levelCompleteCanvas.SetActive (true);
-		//levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 1;
-		//levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
