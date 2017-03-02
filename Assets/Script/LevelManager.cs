@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject powerUpCanvas;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore, level;
+	private GameObject touchArea;
 
 	private string minsAndSecs = "0:0";
 	private bool alert = true;
@@ -55,7 +56,6 @@ public class LevelManager : MonoBehaviour
 
 	public void TurnOffCanvases ()
 	{
-		print ("they are all off");
 		if (levelCompleteCanvas) {
 			levelCompleteCanvas.SetActive (false);
 			TurnOffStars ();
@@ -96,6 +96,8 @@ public class LevelManager : MonoBehaviour
 		starLeft = GameObject.Find ("Star Left");
 		starMiddle = GameObject.Find ("Star Middle");
 		starRight = GameObject.Find ("Star Right");
+		touchArea = GameObject.Find ("Touch Area");
+
 	}
 
 	private void TurnOffStars ()
@@ -108,6 +110,7 @@ public class LevelManager : MonoBehaviour
 	void Update ()
 	{
 		if (Ball.hasStarted && timer) {
+			touchArea.GetComponent <Text> ().text = "Touch Area";
 			UpdateTimer ();
 		}
 		if (timeLeft <= 0f) {
@@ -116,7 +119,7 @@ public class LevelManager : MonoBehaviour
 			alert = false;
 		}
 		if (timeLeft < 7f) {
-			Blink ();
+			Blink (timer);
 			if (alert) {
 				timer.GetComponent <Text> ().fontStyle = FontStyle.Bold;
 				StartCoroutine (Alert ());
@@ -167,10 +170,10 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	private void Blink ()
+	private void Blink (GameObject go)
 	{
-		if (timer) {
-			timer.GetComponent <Text> ().color = (Mathf.Floor (timeLeft % 2) == 0) ?
+		if (go) {
+			go.GetComponent <Text> ().color = (Mathf.Floor (timeLeft % 2) == 0) ?
 				Color.Lerp (Color.yellow, Color.red, 1f) :
 				Color.Lerp (Color.red, Color.yellow, 1f);
 		}

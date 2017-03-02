@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Ball : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class Ball : MonoBehaviour
 	public static bool hasStarted = false;
 	public static bool bonusPaid = false;
 	public static int bonusFactor = 1;
-	public Vector2 defaultSpeed = new Vector2 (2.25f, 9.2f);
+	public Vector2 defaultSpeed = new Vector2 (2.0f, 8.8f);
 
 	private Paddle paddle;
 	private Vector3 paddleToBallVector;
@@ -66,8 +67,8 @@ public class Ball : MonoBehaviour
 		if (speed.y > -7f && speed.y < 7f)
 			speed.y = (speed.y < 0) ? -8f : 8f;
 		Vector2 newSpeed = new Vector2 (
-			                   Mathf.Clamp (speed.x, -9f, 9f),
-			                   Mathf.Clamp (speed.y, -15f, 15f)
+			                   Mathf.Clamp (speed.x, -7f, 7f),
+			                   Mathf.Clamp (speed.y, -13f, 13f)
 		                   );
 		this.GetComponent <Rigidbody2D> ().velocity = newSpeed;
 	}
