@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 61c20edf6e4b8064f80853a203a8b9ee
-timeCreated: 1488683760
+guid: fc3be4ca13d1d234f88ab9456d5e56c6
+timeCreated: 1488683525
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: level-icons_0
-    21300002: level-icons_1
+    21300000: level-stars_0
+    21300002: level-stars_1
+    21300004: level-stars_2
+    21300006: level-stars_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -88,29 +90,55 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: level-icons_0
+      name: level-stars_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 101
-        height: 97
+        x: 12
+        y: 165
+        width: 132
+        height: 54
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: level-icons_1
+      name: level-stars_1
       rect:
         serializedVersion: 2
-        x: 107
-        y: 0
-        width: 101
-        height: 97
+        x: 12
+        y: 110
+        width: 132
+        height: 54
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 3, w: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: level-stars_2
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 54
+        width: 132
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 2, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: level-stars_3
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 0
+        width: 132
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     outline: []

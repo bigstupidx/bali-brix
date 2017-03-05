@@ -34,9 +34,11 @@ public class LevelManager : MonoBehaviour
 	private bool alert = true;
 	private bool starsPlayed = false;
 	private int colorFactor = 20;
+	private int currentLevel;
 
 	void Start ()
 	{
+		currentLevel = SceneManager.GetActiveScene ().buildIndex - 2;
 		FindThemAll ();
 		SetUILevelName (SceneManager.GetActiveScene ().name);
 		TurnOffCanvases ();
@@ -251,7 +253,6 @@ public class LevelManager : MonoBehaviour
 	private void UnlockNextLevel ()
 	{
 		// Remember! Level 01 build index is 3.
-		int currentLevel = SceneManager.GetActiveScene ().buildIndex - 2;
 		if (currentLevel >= LevelSelection.highestLevel) {
 			LevelSelection.highestLevel++;
 			PlayerPrefs.SetInt ("Highest Level", LevelSelection.highestLevel);	
@@ -273,6 +274,8 @@ public class LevelManager : MonoBehaviour
 			fetchLevelPrize ();
 			stars = 3;
 		}
+
+		PlayerPrefs.SetInt ("Level" + currentLevel, stars);
 		if (!starsPlayed) {
 			starsPlayed = true;
 			StartCoroutine (PlayStarPopSound (stars));
