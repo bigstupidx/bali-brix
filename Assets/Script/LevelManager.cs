@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject iAPCanvas;
 	private GameObject powerUpCanvas;
 	private GameObject starLeft, starMiddle, starRight;
-	private GameObject score, ballsNo, levelCompleteScore, level;
+	private GameObject score, ballsNo, levelCompleteScore, level, sound;
 	private GameObject touchArea;
 
 	private string minsAndSecs = "0:0";
@@ -88,7 +88,6 @@ public class LevelManager : MonoBehaviour
 		background = GameObject.Find ("Background");
 		timer = GameObject.Find ("Timer");
 		score = GameObject.Find ("Score");
-		//sound = GameObject.Find ("Sound");
 		ballsNo = GameObject.Find ("Balls No");
 		level = GameObject.Find ("Level");
 		levelCompleteCanvas = GameObject.Find ("Canvas - Level Complete");
@@ -356,7 +355,9 @@ public class LevelManager : MonoBehaviour
 	{
 		AudioListener.pause = (AudioListener.pause) ? false : true;
 		AudioListener.volume = (AudioListener.pause) ? 0 : 2;
-		//sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
+		sound = GameObject.Find ("Sound");
+		print ("toggler " + sound);
+		sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
 	}
 
 	public void ShowIAP ()
