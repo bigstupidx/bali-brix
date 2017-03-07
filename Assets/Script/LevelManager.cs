@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject levelCompleteCanvas;
 	private GameObject iAPCanvas;
 	private GameObject powerUpCanvas;
+	private GameObject pauseCanvas;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore, level, sound;
 	private GameObject touchArea;
@@ -40,12 +41,14 @@ public class LevelManager : MonoBehaviour
 	{
 		currentLevel = SceneManager.GetActiveScene ().buildIndex - 2;
 		FindThemAll ();
-		SetUILevelName (SceneManager.GetActiveScene ().name);
+		//SetUILevelName (SceneManager.GetActiveScene ().name);
 		TurnOffCanvases ();
 		if (!powerUpOffered) {
 			ShowPowerUp ();
 			powerUpOffered = true;
 		}
+		print ("in Start: " + pauseCanvas);
+
 		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 		totalBricks = Brick.brickCounts;
 		timeLeft = totalBricks * 2.1f;
@@ -68,7 +71,20 @@ public class LevelManager : MonoBehaviour
 		if (powerUpCanvas) {
 			powerUpCanvas.SetActive (false);
 		}
+		if (pauseCanvas) {
+			pauseCanvas.SetActive (false);
+		}
 		canvasActive = false;
+		print ("in turn off: " + pauseCanvas);
+	}
+
+	public void ShowPause ()
+	{
+		//pauseCanvas = GameObject.Find ("Canvas - Pause");
+		print ("in ShowPause: " + pauseCanvas);
+		pauseCanvas.SetActive (true);
+		Time.timeScale = 0;
+		canvasActive = true;
 	}
 
 	public void ShowAd ()
@@ -78,10 +94,10 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	private void SetUILevelName (string name)
+	/*private void SetUILevelName (string name)
 	{
 		level.GetComponent<Text> ().text = name.Substring (0, 5) + " " + name.Substring (5, 2);
-	}
+	}*/
 
 	private void FindThemAll ()
 	{
@@ -93,12 +109,12 @@ public class LevelManager : MonoBehaviour
 		levelCompleteCanvas = GameObject.Find ("Canvas - Level Complete");
 		iAPCanvas = GameObject.Find ("Canvas - IAP");
 		powerUpCanvas = GameObject.Find ("Canvas - Power Ups");
+		pauseCanvas = GameObject.Find ("Canvas - Pause");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
 		starLeft = GameObject.Find ("Star Left");
 		starMiddle = GameObject.Find ("Star Middle");
 		starRight = GameObject.Find ("Star Right");
 		touchArea = GameObject.Find ("Touch Area");
-
 	}
 
 	private void TurnOffStars ()
