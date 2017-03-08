@@ -6,7 +6,7 @@ public class SpeedUp : MonoBehaviour
 {
 	public float speedUpFactor;
 
-	private float timeLeft = 7f;
+	private float timeLeft = 10f;
 	private bool active = true;
 	private GameObject ball;
 	private float xSpeed, ySpeed;

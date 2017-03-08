@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SlowDown : MonoBehaviour
 {
-	public float slowDownFactor = -85f;
+	public float slowDownFactor;
 
-	private float timeLeft = 7f;
+	private float timeLeft = 10f;
 	private bool active = true;
 	private GameObject ball;
 
@@ -15,7 +15,7 @@ public class SlowDown : MonoBehaviour
 	{
 		ball = GameObject.Find ("Ball");
 		ball.GetComponent <Rigidbody2D> ().AddForce (new Vector2 (
-			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (slowDownFactor / 3) : (-slowDownFactor / 3),
+			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (slowDownFactor / 5) : (-slowDownFactor / 5),
 			(ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ? (slowDownFactor) : (-slowDownFactor)
 		));
 	}
@@ -41,7 +41,7 @@ public class SlowDown : MonoBehaviour
 	private void ResetSpeed ()
 	{
 		ball.GetComponent <Rigidbody2D> ().AddForce (new Vector2 (
-			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (-slowDownFactor / 3) : (slowDownFactor / 3),
+			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (-slowDownFactor / 5) : (slowDownFactor / 5),
 			(ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ? (-slowDownFactor) : (slowDownFactor)
 		));
 	}
