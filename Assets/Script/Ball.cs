@@ -26,7 +26,7 @@ public class Ball : MonoBehaviour
 		float direction = 0f;
 		if (!hasStarted) {
 			this.transform.position = paddle.transform.position + paddleToBallVector;
-			if (!LevelManager.canvasActive && Input.GetButtonDown ("Fire1")) {
+			if (!CanvasManager.canvasActive && Input.GetButtonDown ("Fire1")) {
 				// set the ball direction at the beginning
 				direction = (this.transform.position.x > 0) ? 1f : -1f;
 				this.GetComponent <Rigidbody2D> ().velocity = 
@@ -56,9 +56,9 @@ public class Ball : MonoBehaviour
 	
 			SetSpeedLimits (this.GetComponent <Rigidbody2D> ().velocity);
 
-			print ("current speed (x,y): ( " +
+			/*print ("current speed (x,y): ( " +
 			this.GetComponent <Rigidbody2D> ().velocity.x + " , " +
-			this.GetComponent <Rigidbody2D> ().velocity.y + " )");
+			this.GetComponent <Rigidbody2D> ().velocity.y + " )");*/
 			
 			//this.GetComponent <Rigidbody2D> ().velocity += speedUp;
 			if (Brick.brickCounts <= 0) // Make sure everything stops after last brick was hit

@@ -11,28 +11,22 @@ public class LevelManager : MonoBehaviour
 	public static int ballCounts = 3;
 	public static int currentScore = 0;
 	public static int playCounts = 0;
-	public static bool powerUpOffered = false;
-	public static bool canvasActive = false;
-	public AudioClip timeoutAlert, popStar, bonusTime, bonusBall;
-	public Sprite[] levelCompleteStars, soundIcons;
+	public AudioClip timeoutAlert, bonusTime, bonusBall;
+	public Sprite[] soundIcons;
 	public int fallingObjects = 0;
 	public int fallingBallIndex = 1;
 	public int totalBricks = 0;
 	public float timeLeft = 0f;
 	public bool secondChance = true;
+	public CanvasManager canvasManager;
 
 	private GameObject timer;
 	private GameObject background;
-	private GameObject levelCompleteCanvas;
-	private GameObject iAPCanvas;
-	private GameObject powerUpCanvas;
-	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore, level, sound;
 	private GameObject touchArea;
 
 	private string minsAndSecs = "0:0";
 	private bool alert = true;
-	private bool starsPlayed = false;
 	private int colorFactor = 20;
 	private int currentLevel;
 
@@ -40,12 +34,6 @@ public class LevelManager : MonoBehaviour
 	{
 		currentLevel = SceneManager.GetActiveScene ().buildIndex - 2;
 		FindThemAll ();
-		TurnOffCanvases ();
-		if (!powerUpOffered) {
-			ShowPowerUp ();
-			powerUpOffered = true;
-		}
-
 		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 		totalBricks = Brick.brickCounts;
 		timeLeft = totalBricks * 2.1f;
@@ -55,26 +43,6 @@ public class LevelManager : MonoBehaviour
 			ShowAd ();
 		}
 	}
-
-	public void TurnOffCanvases ()
-	{
-		if (levelCompleteCanvas) {
-			levelCompleteCanvas.SetActive (false);
-			TurnOffStars ();
-		}
-		if (iAPCanvas) {
-			iAPCanvas.SetActive (false);
-		}
-		if (powerUpCanvas) {
-			powerUpCanvas.SetActive (false);
-		}
-		/*if (pauseCanvas) {
-			pauseCanvas.SetActive (false);
-		}*/
-		canvasActive = false;
-	}
-
-
 
 	public void ShowAd ()
 	{
@@ -90,23 +58,11 @@ public class LevelManager : MonoBehaviour
 		score = GameObject.Find ("Score");
 		ballsNo = GameObject.Find ("Balls No");
 		level = GameObject.Find ("Level");
-		levelCompleteCanvas = GameObject.Find ("Canvas - Level Complete");
-		iAPCanvas = GameObject.Find ("Canvas - IAP");
-		powerUpCanvas = GameObject.Find ("Canvas - Power Ups");
-		//pauseCanvas = GameObject.Find ("Canvas - Pause");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
-		starLeft = GameObject.Find ("Star Left");
-		starMiddle = GameObject.Find ("Star Middle");
-		starRight = GameObject.Find ("Star Right");
 		touchArea = GameObject.Find ("Touch Area");
 	}
 
-	private void TurnOffStars ()
-	{
-		starLeft.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
-		starMiddle.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
-		starRight.GetComponent <Image> ().color = new Color (255, 255, 255, 0);
-	}
+
 
 	void Update ()
 	{
@@ -261,8 +217,9 @@ public class LevelManager : MonoBehaviour
 	public void ShowLevelComplete (float damage)
 	{
 		int stars = 0;
-		canvasActive = true;
-		levelCompleteCanvas.SetActive (true);
+		CanvasManager.canvasActive = true;
+		canvasManager.toggleCanvas (canvasManager.levelComplete);
+
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
@@ -273,11 +230,11 @@ public class LevelManager : MonoBehaviour
 			fetchLevelPrize ();
 			stars = 3;
 		}
-
 		PlayerPrefs.SetInt ("Level" + currentLevel, stars);
-		if (!starsPlayed) {
-			starsPlayed = true;
-			StartCoroutine (PlayStarPopSound (stars));
+
+		if (!canvasManager.starsPlayed) {
+			canvasManager.starsPlayed = true;
+			StartCoroutine (canvasManager.PlayStarPopSound (stars));
 		}
 	}
 
@@ -289,31 +246,6 @@ public class LevelManager : MonoBehaviour
 			(levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable) ? false : true;
 	}*/
 
-	IEnumerator PlayStarPopSound (int stars)
-	{
-		yield return new WaitForSeconds (0.4f);
-		AudioSource.PlayClipAtPoint (popStar, this.transform.position);	
-		if (starLeft) {
-			starLeft.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-			yield return new WaitForSeconds (0.4f);
-		} 
-
-		if (stars == 2) {
-			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
-			if (starMiddle)
-				starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-			yield return new WaitForSeconds (0.4f);
-		} else if (stars == 3) {
-			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
-			if (starMiddle)
-				starMiddle.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-			yield return new WaitForSeconds (0.4f);
-			AudioSource.PlayClipAtPoint (popStar, this.transform.position);
-			if (starRight)
-				starRight.GetComponent <Image> ().color += new Color (0, 0, 0, 255);
-		}
-		starsPlayed = true;
-	}
 
 
 	public void fetchLevelPrize ()
@@ -358,19 +290,6 @@ public class LevelManager : MonoBehaviour
 		sound = GameObject.Find ("Sound");
 		print ("toggler " + sound);
 		sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
-	}
-
-	public void ShowIAP ()
-	{
-		iAPCanvas.SetActive (true);
-		canvasActive = true;
-	}
-
-
-	public void ShowPowerUp ()
-	{
-		powerUpCanvas.SetActive (true);
-		canvasActive = true;
 	}
 
 	public void Quit ()
