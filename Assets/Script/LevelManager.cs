@@ -80,11 +80,9 @@ public class LevelManager : MonoBehaviour
 
 	public void ShowPause ()
 	{
-		//pauseCanvas = GameObject.Find ("Canvas - Pause");
-		print ("in ShowPause: " + pauseCanvas);
+		canvasActive = true;
 		pauseCanvas.SetActive (true);
 		Time.timeScale = 0;
-		canvasActive = true;
 	}
 
 	public void ShowAd ()
@@ -93,11 +91,6 @@ public class LevelManager : MonoBehaviour
 			Advertisement.Show ();
 		}
 	}
-
-	/*private void SetUILevelName (string name)
-	{
-		level.GetComponent<Text> ().text = name.Substring (0, 5) + " " + name.Substring (5, 2);
-	}*/
 
 	private void FindThemAll ()
 	{
@@ -297,13 +290,13 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	private void ToggleUI ()
+	/*private void ToggleUI ()
 	{
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 
 			(levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha == 1) ? 0 : 1;
 		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = 
 			(levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable) ? false : true;
-	}
+	}*/
 
 	IEnumerator PlayStarPopSound (int stars)
 	{
@@ -379,8 +372,6 @@ public class LevelManager : MonoBehaviour
 	public void ShowIAP ()
 	{
 		iAPCanvas.SetActive (true);
-		//iAPCanvas.GetComponent <CanvasGroup> ().alpha = 1;
-		//iAPCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		canvasActive = true;
 	}
 
@@ -388,8 +379,6 @@ public class LevelManager : MonoBehaviour
 	public void ShowPowerUp ()
 	{
 		powerUpCanvas.SetActive (true);
-		//powerUpCanvas.GetComponent <CanvasGroup> ().alpha = 1;
-		//powerUpCanvas.GetComponent <CanvasGroup> ().interactable = true;
 		canvasActive = true;
 	}
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpeedUp : MonoBehaviour
 {
-	public float speedUpFactor = 85f;
+	public float speedUpFactor;
 
 	private float timeLeft = 7f;
 	private bool active = true;
@@ -17,7 +17,7 @@ public class SpeedUp : MonoBehaviour
 	{
 		ball = GameObject.Find ("Ball");
 		ball.GetComponent <Rigidbody2D> ().AddForce (new Vector2 (
-			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (speedUpFactor / 3) : (-speedUpFactor / 3),
+			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (speedUpFactor / 5) : (-speedUpFactor / 5),
 			(ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ? (speedUpFactor) : (-speedUpFactor)
 		));
 	}
@@ -43,7 +43,7 @@ public class SpeedUp : MonoBehaviour
 	private void ResetSpeed ()
 	{
 		ball.GetComponent <Rigidbody2D> ().AddForce (new Vector2 (
-			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (-speedUpFactor / 3) : (speedUpFactor / 3),
+			(ball.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (-speedUpFactor / 5) : (speedUpFactor / 5),
 			(ball.GetComponent <Rigidbody2D> ().velocity.y > 0) ? (-speedUpFactor) : (speedUpFactor)
 		));	
 	}
