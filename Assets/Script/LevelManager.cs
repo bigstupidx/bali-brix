@@ -26,7 +26,6 @@ public class LevelManager : MonoBehaviour
 	private GameObject levelCompleteCanvas;
 	private GameObject iAPCanvas;
 	private GameObject powerUpCanvas;
-	private GameObject pauseCanvas;
 	private GameObject starLeft, starMiddle, starRight;
 	private GameObject score, ballsNo, levelCompleteScore, level, sound;
 	private GameObject touchArea;
@@ -41,13 +40,11 @@ public class LevelManager : MonoBehaviour
 	{
 		currentLevel = SceneManager.GetActiveScene ().buildIndex - 2;
 		FindThemAll ();
-		//SetUILevelName (SceneManager.GetActiveScene ().name);
 		TurnOffCanvases ();
 		if (!powerUpOffered) {
 			ShowPowerUp ();
 			powerUpOffered = true;
 		}
-		print ("in Start: " + pauseCanvas);
 
 		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 		totalBricks = Brick.brickCounts;
@@ -71,19 +68,13 @@ public class LevelManager : MonoBehaviour
 		if (powerUpCanvas) {
 			powerUpCanvas.SetActive (false);
 		}
-		if (pauseCanvas) {
+		/*if (pauseCanvas) {
 			pauseCanvas.SetActive (false);
-		}
+		}*/
 		canvasActive = false;
-		print ("in turn off: " + pauseCanvas);
 	}
 
-	public void ShowPause ()
-	{
-		canvasActive = true;
-		pauseCanvas.SetActive (true);
-		Time.timeScale = 0;
-	}
+
 
 	public void ShowAd ()
 	{
@@ -102,7 +93,7 @@ public class LevelManager : MonoBehaviour
 		levelCompleteCanvas = GameObject.Find ("Canvas - Level Complete");
 		iAPCanvas = GameObject.Find ("Canvas - IAP");
 		powerUpCanvas = GameObject.Find ("Canvas - Power Ups");
-		pauseCanvas = GameObject.Find ("Canvas - Pause");
+		//pauseCanvas = GameObject.Find ("Canvas - Pause");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
 		starLeft = GameObject.Find ("Star Left");
 		starMiddle = GameObject.Find ("Star Middle");

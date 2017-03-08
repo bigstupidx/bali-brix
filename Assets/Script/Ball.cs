@@ -32,9 +32,9 @@ public class Ball : MonoBehaviour
 				this.GetComponent <Rigidbody2D> ().velocity = 
 					new Vector2 (defaultSpeed.x * direction, defaultSpeed.y);
 				hasStarted = true;
-				print ("current speed (x,y): (" +
+				/*print ("current speed (x,y): (" +
 				this.GetComponent <Rigidbody2D> ().velocity.x + "," +
-				this.GetComponent <Rigidbody2D> ().velocity.y + ")");
+				this.GetComponent <Rigidbody2D> ().velocity.y + ")");*/
 			}		
 		}		
 	}
