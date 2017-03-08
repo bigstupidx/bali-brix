@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
 	public static bool hasStarted = false;
 	public static bool bonusPaid = false;
 	public static int bonusFactor = 1;
-	public Vector2 defaultSpeed = new Vector2 (-10.0f, -20.0f);
+	public Vector2 defaultSpeed = new Vector2 (2f, 7.5f);
 
 	private Paddle paddle;
 	private Vector3 paddleToBallVector;

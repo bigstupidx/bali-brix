@@ -67,8 +67,14 @@ public class CanvasManager : MonoBehaviour
 
 	public void ShowPause ()
 	{
-		pause.enabled = true;
+		toggleCanvas (pause);
 		Time.timeScale = 0;
+	}
+
+	public void Continue ()
+	{
+		toggleCanvas (pause);
+		Time.timeScale = 1;
 	}
 
 	public IEnumerator PlayStarPopSound (int stars)
