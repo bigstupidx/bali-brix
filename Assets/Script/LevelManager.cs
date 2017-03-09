@@ -95,6 +95,12 @@ public class LevelManager : MonoBehaviour
 		*/
 	}
 
+	public void NoThanks ()
+	{
+		canvasManager.toggleCanvas (canvasManager.lostContinue);
+		canvasManager.toggleCanvas (canvasManager.lost);
+	}
+
 	public void Pay200Coins ()
 	{
 		timeLeft = 61f;
