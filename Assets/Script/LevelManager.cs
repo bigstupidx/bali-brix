@@ -95,6 +95,16 @@ public class LevelManager : MonoBehaviour
 		*/
 	}
 
+	public void Pay200Coins ()
+	{
+		timeLeft = 61f;
+		ballCounts = 2;
+		alert = true;
+		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
+		UpdateTimer ();	
+		canvasManager.toggleCanvas (canvasManager.lostContinue);
+	}
+
 	public void ShowRewardedAd ()
 	{
 		if (Advertisement.IsReady ("rewardedVideo")) {
@@ -113,10 +123,11 @@ public class LevelManager : MonoBehaviour
 			// YOUR CODE TO REWARD THE GAMER
 			// Give coins etc.
 			timeLeft = 31f;
-			ballCounts++;
+			ballCounts = 1;
 			alert = true;
 			ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 			UpdateTimer ();
+			canvasManager.toggleCanvas (canvasManager.lostContinue);
 			break;
 		case ShowResult.Skipped:
 			Debug.Log ("The ad was skipped before reaching the end.");
@@ -181,10 +192,13 @@ public class LevelManager : MonoBehaviour
 			float damage = (float)destroyedBricks / (float)totalBricks;
 			if (damage < 0.6) {
 				if (secondChance) {
-					ShowRewardedAd ();
+					canvasManager.toggleCanvas (canvasManager.lostContinue);
+					//ShowRewardedAd ();
 					secondChance = false;
 				} else {
-					LoadLevel ("Loose");	
+					//LoadLevel ("Loose");	
+					canvasManager.toggleCanvas (canvasManager.lost);
+
 				}
 			} else {
 				ShowLevelComplete (damage);

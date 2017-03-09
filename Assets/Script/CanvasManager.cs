@@ -12,6 +12,7 @@ public class CanvasManager : MonoBehaviour
 	public Canvas iAP;
 	public Canvas powerUps;
 	public Canvas levelComplete;
+	public Canvas lost, lostContinue;
 	public AudioClip popStar;
 	public bool starsPlayed = false;
 
@@ -33,6 +34,8 @@ public class CanvasManager : MonoBehaviour
 		iAP.enabled = false;
 		powerUps.enabled = false;
 		levelComplete.enabled = false;
+		lost.enabled = false;
+		lostContinue.enabled = false;
 		canvasActive = false;
 		starLeft = GameObject.Find ("Star Left");
 		starMiddle = GameObject.Find ("Star Middle");
