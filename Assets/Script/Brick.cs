@@ -17,7 +17,7 @@ public class Brick : MonoBehaviour
 
 	private bool hasObject = false;
 	//private int fallingBallIndex = 1;
-	private int timesHit, objectsIndex;
+	private int timesHit, objectIndex;
 	private LevelManager levelManager;
 	private GameObject score, levelCompleteScore;
 	private GameObject balls, dust;

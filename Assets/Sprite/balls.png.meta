@@ -1,23 +1,30 @@
 fileFormatVersion: 2
 guid: 389f34439c2b11a46a628029e0089ee6
-timeCreated: 1485334934
+timeCreated: 1489135544
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: balls_0
     21300002: balls_1
-    21300004: balls_2
-    21300006: balls_3
-    21300008: balls_4
-    21300010: balls_5
-    21300012: balls_6
+    21300004: balls_4
+    21300006: balls_5
+    21300008: balls_5
+    21300010: balls_4
+    21300012: balls_5
     21300014: balls_7
-    21300016: balls_8
-    21300018: balls_9
-    21300020: balls_10
+    21300016: balls_3
+    21300018: balls_4
+    21300020: balls_6
     21300022: balls_11
     21300024: balls_12
-    21300026: balls_13
+    21300026: balls_3
+    21300028: balls_6
+    21300030: balls_10
+    21300032: balls_13
+    21300034: balls_8
+    21300036: balls_9
+    21300038: balls_23
+    21300040: balls_2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -54,7 +61,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 75
+  spritePixelsToUnits: 50
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -103,12 +110,12 @@ TextureImporter:
       name: balls_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 31
-        width: 25
-        height: 25
+        x: 13
+        y: 80
+        width: 23
+        height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -116,38 +123,12 @@ TextureImporter:
       name: balls_1
       rect:
         serializedVersion: 2
-        x: 30
-        y: 31
-        width: 25
-        height: 25
+        x: 38
+        y: 53
+        width: 57
+        height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: balls_2
-      rect:
-        serializedVersion: 2
-        x: 59
-        y: 31
-        width: 25
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: balls_3
-      rect:
-        serializedVersion: 2
-        x: 88
-        y: 31
-        width: 25
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -155,12 +136,12 @@ TextureImporter:
       name: balls_4
       rect:
         serializedVersion: 2
-        x: 116
-        y: 31
-        width: 25
-        height: 25
+        x: 202
+        y: 76
+        width: 23
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -168,12 +149,25 @@ TextureImporter:
       name: balls_5
       rect:
         serializedVersion: 2
-        x: 145
-        y: 31
-        width: 25
-        height: 25
+        x: 230
+        y: 76
+        width: 23
+        height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: balls_3
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 62
+        width: 54
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -181,25 +175,12 @@ TextureImporter:
       name: balls_6
       rect:
         serializedVersion: 2
-        x: 174
-        y: 31
-        width: 25
-        height: 25
+        x: 256
+        y: 65
+        width: 44
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: balls_7
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 3
-        width: 25
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -207,12 +188,12 @@ TextureImporter:
       name: balls_8
       rect:
         serializedVersion: 2
-        x: 30
-        y: 3
-        width: 25
-        height: 25
+        x: 53
+        y: 19
+        width: 20
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -220,12 +201,12 @@ TextureImporter:
       name: balls_9
       rect:
         serializedVersion: 2
-        x: 59
-        y: 3
-        width: 25
-        height: 25
+        x: 89
+        y: 14
+        width: 35
+        height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -233,12 +214,12 @@ TextureImporter:
       name: balls_10
       rect:
         serializedVersion: 2
-        x: 88
-        y: 2
-        width: 25
-        height: 25
+        x: 141
+        y: 17
+        width: 21
+        height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -246,12 +227,12 @@ TextureImporter:
       name: balls_11
       rect:
         serializedVersion: 2
-        x: 118
-        y: 3
-        width: 25
-        height: 25
+        x: 180
+        y: 17
+        width: 41
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -259,12 +240,12 @@ TextureImporter:
       name: balls_12
       rect:
         serializedVersion: 2
-        x: 146
-        y: 3
-        width: 25
-        height: 25
+        x: 233
+        y: 16
+        width: 19
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -272,12 +253,38 @@ TextureImporter:
       name: balls_13
       rect:
         serializedVersion: 2
-        x: 174
-        y: 3
-        width: 25
+        x: 272
+        y: 14
+        width: 18
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: balls_7
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 18
+        width: 37
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: balls_2
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 60
+        width: 38
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

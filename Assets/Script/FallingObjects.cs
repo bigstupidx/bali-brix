@@ -7,7 +7,7 @@ public class FallingObjects : MonoBehaviour
 {
 	public Sprite[] fallingObjects;
 	public AudioClip powerUp, powerDown;
-	public GameObject gun, sealer, speedUp, slowDown, growPaddle, shrinkPaddle, breakThrough;
+	public GameObject coin, gun, sealer, speedUp, slowDown, growPaddle, shrinkPaddle, breakThrough;
 
 	private float blinkDuration = 0.3f;
 	private LevelManager levelManager;
@@ -36,48 +36,53 @@ public class FallingObjects : MonoBehaviour
 			switch (this.GetComponent <SpriteRenderer> ().sprite.name) {
 			case "balls_1":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
+				GameObject coinClone = 
+					Instantiate (coin, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;			
+				break;
+			case "balls_2":
+				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				GameObject gunClone = 
 					Instantiate (gun, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
 				break;
-			case "balls_2":
+			case "balls_3":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				GameObject sealerClone = 
 					Instantiate (sealer, new Vector3 (0f, -5.1f, 0f), transform.rotation) as GameObject;
 				break;
-			case "balls_3":
+			case "balls_4":
 				AudioSource.PlayClipAtPoint (powerDown, this.transform.position);	
 				GameObject speedUpClone = 
 					Instantiate (speedUp, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
-			case "balls_4":
+			case "balls_5":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				GameObject slowDownClone = 
 					Instantiate (slowDown, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
-			case "balls_5":
+			case "balls_6":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				GameObject growPaddleClone = 
 					Instantiate (growPaddle, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
-			case "balls_6":
+			case "balls_7":
 				AudioSource.PlayClipAtPoint (powerDown, this.transform.position);	
 				GameObject shrinkPaddleClone = 
 					Instantiate (shrinkPaddle, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
-			case "balls_7":
+			case "balls_8":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				AddLife ();
 				break;
-			case "balls_8":
+			case "balls_9":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				GameObject breakthroughClone = 
 					Instantiate (breakThrough, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
-			case "balls_9":
+			case "balls_10":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				DoubleBalls ();
 				break;
-			case "balls_10":
+			case "balls_11":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				PauseBall ();
 				break;
