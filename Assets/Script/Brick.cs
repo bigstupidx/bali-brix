@@ -15,9 +15,9 @@ public class Brick : MonoBehaviour
 	public GameObject particles;
 	public GameObject fallingObject;
 
-	private bool hasBall = false;
+	private bool hasObject = false;
 	//private int fallingBallIndex = 1;
-	private int timesHit, ballIndex;
+	private int timesHit, objectsIndex;
 	private LevelManager levelManager;
 	private GameObject score, levelCompleteScore;
 	private GameObject balls, dust;
@@ -31,9 +31,9 @@ public class Brick : MonoBehaviour
 		score.GetComponent <Text> ().text = LevelManager.currentScore.ToString ();
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
 		if (levelManager.fallingObjects > 0 && Random.Range (0f, 1f) > 0.5f) {
-			hasBall = true;
+			hasObject = true;
 			levelManager.fallingObjects--;
-			SetBall ();
+			SetObject ();
 		}
 
 		balls = GameObject.Find ("Balls No");
@@ -43,16 +43,16 @@ public class Brick : MonoBehaviour
 			brickCounts++;
 	}
 
-	private void SetBall ()
+	private void SetObject ()
 	{
-		int maxBallIndex = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 8);
+		int maxBallIndex = (int)Mathf.Clamp (SceneManager.GetActiveScene ().buildIndex, 3, 100);
 		//print ("ball: " + fallingBallIndex + " max: " + maxBallIndex); 
 		//print ("calculations: " + fallingBallIndex % maxBallIndex);
-		if (levelManager.fallingBallIndex == maxBallIndex)
-			levelManager.fallingBallIndex = 1; //Random.Range (1, max);  
+		if (levelManager.fallingObjectIndex == maxBallIndex)
+			levelManager.fallingObjectIndex = 1; //Random.Range (1, max);  
 		else
-			levelManager.fallingBallIndex++;
-		ballIndex = levelManager.fallingBallIndex;
+			levelManager.fallingObjectIndex++;
+		objectIndex = levelManager.fallingObjectIndex;
 	}
 
 	void OnCollisionEnter2D (Collision2D collision)
@@ -115,8 +115,8 @@ public class Brick : MonoBehaviour
 	{
 		ShowParticles ();
 		Destroy (this.gameObject);
-		if (hasBall) {
-			DropBall (ballIndex);
+		if (hasObject) {
+			DropBall (objectIndex);
 		}
 		levelManager.IncreaseBackgroundAlpha ();
 	}

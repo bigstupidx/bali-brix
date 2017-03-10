@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
 	public AudioClip timeoutAlert, bonusTime, bonusBall;
 	public Sprite[] soundIcons;
 	public int fallingObjects = 0;
-	public int fallingBallIndex = 1;
+	public int fallingObjectIndex = 1;
 	public int totalBricks = 0;
 	public float timeLeft = 0f;
 	public bool secondChance = true;
