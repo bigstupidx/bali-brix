@@ -6,15 +6,19 @@ using UnityEngine.SceneManagement;
 public class StartScene : MonoBehaviour
 {
 	private GameObject dailyRewardCanvas;
+	private GameObject helpCanvas;
 
 	public static bool rewarded = false;
 
 	void Start ()
 	{
 		dailyRewardCanvas = GameObject.Find ("Canvas - Daily Rewards");
+		helpCanvas = GameObject.Find ("Canvas - Help");
+
 		if (dailyRewardCanvas) {
 			dailyRewardCanvas.SetActive (false);
 		}
+		helpCanvas.SetActive (false);
 	}
 
 	public void DailyRewards ()
@@ -56,6 +60,16 @@ public class StartScene : MonoBehaviour
 	public void RateUs ()
 	{
 		Application.OpenURL ("https://play.google.com/store/apps/details?id=com.soolan.BaliBrix");
+	}
+
+	public void ShowHelp ()
+	{
+		helpCanvas.SetActive (true);
+	}
+
+	public void HideHelp ()
+	{
+		helpCanvas.SetActive (false);
 	}
 
 	public void Quit ()
