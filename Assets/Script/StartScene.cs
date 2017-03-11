@@ -5,26 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class StartScene : MonoBehaviour
 {
-	private GameObject dailyRewardCanvas;
-	private GameObject helpCanvas;
-
+	public Canvas helpCanvas;
+	public Canvas settingsCanvas;
+	public Canvas dailyRewardCanvas;
 	public static bool rewarded = false;
 
 	void Start ()
 	{
-		dailyRewardCanvas = GameObject.Find ("Canvas - Daily Rewards");
-		helpCanvas = GameObject.Find ("Canvas - Help");
-
-		if (dailyRewardCanvas) {
-			dailyRewardCanvas.SetActive (false);
-		}
-		helpCanvas.SetActive (false);
+		helpCanvas.enabled = false;
+		settingsCanvas.enabled = false;
+		dailyRewardCanvas.enabled = false;
 	}
 
 	public void DailyRewards ()
 	{
-		if (dailyRewardCanvas && !rewarded) {
-			dailyRewardCanvas.SetActive (true);
+		if (!rewarded) {
+			dailyRewardCanvas.enabled = true;
 		} else {
 			SceneManager.LoadScene ("Level Selection");
 		}
@@ -37,39 +33,14 @@ public class StartScene : MonoBehaviour
 		SceneManager.LoadScene ("Level Selection");
 	}
 
-	// Update is called once per frame
-	void Update ()
-	{
-		
-	}
-
-	/*public void Play ()
-	{
-		Brick.brickCounts = 0;
-		Ball.hasStarted = false;
-
-		//Ball.ballCounts = 3;
-		SceneManager.LoadScene ("Level Selection");
-	}
-
-	public void LoadLevel (string name)
-	{
-		SceneManager.LoadScene (name);
-	}*/
-
 	public void RateUs ()
 	{
 		Application.OpenURL ("https://play.google.com/store/apps/details?id=com.soolan.BaliBrix");
 	}
 
-	public void ShowHelp ()
+	public void toggleCanvas (Canvas c)
 	{
-		helpCanvas.SetActive (true);
-	}
-
-	public void HideHelp ()
-	{
-		helpCanvas.SetActive (false);
+		c.enabled = (c.enabled == true) ? false : true;
 	}
 
 	public void Quit ()
