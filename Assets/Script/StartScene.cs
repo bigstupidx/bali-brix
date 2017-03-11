@@ -38,6 +38,11 @@ public class StartScene : MonoBehaviour
 		Application.OpenURL ("https://play.google.com/store/apps/details?id=com.soolan.BaliBrix");
 	}
 
+	public void Share ()
+	{
+		// ToDo: Share logic for android and iOS
+	}
+
 	public void toggleCanvas (Canvas c)
 	{
 		c.enabled = (c.enabled == true) ? false : true;
