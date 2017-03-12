@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f39efd372fc58d94fa880300df2ef55b
-timeCreated: 1489236017
+timeCreated: 1489287674
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -92,10 +92,10 @@ TextureImporter:
       name: powerup-frames_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 7
-        width: 83
-        height: 73
+        x: 6
+        y: 70
+        width: 183
+        height: 161
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -105,10 +105,10 @@ TextureImporter:
       name: powerup-frames_1
       rect:
         serializedVersion: 2
-        x: 96
-        y: 8
-        width: 80
-        height: 71
+        x: 210
+        y: 71
+        width: 181
+        height: 159
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,10 +118,10 @@ TextureImporter:
       name: powerup-frames_2
       rect:
         serializedVersion: 2
-        x: 185
-        y: 8
-        width: 81
-        height: 71
+        x: 414
+        y: 71
+        width: 181
+        height: 159
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
