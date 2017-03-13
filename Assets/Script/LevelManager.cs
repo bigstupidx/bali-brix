@@ -62,8 +62,6 @@ public class LevelManager : MonoBehaviour
 		touchArea = GameObject.Find ("Touch Area");
 	}
 
-
-
 	void Update ()
 	{
 		if (Ball.hasStarted && timer) {
