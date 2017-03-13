@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour
 		totalBricks = Brick.brickCounts;
 		timeLeft = totalBricks * 2.1f;
 		playCounts++;
-		if (playCounts > 3) {
+		if (playCounts > 4) {
 			playCounts = 0;
 			ShowAd ();
 		}
@@ -101,10 +101,11 @@ public class LevelManager : MonoBehaviour
 		canvasManager.toggleCanvas (canvasManager.lost);
 	}
 
-	public void Pay200Coins ()
+	public void Pay300Coins ()
 	{
 		timeLeft = 61f;
 		ballCounts = 2;
+		// ToDo:deduct 200 coins
 		alert = true;
 		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
 		UpdateTimer ();	
