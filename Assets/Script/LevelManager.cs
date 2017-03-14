@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
 	public static int ballCounts = 3;
 	public static int currentScore = 0;
 	public static int playCounts = 0;
+	public static int coins = 50;
 	public AudioClip timeoutAlert, bonusTime, bonusBall;
 	public Sprite[] soundIcons;
 	public int fallingObjects = 0;
@@ -22,7 +23,7 @@ public class LevelManager : MonoBehaviour
 
 	private GameObject timer;
 	private GameObject background;
-	private GameObject score, ballsNo, levelCompleteScore, level, sound;
+	private GameObject score, ballsNo, levelCompleteScore, level, sound, coinsNo;
 	private GameObject touchArea;
 
 	private string minsAndSecs = "0:0";
@@ -35,6 +36,7 @@ public class LevelManager : MonoBehaviour
 		currentLevel = SceneManager.GetActiveScene ().buildIndex - 2;
 		FindThemAll ();
 		ballsNo.GetComponent <Text> ().text = ballCounts.ToString ();
+		coinsNo.GetComponent <Text> ().text = coins.ToString ();
 		totalBricks = Brick.brickCounts;
 		timeLeft = totalBricks * 2.1f;
 		playCounts++;
@@ -57,6 +59,7 @@ public class LevelManager : MonoBehaviour
 		timer = GameObject.Find ("Timer");
 		score = GameObject.Find ("Score");
 		ballsNo = GameObject.Find ("Balls No");
+		coinsNo = GameObject.Find ("Coins No");
 		level = GameObject.Find ("Level");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
 		touchArea = GameObject.Find ("Touch Area");
