@@ -25,9 +25,16 @@ namespace CompleteProject
 		// when defining the Product Identifiers on the store. Except, for illustration purposes, the
 		// kProductIDSubscription - it has custom Apple and Google identifiers. We declare their store-
 		// specific mapping to Unity Purchasing's AddProduct, below.
-		public static string kProductIDConsumable = "consumable";
-		public static string kProductIDNonConsumable = "nonconsumable";
-		public static string kProductIDSubscription = "subscription";
+		public static string kProductID300Gold = "com.soolan.balibrix.300gold";
+		public static string kProductID1000Gold = "com.soolan.balibrix.1000gold";
+		public static string kProductID2500Gold = "com.soolan.balibrix.2500gold";
+		public static string kProductID5000Gold = "com.soolan.balibrix.5000gold";
+		public static string kProductID15000Gold = "com.soolan.balibrix.15000gold";
+		public static string kProductID50000Gold = "com.soolan.balibrix.50000gold";
+
+		public static string kProductIDConsumable = "com.soolan.balibrix.consumable";
+		public static string kProductIDNonConsumable = "com.soolan.balibrix.adsfree";
+		public static string kProductIDSubscription = "com.soolan.balibrix.subscription";
 
 		// Apple App Store-specific product identifier for the subscription product.
 		private static string kProductNameAppleSubscription = "com.soolan.BaliBrix.subscription.new";
@@ -58,6 +65,12 @@ namespace CompleteProject
 			// Add a product to sell / restore by way of its identifier, associating the general identifier
 			// with its store-specific identifiers.
 			builder.AddProduct (kProductIDConsumable, ProductType.Consumable);
+			builder.AddProduct (kProductID300Gold, ProductType.Consumable);
+			builder.AddProduct (kProductID1000Gold, ProductType.Consumable);
+			builder.AddProduct (kProductID2500Gold, ProductType.Consumable);
+			builder.AddProduct (kProductID5000Gold, ProductType.Consumable);
+			builder.AddProduct (kProductID15000Gold, ProductType.Consumable);
+			builder.AddProduct (kProductID50000Gold, ProductType.Consumable);
 			// Continue adding the non-consumable product.
 			builder.AddProduct (kProductIDNonConsumable, ProductType.NonConsumable);
 			// And finish adding the subscription product. Notice this uses store-specific IDs, illustrating
@@ -89,7 +102,6 @@ namespace CompleteProject
 			BuyProductID (kProductIDConsumable);
 		}
 
-
 		public void BuyNonConsumable ()
 		{
 			// Buy the non-consumable product using its general identifier. Expect a response either 
@@ -108,7 +120,7 @@ namespace CompleteProject
 		}
 
 
-		void BuyProductID (string productId)
+		public void BuyProductID (string productId)
 		{
 			// If Purchasing has been initialized ...
 			if (IsInitialized ()) {
@@ -201,10 +213,25 @@ namespace CompleteProject
 			// A consumable product has been purchased by this user.
 			if (String.Equals (args.purchasedProduct.definition.id, kProductIDConsumable, StringComparison.Ordinal)) {
 				Debug.Log (string.Format ("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
-				// TODO: The consumable item has been successfully purchased, add 100 coins to the player's in-game score.
-				//ScoreManager.score += 100;
-				//====================== here handle coins and you are good to go
+				//LevelManager.coins += 300;
+			} else if (String.Equals (args.purchasedProduct.definition.id, kProductID300Gold, StringComparison.Ordinal)) {
+				Debug.Log (string.Format ("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
 				LevelManager.coins += 300;
+			} else if (String.Equals (args.purchasedProduct.definition.id, kProductID1000Gold, StringComparison.Ordinal)) {
+				Debug.Log (string.Format ("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+				LevelManager.coins += 1000;
+			} else if (String.Equals (args.purchasedProduct.definition.id, kProductID2500Gold, StringComparison.Ordinal)) {
+				Debug.Log (string.Format ("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+				LevelManager.coins += 2500;
+			} else if (String.Equals (args.purchasedProduct.definition.id, kProductID5000Gold, StringComparison.Ordinal)) {
+				Debug.Log (string.Format ("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+				LevelManager.coins += 5000;
+			} else if (String.Equals (args.purchasedProduct.definition.id, kProductID15000Gold, StringComparison.Ordinal)) {
+				Debug.Log (string.Format ("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+				LevelManager.coins += 15000;
+			} else if (String.Equals (args.purchasedProduct.definition.id, kProductID50000Gold, StringComparison.Ordinal)) {
+				Debug.Log (string.Format ("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
+				LevelManager.coins += 50000;
 			}
 			// Or ... a non-consumable product has been purchased by this user.
 			else if (String.Equals (args.purchasedProduct.definition.id, kProductIDNonConsumable, StringComparison.Ordinal)) {

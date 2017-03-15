@@ -17,6 +17,7 @@ public class CanvasManager : MonoBehaviour
 	public bool starsPlayed = false;
 
 	private GameObject starLeft, starMiddle, starRight;
+	private GameObject coinsNo;
 
 	// Use this for initialization
 	void Start ()
@@ -41,6 +42,8 @@ public class CanvasManager : MonoBehaviour
 		starMiddle = GameObject.Find ("Star Middle");
 		starRight = GameObject.Find ("Star Right");
 		TurnOffStars ();
+		coinsNo = GameObject.Find ("Coins No");
+		coinsNo.GetComponent <Text> ().text = LevelManager.coins.ToString ();
 	}
 
 	private void TurnOffStars ()
@@ -66,6 +69,7 @@ public class CanvasManager : MonoBehaviour
 	{
 		c.enabled = (c.enabled == true) ? false : true;
 		canvasActive = c.enabled;
+		coinsNo.GetComponent <Text> ().text = LevelManager.coins.ToString ();
 	}
 
 	public void ShowPause ()
