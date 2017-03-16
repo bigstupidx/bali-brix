@@ -31,7 +31,7 @@ public class PowerUps : MonoBehaviour
 		case "Grow Ball":
 			price = 125;
 			break;
-		case "Clone":
+		case "Triple Ball":
 			price = 150;
 			break;
 		case "Grow Paddle":

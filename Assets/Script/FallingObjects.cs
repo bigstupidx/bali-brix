@@ -7,7 +7,10 @@ public class FallingObjects : MonoBehaviour
 {
 	public Sprite[] fallingObjects;
 	public AudioClip powerUp, powerDown;
-	public GameObject coin, gun, sealer, speedUp, slowDown, growPaddle, shrinkPaddle, breakThrough;
+	public GameObject 
+		coin, gun, sealer, speedUp, slowDown, 
+		growPaddle, shrinkPaddle, breakThrough,
+		tripleBall;
 
 	private float blinkDuration = 0.3f;
 	private LevelManager levelManager;
@@ -79,7 +82,8 @@ public class FallingObjects : MonoBehaviour
 				break;
 			case "balls_10":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
-				DoubleBalls ();
+				GameObject tripleBallClone = 
+					Instantiate (tripleBall, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
 			case "balls_11":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
@@ -103,11 +107,6 @@ public class FallingObjects : MonoBehaviour
 		// we need to decrease the bonus factor because in the AddBonusBall it 
 		// has been increased for handling score bonus
 		Ball.bonusFactor--;
-	}
-
-	private void DoubleBalls ()
-	{
-
 	}
 
 	private void PauseBall ()
