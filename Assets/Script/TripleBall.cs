@@ -23,13 +23,14 @@ public class TripleBall : MonoBehaviour
 		ball2.GetComponent <Rigidbody2D> ()
 			.AddForce (new Vector2 (
 			(xSpeed > 0) ? -(2 * xSpeed) : (2 * xSpeed), 
-			(ySpeed > 0) ? (ySpeed / 10) : -(ySpeed / 10) 
+			(ySpeed > 0) ? (ySpeed / 20) : -(ySpeed / 20) 
 		), ForceMode2D.Impulse);
+		
 		ball3 = Instantiate (currentBall, new Vector3 (x, y, 0f), transform.rotation) as GameObject;
 		ball3.GetComponent <Rigidbody2D> ()
 			.AddForce (new Vector2 (
-			(xSpeed > 0) ? (xSpeed / 10) : -(xSpeed / 10), 
-			(ySpeed > 0) ? -(2 * ySpeed) : (2 * ySpeed)
+			(xSpeed > 0) ? (xSpeed / 10f) : -(xSpeed / 10f), 
+			(ySpeed > 0) ? -(0.4f * ySpeed) : (0.4f * ySpeed)
 		), ForceMode2D.Impulse);
 	}
 	
