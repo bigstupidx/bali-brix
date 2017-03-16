@@ -6,7 +6,7 @@ using UnityEngineInternal;
 public class PowerUps : MonoBehaviour
 {
 	public GameObject gun, sealer, slowDown, growPaddle, breakThrough;
-	private CanvasManager cm;
+	private CanvasManager cm = new CanvasManager ();
 	public static List<string> powerUps = new List<string>{ };
 
 	public void processPowerUpSelection (GameObject go)
@@ -28,9 +28,23 @@ public class PowerUps : MonoBehaviour
 		case "Sealer":
 			price = 100;
 			break;
-		
+		case "Grow Ball":
+			price = 125;
+			break;
+		case "Clone":
+			price = 150;
+			break;
+		case "Grow Paddle":
+			price = 200;
+			break;
 		case "Gun":
 			price = 250;
+			break;
+		case "Bonus Ball":
+			price = 275;
+			break;
+		case "Break Through":
+			price = 300;
 			break;
 		}
 		return price;
