@@ -34,7 +34,6 @@ public class SpeedUp : MonoBehaviour
 	{
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
-			timeLeft = 7f;
 			active = false;
 			ResetSpeed ();
 		}

@@ -8,7 +8,7 @@ public class Gun : MonoBehaviour
 
 	// one bullet every 0.5 sec
 	private float shootingRate = 0.5f;
-	private float timeLeft = 9f;
+	private float timeLeft = 10f;
 	private bool active = true;
 	private bool gun = false;
 	private bool loaded = true;
@@ -40,7 +40,7 @@ public class Gun : MonoBehaviour
 	{
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
-			timeLeft = 7f;
+			//timeLeft = 7f;
 			active = false;
 		}
 	}

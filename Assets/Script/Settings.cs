@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Settings : MonoBehaviour
 {
-
 	public Sprite[] soundIcons;
 	private GameObject sound;
 
@@ -15,22 +14,11 @@ public class Settings : MonoBehaviour
 		sound = GameObject.Find ("Sound Settings");
 	}
 
-	public void LoadLevel (string name)
-	{
-		SceneManager.LoadScene (name);
-	}
-
-	public void Quit ()
-	{
-		Application.Quit ();
-	}
-
 	public void toggleSound ()
 	{
 		AudioListener.pause = (AudioListener.pause) ? false : true;
 		AudioListener.volume = (AudioListener.pause) ? 0 : 2;
 		sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
 		print ((AudioListener.pause) ? "paused" : "playing...");
-
 	}
 }

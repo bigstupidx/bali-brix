@@ -32,9 +32,6 @@ public class ButtomEdge : MonoBehaviour
 			print ("total: " + levelManager.totalBricks + " available: " + Brick.brickCounts);
 			print (" Damage: " + (float)(levelManager.totalBricks - Brick.brickCounts) / (float)levelManager.totalBricks);
 			levelManager.EvalDamage (levelManager.totalBricks - Brick.brickCounts);
-			//levelManager.LoadLevel ("Loose");	
-			//levelManager.EvalDamage ();
-			//LevelManager.ballCounts = 3;
 		}
 		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
 	}

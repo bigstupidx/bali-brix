@@ -28,7 +28,7 @@ public class GrowPaddle : MonoBehaviour
 	{
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
-			timeLeft = 10f;
+			//timeLeft = 10f;
 			active = false;
 			ResetPaddle ();
 		}

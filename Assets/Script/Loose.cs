@@ -5,18 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Loose : MonoBehaviour
 {
-	// Use this for initialization
-	void Start ()
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		
-	}
-
 	public void LoadLevel (string name)
 	{
 		// Need to reset the brick counts otherwise the leftover from last game 
@@ -26,5 +14,4 @@ public class Loose : MonoBehaviour
 		LevelManager.ballCounts = 3;
 		SceneManager.LoadScene (name);
 	}
-
 }

@@ -7,7 +7,7 @@ public class ShrinkPaddle : MonoBehaviour
 
 	public float shrinkFactor = -0.2f;
 
-	private float timeLeft = 7f;
+	private float timeLeft = 10f;
 	private bool active = true;
 	private GameObject paddle;
 	// Use this for initialization
@@ -29,7 +29,6 @@ public class ShrinkPaddle : MonoBehaviour
 	{
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
-			timeLeft = 7f;
 			active = false;
 			ResetPaddle ();
 		}

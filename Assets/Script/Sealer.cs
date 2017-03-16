@@ -4,9 +4,9 @@ using System.Collections;
 public class Sealer : MonoBehaviour
 {
 	private float blinkDuration = 1f;
-	private float timeLeft = 7f;
+	private float timeLeft = 10f;
 	private bool active = true;
-	
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -22,7 +22,7 @@ public class Sealer : MonoBehaviour
 		if (timeLeft < 0) {
 			active = false;
 			Destroy (this.gameObject);
-			timeLeft = 7f;
+			//timeLeft = 7f;
 		}
 	}
 

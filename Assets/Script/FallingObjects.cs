@@ -13,7 +13,6 @@ public class FallingObjects : MonoBehaviour
 	private LevelManager levelManager;
 	private GameObject balls;
 
-
 	// Use this for initialization
 	void Start ()
 	{

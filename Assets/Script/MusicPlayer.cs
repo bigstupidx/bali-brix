@@ -20,9 +20,4 @@ public class MusicPlayer : MonoBehaviour
 	{
 		Debug.Log ("Music Player Start " + GetInstanceID ());
 	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	}
 }

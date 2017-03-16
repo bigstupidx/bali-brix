@@ -42,6 +42,11 @@ public class CanvasManager : MonoBehaviour
 		starMiddle = GameObject.Find ("Star Middle");
 		starRight = GameObject.Find ("Star Right");
 		TurnOffStars ();
+		UpdateCoins ();
+	}
+
+	public void UpdateCoins ()
+	{
 		coinsNo = GameObject.Find ("Coins No");
 		coinsNo.GetComponent <Text> ().text = LevelManager.coins.ToString ();
 	}
@@ -110,5 +115,4 @@ public class CanvasManager : MonoBehaviour
 		}
 		starsPlayed = true;
 	}
-
 }

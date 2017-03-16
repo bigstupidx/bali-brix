@@ -6,7 +6,7 @@ using System.Security.Principal;
 public class BreakthroughBall : MonoBehaviour
 {
 
-	private float timeLeft = 7f;
+	private float timeLeft = 10f;
 	private bool active = true;
 	private GameObject[] allAvailableBricks;
 	private bool trigger = false;
@@ -30,7 +30,7 @@ public class BreakthroughBall : MonoBehaviour
 	{
 		timeLeft -= Time.deltaTime;
 		if (timeLeft < 0) {
-			timeLeft = 7;
+			//timeLeft = 7;
 			active = false;
 			ToggleTrigger ();
 		}
