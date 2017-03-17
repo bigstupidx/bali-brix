@@ -30,9 +30,10 @@ public class TripleBall : MonoBehaviour
 		ball3.GetComponent <Rigidbody2D> ()
 			.AddForce (new Vector2 (
 			(xSpeed > 0) ? (xSpeed / 10f) : -(xSpeed / 10f), 
-			(ySpeed > 0) ? -(0.4f * ySpeed) : (0.4f * ySpeed)
+			(ySpeed > 0) ? -(0.01f * ySpeed) : (0.01f * ySpeed)
 		), ForceMode2D.Impulse);
-	}
-	
 
+		ball2.GetComponent <SpriteRenderer> ().color = new Color (255f, 0f, 0f, 255f);
+		ball3.GetComponent <SpriteRenderer> ().color = new Color (0f, 255f, 0f, 255f);
+	}
 }
