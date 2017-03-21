@@ -16,11 +16,12 @@ public class PowerUps : MonoBehaviour
 	{
 		string name = go.transform.name;
 		int cost = GetPrice (name);
-		//go = GameObject.Find (name);
-		if (cost < LevelManager.coins) {
+		TogglePowerUp (cost);
+
+		if (cost <= LevelManager.coins) {
 			LevelManager.coins -= cost;
 			powerUps.Add (name);
-			print ("powerup: " + go); 
+			print ("powerup: " + name); 
 			go.GetComponent <Image> ().sprite = buttonFrame [1];
 			cm.UpdateCoins ();
 		} else {
@@ -28,29 +29,34 @@ public class PowerUps : MonoBehaviour
 		}
 	}
 
+	private void TogglePowerUp (int price)
+	{
+		
+	}
+
 	private int GetPrice (string name)
 	{
 		int price = 0;
 		switch (name) {
-		case "Sealer":
+		case "Button- sealer":
 			price = 100;
 			break;
-		case "Grow Ball":
+		case "Button- grow ball":
 			price = 125;
 			break;
-		case "Triple Ball":
+		case "Button- clone":
 			price = 150;
 			break;
-		case "Grow Paddle":
+		case "Button- grow paddle":
 			price = 200;
 			break;
-		case "Gun":
+		case "Button- gun":
 			price = 250;
 			break;
-		case "Bonus Ball":
+		case "Button- life":
 			price = 275;
 			break;
-		case "Break Through":
+		case "Button- durian":
 			price = 300;
 			break;
 		}
