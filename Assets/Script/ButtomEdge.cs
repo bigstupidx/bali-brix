@@ -27,7 +27,9 @@ public class ButtomEdge : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D collision) // Type Collision2D
 	{
 		AudioSource.PlayClipAtPoint (missed, this.transform.position);	
-		Ball.hasStarted = false;
+		// ToDo: Find out if there are other balls in the game
+
+		Ball.hasStarted = HasBalls ();
 		Destroy (collision.gameObject);
 		if (LevelManager.ballCounts-- <= 1) {
 			print ("total: " + levelManager.totalBricks + " available: " + Brick.brickCounts);
@@ -35,5 +37,10 @@ public class ButtomEdge : MonoBehaviour
 			levelManager.EvalDamage (levelManager.totalBricks - Brick.brickCounts);
 		}
 		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
+	}
+
+	private bool HasBalls ()
+	{
+		return true;
 	}
 }
