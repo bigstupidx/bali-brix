@@ -2,22 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngineInternal;
+using UnityEngine.UI;
 
 public class PowerUps : MonoBehaviour
 {
 	public GameObject gun, sealer, slowDown, growPaddle, breakThrough;
-	private CanvasManager cm = new CanvasManager ();
 	public static List<string> powerUps = new List<string>{ };
+	public Sprite[] buttonFrame;
+	private CanvasManager cm = new CanvasManager ();
+	public Canvas IAP;
 
 	public void processPowerUpSelection (GameObject go)
 	{
-		int cost = GetPrice (go.transform.name);
+		string name = go.transform.name;
+		int cost = GetPrice (name);
+		//go = GameObject.Find (name);
 		if (cost < LevelManager.coins) {
 			LevelManager.coins -= cost;
-			powerUps.Add (go.transform.name);
-			print ("current powers: " + powerUps.ToArray () + " - " + go.transform.name);
-			print ("coins: " + LevelManager.coins);
+			powerUps.Add (name);
+			print ("powerup: " + go); 
+			go.GetComponent <Image> ().sprite = buttonFrame [1];
 			cm.UpdateCoins ();
+		} else {
+			cm.toggleCanvas (IAP);
 		}
 	}
 
