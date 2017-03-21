@@ -73,7 +73,7 @@ public class CanvasManager : MonoBehaviour
 	public void toggleCanvas (Canvas c)
 	{
 		c.enabled = (c.enabled == true) ? false : true;
-		canvasActive = c.enabled;
+		canvasActive = (c.transform.name == "Canvas - IAP") ? true : c.enabled;
 		UpdateCoins ();
 	}
 

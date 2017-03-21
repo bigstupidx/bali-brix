@@ -12,26 +12,28 @@ public class PowerUps : MonoBehaviour
 	private CanvasManager cm = new CanvasManager ();
 	public Canvas IAP;
 
-	public void processPowerUpSelection (GameObject go)
+
+	public void TogglePowerUp (GameObject powerUp)
 	{
-		string name = go.transform.name;
+		string name = powerUp.transform.name;
 		int cost = GetPrice (name);
-		TogglePowerUp (cost);
-
-		if (cost <= LevelManager.coins) {
-			LevelManager.coins -= cost;
-			powerUps.Add (name);
+		if (powerUp.GetComponent <Image> ().sprite == buttonFrame [0]) {
+			if (cost <= LevelManager.coins) {
+				powerUp.GetComponent <Image> ().sprite = buttonFrame [1];
+				LevelManager.coins -= cost;
+				powerUps.Add (name);
+				print ("powerup: " + name); 
+				cm.UpdateCoins ();
+			} else {
+				cm.toggleCanvas (IAP);
+			}
+		} else if (powerUp.GetComponent <Image> ().sprite == buttonFrame [1]) {
+			powerUp.GetComponent <Image> ().sprite = buttonFrame [0];
+			LevelManager.coins += cost;
+			powerUps.Remove (name);
 			print ("powerup: " + name); 
-			go.GetComponent <Image> ().sprite = buttonFrame [1];
 			cm.UpdateCoins ();
-		} else {
-			cm.toggleCanvas (IAP);
 		}
-	}
-
-	private void TogglePowerUp (int price)
-	{
-		
 	}
 
 	private int GetPrice (string name)
