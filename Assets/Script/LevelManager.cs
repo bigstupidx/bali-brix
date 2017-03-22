@@ -95,6 +95,7 @@ public class LevelManager : MonoBehaviour
 				InitiatePowerUp (s);
 			}
 		PowerUps.powerUps = new List<string>{ };
+		print (PowerUps.powerUps.Count);
 	}
 
 	private void InitiatePowerUp (string name)
