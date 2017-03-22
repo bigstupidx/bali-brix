@@ -236,7 +236,7 @@ public class LevelManager : MonoBehaviour
 		int stars = 0;
 		CanvasManager.canvasActive = true;
 		canvasManager.toggleCanvas (canvasManager.levelComplete);
-
+		DeleteALlMovingObjects()
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
@@ -253,6 +253,11 @@ public class LevelManager : MonoBehaviour
 			canvasManager.starsPlayed = true;
 			StartCoroutine (canvasManager.PlayStarPopSound (stars));
 		}
+	}
+
+	private void DeleteAllMovingObjects()
+	{
+		//ToDo: clear the scene from falling objects and cloned balls
 	}
 
 	/*private void ToggleUI ()
