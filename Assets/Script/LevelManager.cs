@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using System.Net;
 using UnityEngine.Advertisements;
 using System.Net.NetworkInformation;
+using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
@@ -68,7 +70,7 @@ public class LevelManager : MonoBehaviour
 		if (Ball.hasStarted && timer) {
 			touchArea.GetComponent <Text> ().text = "Touch Area";
 			UpdateTimer ();
-		}
+		} 
 		if (timeLeft <= 0f) {
 			EvalDamage (totalBricks - Brick.brickCounts);
 			timeLeft = 0.1f; // just to prevent running EvalDamage (the root cause of Flickering)
@@ -84,14 +86,25 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+	public void CheckPowerUps ()
+	{
+		print (PowerUps.powerUps.Count);
+		if (PowerUps.powerUps.Count > 0)
+			foreach (string s in PowerUps.powerUps) {
+				print (s + "\n");
+				InitiatePowerUp (s);
+			}
+		PowerUps.powerUps = new List<string>{ };
+	}
+
+	private void InitiatePowerUp (string name)
+	{
+		print ("initiating the powerup!");
+	}
+
+
 	private void SecondChance ()
 	{
-		// 3 sec to make a descision + 30 sec to play
-		/*
-		if () {
-			
-		}
-		*/
 	}
 
 	public void NoThanks ()
