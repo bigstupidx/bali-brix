@@ -236,7 +236,7 @@ public class LevelManager : MonoBehaviour
 		int stars = 0;
 		CanvasManager.canvasActive = true;
 		canvasManager.toggleCanvas (canvasManager.levelComplete);
-		DeleteALlMovingObjects()
+		DeleteAllMovingObjects ();
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
 		} else if (damage >= 0.7 && damage < 1) { // 2 stars
@@ -255,20 +255,20 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	private void DeleteAllMovingObjects()
+	private void DeleteAllMovingObjects ()
 	{
 		//ToDo: clear the scene from falling objects and cloned balls
+		GameObject[] fallingObjects = GameObject.FindGameObjectsWithTag ("Falling Objects");
+		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
+		if (fallingObjects != null) {
+			foreach (GameObject g in fallingObjects)
+				Destroy (g);
+		}
+		if (balls != null) {
+			foreach (GameObject g in balls)
+				Destroy (g);
+		}
 	}
-
-	/*private void ToggleUI ()
-	{
-		levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha = 
-			(levelCompleteCanvas.GetComponent <CanvasGroup> ().alpha == 1) ? 0 : 1;
-		levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable = 
-			(levelCompleteCanvas.GetComponent <CanvasGroup> ().interactable) ? false : true;
-	}*/
-
-
 
 	public void fetchLevelPrize ()
 	{
