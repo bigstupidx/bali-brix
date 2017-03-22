@@ -22,7 +22,6 @@ public class PowerUps : MonoBehaviour
 				powerUp.GetComponent <Image> ().sprite = buttonFrame [1];
 				LevelManager.coins -= cost;
 				powerUps.Add (name);
-				print ("powerup: " + name); 
 				cm.UpdateCoins ();
 			} else {
 				cm.toggleCanvas (IAP);
@@ -31,7 +30,6 @@ public class PowerUps : MonoBehaviour
 			powerUp.GetComponent <Image> ().sprite = buttonFrame [0];
 			LevelManager.coins += cost;
 			powerUps.Remove (name);
-			print ("powerup: " + name); 
 			cm.UpdateCoins ();
 		}
 	}

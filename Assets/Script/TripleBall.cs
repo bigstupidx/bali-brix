@@ -9,7 +9,7 @@ public class TripleBall : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		currentBall = GameObject.Find ("Ball");
+		currentBall = GameObject.FindGameObjectWithTag ("Ball");
 		x = currentBall.transform.position.x;
 		y = currentBall.transform.position.y;
 		xSpeed = currentBall.GetComponent <Rigidbody2D> ().velocity.x;

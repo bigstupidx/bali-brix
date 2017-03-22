@@ -124,7 +124,6 @@ public class LevelManager : MonoBehaviour
 		Ball.hasStarted = false;
 		switch (result) {
 		case ShowResult.Finished:
-			Debug.Log ("The ad was successfully shown.");
 			//
 			// YOUR CODE TO REWARD THE GAMER
 			// Give coins etc.
@@ -136,10 +135,8 @@ public class LevelManager : MonoBehaviour
 			canvasManager.toggleCanvas (canvasManager.lostContinue);
 			break;
 		case ShowResult.Skipped:
-			Debug.Log ("The ad was skipped before reaching the end.");
 			break;
 		case ShowResult.Failed:
-			Debug.LogError ("The ad failed to be shown.");
 			break;
 		}
 	}
@@ -308,13 +305,11 @@ public class LevelManager : MonoBehaviour
 		AudioListener.pause = (AudioListener.pause) ? false : true;
 		AudioListener.volume = (AudioListener.pause) ? 0 : 2;
 		sound = GameObject.Find ("Sound");
-		print ("toggler " + sound);
 		sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
 	}
 
 	public void Quit ()
 	{
-		Debug.Log ("quit!");
 		Application.Quit ();
 	}
 }
