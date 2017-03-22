@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ButtomEdge : MonoBehaviour
 {
 	public AudioClip missed;
+	public GameObject ball;
 	private LevelManager levelManager;
 	private GameObject balls;
 
@@ -17,30 +18,36 @@ public class ButtomEdge : MonoBehaviour
 		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
 	}
 
-	// This is where a Collider object triggers
-	void OnTriggerEnter2D (Collider2D trigger)  // Type Collider2D
-	{
-		
-	}
+
 
 	// This is where A Collision object collides
 	void OnCollisionEnter2D (Collision2D collision) // Type Collision2D
 	{
+		Destroy (collision.gameObject, 0f);
+		//DestroyImmediate (collision.gameObject);
 		AudioSource.PlayClipAtPoint (missed, this.transform.position);	
-		// ToDo: Find out if there are other balls in the game
-
-		Ball.hasStarted = HasBalls ();
-		Destroy (collision.gameObject);
-		if (LevelManager.ballCounts-- <= 1) {
-			print ("total: " + levelManager.totalBricks + " available: " + Brick.brickCounts);
-			print (" Damage: " + (float)(levelManager.totalBricks - Brick.brickCounts) / (float)levelManager.totalBricks);
-			levelManager.EvalDamage (levelManager.totalBricks - Brick.brickCounts);
-		}
-		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
+		StartCoroutine (CheckActiveBalls ());
 	}
 
-	private bool HasBalls ()
+	private IEnumerator CheckActiveBalls ()
 	{
-		return true;
+		yield return new WaitForFixedUpdate ();
+		bool active = HasBall ();
+		Ball.hasStarted = active;
+		print ("Are we active?" + active);
+		if (!active) {
+			if (LevelManager.ballCounts-- <= 0) {
+				levelManager.EvalDamage (levelManager.totalBricks - Brick.brickCounts);
+			} else {
+				Instantiate (ball);
+				print ("We are here and here is the instantiated ball: " + ball);
+			}
+			balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
+		}
+	}
+
+	private bool HasBall ()
+	{
+		return (GameObject.FindGameObjectWithTag ("Ball") != null) ? true : false;
 	}
 }
