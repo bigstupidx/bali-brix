@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
 
 	private GameObject timer;
 	private GameObject background;
-	private GameObject score, ballsNo, levelCompleteScore, level, sound;
+	private GameObject score, ballsNo, levelCompleteScore, level, sound, coinsNumber;
 	private GameObject touchArea;
 
 	private string minsAndSecs = "0:0";
@@ -65,6 +65,7 @@ public class LevelManager : MonoBehaviour
 		ballsNo = GameObject.Find ("Balls No");
 		level = GameObject.Find ("Level");
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
+		coinsNumber = GameObject.Find ("Coins Number");
 		touchArea = GameObject.Find ("Touch Area");
 	}
 
@@ -284,6 +285,8 @@ public class LevelManager : MonoBehaviour
 		int stars = 0;
 		CanvasManager.canvasActive = true;
 		canvasManager.toggleCanvas (canvasManager.levelComplete);
+		coinsNumber.GetComponent <Text> ().text = coins.ToString ();
+
 		DeleteAllMovingObjects ();
 		if (damage < 0.7) {												// 1 star
 			stars = 1;
