@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 	public bool secondChance = true;
 	public CanvasManager canvasManager;
 	// they will be used as powerups
-	public GameObject sealer;
+	public GameObject sealer, growPaddle;
 
 	private GameObject timer;
 	private GameObject background;
@@ -111,6 +111,10 @@ public class LevelManager : MonoBehaviour
 		case "Button- sealer":
 			GameObject sealerClone = 
 				Instantiate (sealer, new Vector3 (0f, -5.1f, 0f), transform.rotation) as GameObject;
+			break;
+		case "Button- grow paddle":
+			GameObject growPaddleClone = 
+				Instantiate (growPaddle, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 			break;
 		}
 	}
