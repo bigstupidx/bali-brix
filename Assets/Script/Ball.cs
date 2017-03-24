@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
 	public static bool bonusPaid = false;
 	public static int bonusFactor = 1;
 	public Vector2 defaultSpeed = new Vector2 (2f, 6.8f);
+	public GameObject tripleBall;
 
 	private Paddle paddle;
 	private Vector3 paddleToBallVector;
@@ -33,10 +34,13 @@ public class Ball : MonoBehaviour
 				direction = (this.transform.position.x > 0) ? 1f : -1f;
 				this.GetComponent <Rigidbody2D> ().velocity = 
 					new Vector2 (defaultSpeed.x * direction, defaultSpeed.y);
+				// Check if TrippleBall PowerUp is added
+				if (LevelManager.tripleBall == true) {
+					GameObject tripleBallClone =
+						Instantiate (tripleBall, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
+					LevelManager.tripleBall = false;
+				}
 				hasStarted = true;
-				/*print ("current speed (x,y): (" +
-				this.GetComponent <Rigidbody2D> ().velocity.x + "," +
-				this.GetComponent <Rigidbody2D> ().velocity.y + ")");*/
 			}		
 		}		
 	}
