@@ -116,6 +116,12 @@ public class LevelManager : MonoBehaviour
 			GameObject growPaddleClone = 
 				Instantiate (growPaddle, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 			break;
+		case "Button- life":
+			AddBonusBall (ballsNo);
+			// we need to decrease the bonus factor because in the AddBonusBall it 
+			// has been increased for handling score bonus
+			Ball.bonusFactor--;
+			break;
 		}
 	}
 
