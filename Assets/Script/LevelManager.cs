@@ -23,6 +23,8 @@ public class LevelManager : MonoBehaviour
 	public float timeLeft = 0f;
 	public bool secondChance = true;
 	public CanvasManager canvasManager;
+	// they will be used as powerups
+	public GameObject sealer;
 
 	private GameObject timer;
 	private GameObject background;
@@ -105,6 +107,10 @@ public class LevelManager : MonoBehaviour
 		switch (name) {
 		case "Button- clone":
 			tripleBall = true;
+			break;
+		case "Button- sealer":
+			GameObject sealerClone = 
+				Instantiate (sealer, new Vector3 (0f, -5.1f, 0f), transform.rotation) as GameObject;
 			break;
 		}
 	}
