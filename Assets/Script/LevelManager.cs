@@ -24,7 +24,7 @@ public class LevelManager : MonoBehaviour
 	public bool secondChance = true;
 	public CanvasManager canvasManager;
 	// they will be used as powerups
-	public GameObject sealer, growPaddle;
+	public GameObject sealer, growPaddle, gun;
 
 	private GameObject timer;
 	private GameObject background;
@@ -121,6 +121,10 @@ public class LevelManager : MonoBehaviour
 			// we need to decrease the bonus factor because in the AddBonusBall it 
 			// has been increased for handling score bonus
 			Ball.bonusFactor--;
+			break;
+		case "Button- gun":
+			GameObject gunClone = 
+				Instantiate (gun, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
 			break;
 		}
 	}
