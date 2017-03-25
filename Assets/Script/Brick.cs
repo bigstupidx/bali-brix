@@ -52,7 +52,7 @@ public class Brick : MonoBehaviour
 			levelManager.fallingObjectIndex = 1; //Random.Range (1, max);  
 		else
 			levelManager.fallingObjectIndex++;
-		objectIndex = Random.Range (1, 11);//Random.Range (1, 13); //levelManager.fallingObjectIndex; 
+		objectIndex = Random.Range (1, 3);//Random.Range (1, 13); //levelManager.fallingObjectIndex; 
 	}
 
 	void OnCollisionEnter2D (Collision2D collision)

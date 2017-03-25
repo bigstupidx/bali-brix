@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
 	private GameObject background;
 	private GameObject score, ballsNo, levelCompleteScore, level, sound, coinsNumber;
 	private GameObject touchArea;
+	private GameObject message;
 
 	private string minsAndSecs = "0:0";
 	private bool alert = true;
@@ -67,6 +68,7 @@ public class LevelManager : MonoBehaviour
 		levelCompleteScore = GameObject.Find ("Level Complete Score");
 		coinsNumber = GameObject.Find ("Coins Number");
 		touchArea = GameObject.Find ("Touch Area");
+		message = GameObject.Find ("Message");
 	}
 
 	void Update ()
@@ -280,10 +282,28 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public void ShowMessage (string message)
+	public void ShowMessage (string myText)
 	{
-		canvasManager.toggleCanvas (canvasManager.messageCenter);
-		print (message);
+		print ("MESSAGE CANVAS IS:" + canvasManager.messageCenter.enabled);
+		canvasManager.messageCenter.enabled = true;
+		print ("MESSAGE CANVAS IS:" + canvasManager.messageCenter.enabled);
+
+		message.GetComponent <Text> ().text = myText;
+		StartCoroutine (FadeMessage (message));
+	}
+
+	IEnumerator FadeMessage (GameObject message)
+	{
+		//message.GetComponent <Text> ().color;
+		Color solidColor = new Color (255f, 255f, 0f, 1f);
+		Color fadedColor = new Color (solidColor.r, solidColor.g, solidColor.b, 0f);
+		for (var t = 0f; t < 1f; t += Time.deltaTime) {
+			message.GetComponent <Text> ().color = Color.Lerp (solidColor, fadedColor, t / 1f);
+			message.transform.localScale += new Vector3 (0.01f, 0.01f, 0f);
+			yield return new WaitForSeconds (0.001f);
+		}	
+		canvasManager.messageCenter.enabled = false;
+		message.transform.localScale = new Vector3 (1f, 1f, 1f);
 	}
 
 	public void ShowLevelComplete (float damage)
