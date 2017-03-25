@@ -38,6 +38,7 @@ public class FallingObjects : MonoBehaviour
 			switch (this.GetComponent <SpriteRenderer> ().sprite.name) {
 			case "balls_1":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
+				levelManager.ShowMessage ("BADA");
 				GameObject coinClone = 
 					Instantiate (coin, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;			
 				break;

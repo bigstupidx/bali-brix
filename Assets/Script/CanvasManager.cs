@@ -13,6 +13,7 @@ public class CanvasManager : MonoBehaviour
 	public Canvas powerUps;
 	public Canvas levelComplete;
 	public Canvas lost, lostContinue;
+	public Canvas messageCenter;
 	public AudioClip popStar;
 	public bool starsPlayed = false;
 
@@ -37,6 +38,7 @@ public class CanvasManager : MonoBehaviour
 		levelComplete.enabled = false;
 		lost.enabled = false;
 		lostContinue.enabled = false;
+		messageCenter.enabled = false;
 		canvasActive = false;
 		starLeft = GameObject.Find ("Star Left");
 		starMiddle = GameObject.Find ("Star Middle");
@@ -75,6 +77,10 @@ public class CanvasManager : MonoBehaviour
 		c.enabled = (c.enabled == true) ? false : true;
 		canvasActive = (c.transform.name == "Canvas - IAP") ? true : c.enabled;
 		UpdateCoins ();
+		print (
+			"canvas toggled: " + c.transform.name +
+			"\n and it is: " + c.enabled
+		);
 	}
 
 	public void ShowPause ()

@@ -280,6 +280,12 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+	public void ShowMessage (string message)
+	{
+		canvasManager.toggleCanvas (canvasManager.messageCenter);
+		print (message);
+	}
+
 	public void ShowLevelComplete (float damage)
 	{
 		int stars = 0;
