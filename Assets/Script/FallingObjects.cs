@@ -33,6 +33,7 @@ public class FallingObjects : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
+		// What should we do next when we catch a falling object
 		if (other.tag == "Paddle") {
 			Destroy (this.gameObject);
 			switch (this.GetComponent <SpriteRenderer> ().sprite.name) {
@@ -43,7 +44,6 @@ public class FallingObjects : MonoBehaviour
 				GameObject coinClone = 
 					Instantiate (coin, new Vector3 (0f, 0f, 0f), transform.rotation) as GameObject;
 				levelManager.ShowMessage ("+" + currentBonus.ToString () + " coins");
-
 				break;
 			case "balls_2":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
@@ -81,6 +81,7 @@ public class FallingObjects : MonoBehaviour
 				break;
 			case "balls_9":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
+				levelManager.ShowMessage ("DURIAN");
 				GameObject breakthroughClone = 
 					Instantiate (breakThrough, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
