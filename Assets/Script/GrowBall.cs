@@ -6,15 +6,16 @@ public class GrowBall : MonoBehaviour
 {
 	private float timeLeft = 10f;
 	private bool active = true;
-	private GameObject ball;
+	private GameObject[] balls;
 
 	// Use this for initialization
 	void Start ()
 	{
-		ball = GameObject.Find ("Ball");
-		print (ball.transform.localScale.x);
-		ball.transform.localScale += new Vector3 (0.3f, 0.3f, 0f);
-		print (ball.transform.localScale.x);
+		balls = GameObject.FindGameObjectsWithTag ("Ball");
+		if (balls != null) {
+			foreach (GameObject g in balls)
+				g.transform.localScale += new Vector3 (0.3f, 0.3f, 0f);
+		}
 	}
 
 	// Update is called once per frame
@@ -36,7 +37,10 @@ public class GrowBall : MonoBehaviour
 
 	private void ResetSize ()
 	{
-		if (ball)
-			ball.transform.localScale = new Vector3 (1f, 1f, 1f);
+		balls = GameObject.FindGameObjectsWithTag ("Ball");
+		if (balls != null) {
+			foreach (GameObject g in balls)
+				g.transform.localScale = new Vector3 (1f, 1f, 1f);
+		}
 	}
 }
