@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
 			playCounts = 0;
 			ShowAd ();
 		}
+		CanvasManager.powerUpOffered = false;
 	}
 
 	public void ShowAd ()
@@ -101,6 +102,7 @@ public class LevelManager : MonoBehaviour
 				InitiatePowerUp (s);
 			}
 		PowerUps.powerUps = new List<string>{ };
+
 		print (PowerUps.powerUps.Count);
 	}
 
