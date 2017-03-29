@@ -4,51 +4,37 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class StartScene : MonoBehaviour
 {
 	public Canvas helpCanvas;
 	public Canvas settingsCanvas;
 	public Canvas dailyRewardCanvas;
-	public static bool rewarded = false;
 
 	private LevelManager levelManager;
+	private GameObject today, tomorrow;
+	private int currentRewardDay = 1;
+	private int currentRewardAmount = 100;
 
 	void Start ()
+	{		 
+		InitGameObjects ();
+		SetPlayerPrefs ();
+		//HandleDailyReward (CheckDate ());
+	}
+
+	private void InitGameObjects ()
 	{
 		helpCanvas.enabled = false;
 		settingsCanvas.enabled = false;
 		dailyRewardCanvas.enabled = false;
-
-		SetDailyReward (CheckDate ());
+		today = GameObject.Find ("Text - Day");
+		tomorrow = GameObject.Find ("Text - Tomorrow");
 	}
 
-	private void SetDailyReward (TimeSpan timeSpan)
+	private void SetPlayerPrefs ()
 	{
-		if (timeSpan.Hours < 48 && timeSpan.Hours > 24) {
-			//ToDo: Pay the nextt reward
-			HandleNextReward ();
-		} else if (timeSpan.Hours >= 48) {
-			//ToDo: reset the reward to the day 1
-			ResetDailyRewards ();
-		}
-	}
-
-	private void HandleNextReward ()
-	{
-		
-	}
-
-	private void ResetRewards ()
-	{
-		
-	}
-
-	private TimeSpan CheckDate ()
-	{
-		//Store the current time when it starts
-		DateTime currentDate = System.DateTime.Now;
-
 		if (!PlayerPrefs.HasKey ("Last Visit")) {
 			// Happy Birthday Sohail
 			PlayerPrefs.SetString (
@@ -56,6 +42,51 @@ public class StartScene : MonoBehaviour
 				Convert.ToDateTime ("3/21/1975 5:00:00 AM").ToBinary ().ToString ()
 			);
 		}
+		if (!PlayerPrefs.HasKey ("CurrentRewardDay")) {
+			PlayerPrefs.SetInt ("CurrentRewardDay", 1);
+		}
+		if (!PlayerPrefs.HasKey ("Rewarded")) {
+			PlayerPrefs.SetInt ("Rewarded", 0);
+		}
+	}
+
+	public void HandleDailyReward ()
+	{
+		TimeSpan timeSpan = CheckDate ();
+		if (timeSpan.Hours <= 24 && PlayerPrefs.GetInt ("Rewarded") == 0) {
+			SetReward ();
+			PlayerPrefs.SetInt ("Rewarded", 1);
+		} else if (timeSpan.Hours > 24 && timeSpan.Hours < 48) {
+			SetReward ();
+		} else if (timeSpan.Hours >= 48) {
+			ResetRewards ();
+		} else {
+			SceneManager.LoadScene ("Level Selection");
+		}
+	}
+
+	private void SetReward ()
+	{
+		currentRewardDay = PlayerPrefs.GetInt ("CurrentRewardDay");
+		currentRewardAmount += currentRewardDay * 10;
+		today.GetComponent <Text> ().text = 
+				"Day " + currentRewardDay.ToString () + "\n +" + currentRewardAmount.ToString ();
+		tomorrow.GetComponent <Text> ().text = 
+				"tomorrow\n +" + (currentRewardAmount + 10).ToString () + "\n coins";
+		dailyRewardCanvas.enabled = true;
+	}
+
+	private void ResetRewards ()
+	{
+		PlayerPrefs.SetInt ("CurrentRewardDay", 1);
+		SetReward ();
+	}
+
+	public TimeSpan CheckDate ()
+	{
+		//Store the current time when it starts
+		DateTime currentDate = System.DateTime.Now;
+
 		//Grab the old time from the player prefs as a long
 		long temp = Convert.ToInt64 (PlayerPrefs.GetString ("Last Visit"));
 
@@ -68,19 +99,11 @@ public class StartScene : MonoBehaviour
 		return difference;
 	}
 
-	public void DailyRewards ()
-	{
-		if (!rewarded) {
-			dailyRewardCanvas.enabled = true;
-		} else {
-			SceneManager.LoadScene ("Level Selection");
-		}
-	}
-
 	public void RewardClaimed ()
 	{
-		//ToDo: add coins
-		rewarded = true;
+		LevelManager.coins += currentRewardAmount;
+		PlayerPrefs.SetInt ("CurrentRewardDay", currentRewardDay + 1);
+		PlayerPrefs.SetInt ("Rewarded", 1);
 		SceneManager.LoadScene ("Level Selection");
 	}
 
