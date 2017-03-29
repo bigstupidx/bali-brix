@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class StartScene : MonoBehaviour
 {
@@ -15,6 +16,25 @@ public class StartScene : MonoBehaviour
 		helpCanvas.enabled = false;
 		settingsCanvas.enabled = false;
 		dailyRewardCanvas.enabled = false;
+
+		CheckDate ();
+	}
+
+	private void CheckDate ()
+	{
+		//Store the current time when it starts
+		DateTime currentDate = System.DateTime.Now;
+
+		//Grab the old time from the player prefs as a long
+		long temp = Convert.ToInt64 (PlayerPrefs.GetString ("sysString"));
+
+		//Convert the old time from binary to a DataTime variable
+		DateTime oldDate = DateTime.FromBinary (temp);
+		print ("oldDate: " + oldDate);
+
+		//Use the Subtract method and store the result as a timespan variable
+		TimeSpan difference = currentDate.Subtract (oldDate);
+		print ("Difference: " + difference);
 	}
 
 	public void DailyRewards ()

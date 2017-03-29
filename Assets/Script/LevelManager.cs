@@ -50,6 +50,7 @@ public class LevelManager : MonoBehaviour
 			ShowAd ();
 		}
 		CanvasManager.powerUpOffered = false;
+		LastVisit ();
 	}
 
 	public void ShowAd ()
@@ -392,8 +393,16 @@ public class LevelManager : MonoBehaviour
 		sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
 	}
 
+	private void LastVisit ()
+	{
+		PlayerPrefs.SetString ("Last Visit", System.DateTime.Now.ToBinary ().ToString ());
+		print ("Saving this date to prefs: " + System.DateTime.Now);
+	}
+
 	public void Quit ()
 	{
+		//Save the current system time as a string in the player prefs class
+		LastVisit ();
 		Application.Quit ();
 	}
 }
