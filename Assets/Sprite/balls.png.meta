@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 389f34439c2b11a46a628029e0089ee6
-timeCreated: 1489235439
+timeCreated: 1490869925
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -25,12 +25,12 @@ TextureImporter:
     21300036: balls_9
     21300038: balls_7
     21300040: balls_2
-    21300042: balls_11
+    21300042: balls_reserved
     21300044: balls_6
-    21300046: balls_13
+    21300046: balls_12
     21300048: balls_7
     21300050: balls_6
-    21300052: balls_12
+    21300052: balls_11
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -243,11 +243,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: balls_11
+      name: balls_reserved
       rect:
         serializedVersion: 2
         x: 326
-        y: 41
+        y: 42
         width: 67
         height: 42
       alignment: 0
@@ -256,7 +256,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: balls_12
+      name: balls_11
       rect:
         serializedVersion: 2
         x: 414
@@ -269,7 +269,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: balls_13
+      name: balls_12
       rect:
         serializedVersion: 2
         x: 480

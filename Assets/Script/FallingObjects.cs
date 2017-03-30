@@ -92,10 +92,11 @@ public class FallingObjects : MonoBehaviour
 				GameObject tripleBallClone = 
 					Instantiate (tripleBall, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
-			case "balls_11":
+			// removed for now
+			/*case "balls_11":
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				PauseBall ();
-				break;
+				break;*/
 			default:
 				print ("you hit the R ball!");
 				break;
@@ -118,7 +119,7 @@ public class FallingObjects : MonoBehaviour
 
 	private void PauseBall ()
 	{
-		paddle.GetComponent <PolygonCollider2D> ().isTrigger = true;
+		// Removed for now
 		// ToDo: active the trigger for paddle
 		// Find the number of active balls
 		// when a BALL hit the triggered paddle decrease the numberof active balls
