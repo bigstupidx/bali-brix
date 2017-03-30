@@ -12,7 +12,6 @@ public class PowerUps : MonoBehaviour
 	private CanvasManager cm = new CanvasManager ();
 	public Canvas IAP;
 
-
 	public void TogglePowerUp (GameObject powerUp)
 	{
 		string name = powerUp.transform.name;

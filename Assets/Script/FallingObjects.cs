@@ -14,14 +14,16 @@ public class FallingObjects : MonoBehaviour
 
 	private float blinkDuration = 0.3f;
 	private LevelManager levelManager;
-	private GameObject balls;
+	private GameObject ballCount;
+	private GameObject paddle;
 
 	// Use this for initialization
 	void Start ()
 	{
 		levelManager = GameObject.FindObjectOfType<LevelManager> ();
-		balls = GameObject.Find ("Balls No");
-		balls.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
+		paddle = GameObject.Find ("Paddle");
+		ballCount = GameObject.Find ("Balls No");
+		ballCount.GetComponent <Text> ().text = LevelManager.ballCounts.ToString ();
 	}
 
 	// Update is called once per frame
@@ -108,7 +110,7 @@ public class FallingObjects : MonoBehaviour
 
 	private void AddLife ()
 	{
-		levelManager.AddBonusBall (balls);
+		levelManager.AddBonusBall (ballCount);
 		// we need to decrease the bonus factor because in the AddBonusBall it 
 		// has been increased for handling score bonus
 		Ball.bonusFactor--;
@@ -116,6 +118,14 @@ public class FallingObjects : MonoBehaviour
 
 	private void PauseBall ()
 	{
-
+		paddle.GetComponent <PolygonCollider2D> ().isTrigger = true;
+		// ToDo: active the trigger for paddle
+		// Find the number of active balls
+		// when a BALL hit the triggered paddle decrease the numberof active balls
+		// and freeze the ball where ever it is
+		// (possibly deactivate the gun as well)
+		// when all balls are caught (or missed)
+		// each tap should release one ball
+		// by releasing the last ball set the paddle's isTrigger to false
 	}
 }
