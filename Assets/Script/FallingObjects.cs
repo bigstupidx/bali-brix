@@ -10,7 +10,7 @@ public class FallingObjects : MonoBehaviour
 	public GameObject 
 		coin, gun, sealer, speedUp, slowDown, 
 		growPaddle, shrinkPaddle, breakThrough,
-		tripleBall;
+		tripleBall, growBall;
 
 	private float blinkDuration = 0.3f;
 	private LevelManager levelManager;
@@ -91,6 +91,11 @@ public class FallingObjects : MonoBehaviour
 				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
 				GameObject tripleBallClone = 
 					Instantiate (tripleBall, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
+				break;
+			case "balls_11":
+				AudioSource.PlayClipAtPoint (powerUp, this.transform.position);	
+				GameObject growBallClone = 
+					Instantiate (growBall, new Vector3 (0f, -5.8f, 0f), transform.rotation) as GameObject;
 				break;
 			// removed for now
 			/*case "balls_11":
