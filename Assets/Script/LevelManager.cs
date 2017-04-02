@@ -245,7 +245,7 @@ public class LevelManager : MonoBehaviour
 		if (cleared) {
 			ShowLevelComplete (1);
 			UnlockNextLevel ();
-			Invoke ("LoadNextLevel", timeLeft * 0.1f + 5f);
+			HandleAutoPlay (5f);
 		} else {
 			float damage = (float)destroyedBricks / (float)totalBricks;
 			if (damage < 0.6) {
@@ -261,9 +261,22 @@ public class LevelManager : MonoBehaviour
 			} else {
 				ShowLevelComplete (damage);
 				UnlockNextLevel ();
-				Invoke ("LoadNextLevel", 3.5f);
+				HandleAutoPlay (3.5f);
 			}
 		}
+	}
+
+	private void HandleAutoPlay (float delay)
+	{
+		if (StartScene.nonStopPlay)
+			Invoke ("LoadNextLevel", timeLeft * 0.1f + delay);
+		else
+			Invoke ("LoadLevelSelection", timeLeft * 0.1f + delay);
+	}
+
+	public void LoadLevelSelection ()
+	{
+		LoadLevel ("Level Selection");
 	}
 
 	public void LoadNextLevel ()

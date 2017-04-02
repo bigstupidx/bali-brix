@@ -12,7 +12,7 @@ public class StartScene : MonoBehaviour
 	public Canvas settingsCanvas;
 	public Canvas dailyRewardCanvas;
 	public Sprite[] acceptRejectIcons;
-	public static bool nonStopPlay = false;
+	public static bool nonStopPlay = true;
 
 	private LevelManager levelManager;
 	private GameObject today, tomorrow;
