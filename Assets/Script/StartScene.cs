@@ -16,6 +16,7 @@ public class StartScene : MonoBehaviour
 
 	private LevelManager levelManager;
 	private GameObject today, tomorrow;
+	private GameObject nonStopButton;
 	private int currentRewardDay = 1;
 	private int currentRewardAmount = 100;
 
@@ -127,8 +128,9 @@ public class StartScene : MonoBehaviour
 	public void ToggleNonStopPlay ()
 	{
 		nonStopPlay = (nonStopPlay) ? false : true;
-		//sound = GameObject.Find ("Sound");
-		//sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
+		nonStopButton = GameObject.Find ("NonStop - Button");
+		nonStopButton.GetComponent <Image> ().sprite = 
+			(nonStopPlay) ? acceptRejectIcons [1] : acceptRejectIcons [0];
 	}
 
 	public void Quit ()
