@@ -11,6 +11,8 @@ public class StartScene : MonoBehaviour
 	public Canvas helpCanvas;
 	public Canvas settingsCanvas;
 	public Canvas dailyRewardCanvas;
+	public Sprite[] acceptRejectIcons;
+	public static bool nonStopPlay = false;
 
 	private LevelManager levelManager;
 	private GameObject today, tomorrow;
@@ -120,6 +122,13 @@ public class StartScene : MonoBehaviour
 	public void toggleCanvas (Canvas c)
 	{
 		c.enabled = (c.enabled == true) ? false : true;
+	}
+
+	public void ToggleNonStopPlay ()
+	{
+		nonStopPlay = (nonStopPlay) ? false : true;
+		//sound = GameObject.Find ("Sound");
+		//sound.GetComponent <Image> ().sprite = (AudioListener.pause) ? soundIcons [1] : soundIcons [0];
 	}
 
 	public void Quit ()

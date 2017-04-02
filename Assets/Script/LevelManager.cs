@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
 	public static int playCounts = 0;
 	public static int coins = 550;
 	public static bool tripleBall = false;
+
 	public AudioClip timeoutAlert, bonusTime, bonusBall;
 	public Sprite[] soundIcons;
 	public int fallingObjects = 0;
