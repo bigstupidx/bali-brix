@@ -20,7 +20,7 @@ public class SlowDown : MonoBehaviour
 					(g.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (slowDownFactor / 5) : (-slowDownFactor / 5),
 					(g.GetComponent <Rigidbody2D> ().velocity.y > 0) ? (slowDownFactor) : (-slowDownFactor)
 				));
-				g.GetComponent <SpriteRenderer> ().color = new Color (0f, 255f, 0f, 255f);
+				g.GetComponent <SpriteRenderer> ().color = new Color (100f, 255f, 0f, 255f);
 
 			}
 		}
