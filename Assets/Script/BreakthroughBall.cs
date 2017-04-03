@@ -16,8 +16,6 @@ public class BreakthroughBall : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		allAvailableBricks = GameObject.FindGameObjectsWithTag ("Breakable");
-		ball = GameObject.FindGameObjectsWithTag ("Ball");
 		ToggleTrigger ();
 	}
 
@@ -43,16 +41,19 @@ public class BreakthroughBall : MonoBehaviour
 	private void ToggleTrigger ()
 	{
 		trigger = (trigger) ? false : true;
+		allAvailableBricks = GameObject.FindGameObjectsWithTag ("Breakable");
+		ball = GameObject.FindGameObjectsWithTag ("Ball");
 		for (int index = 0; index < allAvailableBricks.Length; index++) {
 			allAvailableBricks [index].GetComponent <BoxCollider2D> ().isTrigger = trigger;
 		}
-		if (ball.Length != 0)
-			foreach (GameObject g in ball) {
+		foreach (GameObject g in ball) {
+			if (g) {
 				if (trigger) {
 					g.GetComponent <SpriteRenderer> ().sprite = durian;
 				} else {
 					g.GetComponent <SpriteRenderer> ().sprite = normal;
-				}
+				}	
 			}
+		}
 	}
 }
