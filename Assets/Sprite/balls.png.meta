@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 389f34439c2b11a46a628029e0089ee6
-timeCreated: 1490869925
+timeCreated: 1491215979
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -27,10 +27,13 @@ TextureImporter:
     21300040: balls_2
     21300042: balls_reserved
     21300044: balls_6
-    21300046: balls_12
+    21300046: balls_6
     21300048: balls_7
     21300050: balls_6
     21300052: balls_11
+    21300054: balls_12
+    21300056: balls_13
+    21300058: balls_14
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -117,7 +120,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 25
-        y: 134
+        y: 217
         width: 34
         height: 36
       alignment: 0
@@ -130,7 +133,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 78
-        y: 120
+        y: 203
         width: 91
         height: 66
       alignment: 0
@@ -143,7 +146,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 173
-        y: 114
+        y: 197
         width: 48
         height: 66
       alignment: 0
@@ -156,7 +159,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 235
-        y: 134
+        y: 217
         width: 106
         height: 19
       alignment: 0
@@ -169,7 +172,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 343
-        y: 126
+        y: 209
         width: 35
         height: 34
       alignment: 0
@@ -182,7 +185,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 126
+        y: 209
         width: 34
         height: 35
       alignment: 0
@@ -195,9 +198,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 436
-        y: 117
+        y: 199
         width: 82
-        height: 41
+        height: 44
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,7 +211,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 41
+        y: 124
         width: 45
         height: 43
       alignment: 0
@@ -220,10 +223,10 @@ TextureImporter:
       name: balls_9
       rect:
         serializedVersion: 2
-        x: 160
-        y: 17
-        width: 96
-        height: 93
+        x: 164
+        y: 105
+        width: 88
+        height: 87
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,21 +237,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 259
-        y: 42
+        y: 125
         width: 46
-        height: 42
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: balls_reserved
-      rect:
-        serializedVersion: 2
-        x: 326
-        y: 42
-        width: 67
         height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -259,10 +249,10 @@ TextureImporter:
       name: balls_11
       rect:
         serializedVersion: 2
-        x: 414
-        y: 43
-        width: 32
-        height: 46
+        x: 326
+        y: 124
+        width: 67
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,8 +262,21 @@ TextureImporter:
       name: balls_12
       rect:
         serializedVersion: 2
+        x: 414
+        y: 126
+        width: 32
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: balls_13
+      rect:
+        serializedVersion: 2
         x: 480
-        y: 38
+        y: 121
         width: 31
         height: 45
       alignment: 0
@@ -286,9 +289,22 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 27
-        y: 40
+        y: 123
         width: 64
-        height: 38
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: balls_14
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 35
+        width: 53
+        height: 53
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
