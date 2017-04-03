@@ -46,8 +46,8 @@ public class BreakthroughBall : MonoBehaviour
 		for (int index = 0; index < allAvailableBricks.Length; index++) {
 			allAvailableBricks [index].GetComponent <BoxCollider2D> ().isTrigger = trigger;
 		}
-		foreach (GameObject g in ball) {
-			if (g) {
+		if (ball != null) {
+			foreach (GameObject g in ball) {
 				if (trigger) {
 					g.GetComponent <SpriteRenderer> ().sprite = durian;
 				} else {

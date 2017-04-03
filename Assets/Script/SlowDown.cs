@@ -15,11 +15,14 @@ public class SlowDown : MonoBehaviour
 	{
 		balls = GameObject.FindGameObjectsWithTag ("Ball");
 		if (balls != null) {
-			foreach (GameObject g in balls)
+			foreach (GameObject g in balls) {
 				g.GetComponent <Rigidbody2D> ().AddForce (new Vector2 (
 					(g.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (slowDownFactor / 5) : (-slowDownFactor / 5),
 					(g.GetComponent <Rigidbody2D> ().velocity.y > 0) ? (slowDownFactor) : (-slowDownFactor)
 				));
+				g.GetComponent <SpriteRenderer> ().color = new Color (0f, 255f, 0f, 255f);
+
+			}
 		}
 	}
 

@@ -17,11 +17,14 @@ public class SpeedUp : MonoBehaviour
 	{
 		balls = GameObject.FindGameObjectsWithTag ("Ball");
 		if (balls != null) {
-			foreach (GameObject g in balls)
+			foreach (GameObject g in balls) {
 				g.GetComponent <Rigidbody2D> ().AddForce (new Vector2 (
 					(g.GetComponent <Rigidbody2D> ().velocity.x > 0) ? (speedUpFactor / 5) : (-speedUpFactor / 5),
 					(g.GetComponent <Rigidbody2D> ().velocity.y > 0) ? (speedUpFactor) : (-speedUpFactor)
 				));
+				g.GetComponent <SpriteRenderer> ().color = new Color (255f, 0f, 0f, 255f);
+			}
+				
 		}
 	}
 	
