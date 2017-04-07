@@ -179,7 +179,6 @@ public class LevelManager : MonoBehaviour
 		Ball.hasStarted = false;
 		switch (result) {
 		case ShowResult.Finished:
-			//
 			// YOUR CODE TO REWARD THE GAMER
 			// Give coins etc.
 			timeLeft = 31f;
@@ -337,7 +336,6 @@ public class LevelManager : MonoBehaviour
 			stars = 2;
 		} else { 																	// 3 stars
 			StartCoroutine (addTimeBonusScore ((int)timeLeft));
-			//Invoke ("LoadNextLevel", 5f);
 			fetchLevelPrize ();
 			stars = 3;
 		}
